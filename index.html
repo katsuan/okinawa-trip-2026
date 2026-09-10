@@ -108,7 +108,8 @@
     justify-content:space-between;
     margin-bottom:8px;
   }
-  .pokefuta-box .row .title{font-weight:800;font-size:.92rem;}
+  .pokefuta-box .row .title{font-weight:800;font-size:.92rem;display:flex;align-items:center;gap:6px;}
+  .pf-logo{height:28px;width:auto;display:block;}
   .pokefuta-box .row .count{font-weight:800;font-size:.92rem;color:#7a5a00;}
   .pf-bar{
     background:#f2e6b8;
@@ -967,7 +968,7 @@
 <section class="day-panel" data-day="pf">
 <div class="pokefuta-box">
 <div class="row">
-<div class="title">⚡ ポケふた回収率</div>
+<div class="title"><img class="pf-logo" src="img/manhole_logo_jp.png" alt="ポケふた">ポケふた回収率</div>
 <div class="count"><span id="pfChecked">0</span> / <span id="pfTotal">0</span></div>
 </div>
 <div class="pf-bar"><div class="pf-bar-fill" id="pfBarFill"></div></div>
