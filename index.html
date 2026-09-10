@@ -895,7 +895,7 @@
         <div class="thumb"><img alt="ポケふた" src="img/037ab104126f6843a4d1264f42926ab5_m.png"/></div>
         <div class="body">
           <div class="pf-mon">ハブネーク・ザングース</div>
-          <div class="desc">斎場御嶽方面。空港からは車で約40分。レンタカー返却前に余裕があれば立ち寄り(フライト時間に注意)</div>
+          <div class="desc">斎場御嶽方面。カヌチャから車で約1時間30分〜2時間、南城市から那覇空港(レンタカー返却)まで約40〜50分が目安。レンタカー返却前に余裕があれば立ち寄り(フライト時間に注意)</div>
         </div>
       </div>
     </div>
@@ -1256,6 +1256,7 @@
     });
     saveChecks(checks);
     updatePokefutaProgress();
+    if(tripMap) updateMapMarkers(undefined, {skipFit:true});
   }
 
   document.addEventListener("change", onCheckboxChange);
@@ -1305,13 +1306,13 @@
   var tripMap = null;
   var markerLayer = null;
   var MAP_POINTS = [
-    {id:"lodging", name:"カヌチャリゾート(宿泊)", rank:"lodging", days:[1,2,3,4,5], lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
-    {id:"churaumi", name:"沖縄美ら海水族館(必須)", rank:"must", days:[2], lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
-    {id:"kokusai", name:"国際通り(必須)", rank:"must", days:[3], lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
-    {id:"naha-airport", name:"那覇空港", rank:"optional", days:[1,5], lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
-    {id:"rentalcar", name:"Timesレンタカー那覇空港店", rank:"optional", days:[1,5], lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
-    {id:"pokecenter", name:"ポケモンセンターオキナワ", rank:"optional", days:[3], lat:26.3306, lng:127.8064, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
-    {id:"kyoda", name:"道の駅 許田", rank:"optional", days:[1], lat:26.5386, lng:127.9693, link:"https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%E8%A8%B1%E7%94%B0"},
+    {id:"lodging", name:"カヌチャリゾート(宿泊)", rank:"lodging", days:[1,2,3,4,5], cardIds:{1:"d1-checkin",2:"d2-return",3:"d3-return",4:"d4-free",5:"d5-checkout"}, lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
+    {id:"churaumi", name:"沖縄美ら海水族館(必須)", rank:"must", days:[2], cardIds:{2:"d2-churaumi"}, lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
+    {id:"kokusai", name:"国際通り(必須)", rank:"must", days:[3], cardIds:{3:"d3-kokusai"}, lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
+    {id:"naha-airport", name:"那覇空港", rank:"optional", days:[1,5], cardIds:{1:"d1-arrive"}, lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
+    {id:"rentalcar", name:"Timesレンタカー那覇空港店", rank:"optional", days:[1,5], cardIds:{1:"d1-rentalcar",5:"d5-move"}, lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
+    {id:"pokecenter", name:"ポケモンセンターオキナワ", rank:"optional", days:[3], cardIds:{3:"d3-pokecenter"}, lat:26.3306, lng:127.8064, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
+    {id:"kyoda", name:"道の駅 許田", rank:"optional", days:[1], cardIds:{1:"d1-kyoda"}, lat:26.5386, lng:127.9693, link:"https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%E8%A8%B1%E7%94%B0"},
     {id:"pf-naha-shuri", name:"那覇市首里 ポケふた(ガーディ)", rank:"pokefuta", days:[3], img:"6ea8d929a518be32eb78754371390526_m.png", lat:26.22005, lng:127.71657, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18"},
     {id:"pf-naha-makishi", name:"那覇市牧志 ポケふた(ウインディ)", rank:"pokefuta", days:[3], img:"38ee8e633d933570a2506d1ceba9290b_m.png", lat:26.21641, lng:127.68942, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2"},
     {id:"pf-chatan", name:"北谷町 ポケふた(ガーディ)", rank:"pokefuta", days:[3], img:"5607d35bb32e267fd37f06948e578902_m.png", lat:26.315733, lng:127.753613, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20"},
@@ -1335,6 +1336,14 @@
     return pt.rank === "lodging" || (pt.days && pt.days.indexOf(d) !== -1);
   }
 
+  function isPointDone(pt){
+    if(pt.cardIds){
+      var cardId = pt.cardIds[currentMapDay];
+      return cardId ? !!checks[cardId] : false;
+    }
+    return !!checks[pt.id];
+  }
+
   function markerFor(pt){
     var icon;
     if(pt.rank === "pokefuta" && pt.img){
@@ -1355,7 +1364,8 @@
       });
     }
     var zIndexOffset = RANK_Z[pt.rank] || 0;
-    return L.marker([pt.lat, pt.lng], {icon: icon, zIndexOffset: zIndexOffset})
+    var isDone = isPointDone(pt);
+    return L.marker([pt.lat, pt.lng], {icon: icon, zIndexOffset: isDone ? zIndexOffset - 50 : zIndexOffset, opacity: isDone ? 0.45 : 1})
       .bindPopup(pt.name + '<br><a href="' + pt.link + '" target="_blank" rel="noopener">📍 Google Mapで開く</a>');
   }
 
@@ -1372,10 +1382,11 @@
   var currentMapDay = "1";
   var hiddenRanks = {};
 
-  function updateMapMarkers(day){
+  function updateMapMarkers(day, opts){
     ensureMapInit();
     if(!tripMap) return;
     if(day !== undefined) currentMapDay = day;
+    opts = opts || {};
     markerLayer.clearLayers();
     markersById = {};
     var matched = MAP_POINTS.filter(function(pt){
@@ -1386,8 +1397,10 @@
       m.addTo(markerLayer);
       markersById[pt.id] = m;
     });
-    if(matched.length){
-      var bounds = L.latLngBounds(matched.map(function(pt){ return [pt.lat, pt.lng]; }));
+    if(matched.length && !opts.skipFit){
+      var unchecked = matched.filter(function(pt){ return !isPointDone(pt); });
+      var boundsSource = unchecked.length ? unchecked : matched;
+      var bounds = L.latLngBounds(boundsSource.map(function(pt){ return [pt.lat, pt.lng]; }));
       tripMap.fitBounds(bounds, {padding: [30,30], maxZoom: 12});
     }
     setTimeout(function(){ tripMap.invalidateSize(); }, 30);
