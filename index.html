@@ -156,18 +156,18 @@
   .tab-fade{
     position:absolute;
     top:0; bottom:12px;
-    width:64px;
+    width:30px;
     pointer-events:none;
     z-index:21;
     opacity:0;
     transition:opacity .2s ease;
   }
   .tab-fade.visible{opacity:1;}
-  .tab-fade-left{left:0; background:linear-gradient(to left, transparent, var(--sand) 45%, var(--sand) 100%);}
-  .tab-fade-right{right:0; background:linear-gradient(to right, transparent, var(--sand) 45%, var(--sand) 100%);}
+  .tab-fade-left{left:0; background:linear-gradient(to left, transparent, var(--sand));}
+  .tab-fade-right{right:0; background:linear-gradient(to right, transparent, var(--sand));}
   .tab-scroll-hint{
     position:absolute;
-    top:0; right:2px; bottom:12px;
+    top:0; bottom:12px;
     display:flex;
     align-items:center;
     z-index:22;
@@ -176,14 +176,11 @@
     font-size:1.1rem;
     font-weight:800;
     opacity:0;
-    animation:hintNudge 1.4s ease-in-out infinite;
     transition:opacity .25s ease;
   }
   .tab-scroll-hint.visible{opacity:.85;}
-  @keyframes hintNudge{
-    0%,100%{transform:translateX(0);}
-    50%{transform:translateX(4px);}
-  }
+  .tab-scroll-hint-left{left:2px;}
+  .tab-scroll-hint-right{right:2px;}
   .tabbar{
     position:relative;
     z-index:20;
@@ -570,7 +567,8 @@
 </nav>
 <div class="tab-fade tab-fade-left" id="tabFadeLeft"></div>
 <div class="tab-fade tab-fade-right" id="tabFadeRight"></div>
-<div class="tab-scroll-hint" id="tabScrollHint">›</div>
+<div class="tab-scroll-hint tab-scroll-hint-left" id="tabScrollHintLeft">‹</div>
+<div class="tab-scroll-hint tab-scroll-hint-right" id="tabScrollHintRight">›</div>
 </div>
 <div id="mapSection">
 <div id="tripMap"></div>
@@ -1641,6 +1639,8 @@
         mapShowAll = false;
         showDay(day);
       }
+      btn.scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+      setTimeout(function(){ if(window.updateTabScrollHint) window.updateTabScrollHint(); }, 50);
     });
   });
 
@@ -1804,7 +1804,7 @@
     updatePokefutaProgress();
     setupMemo();
     setupChecklist("okinawa-trip-2026-packing", "packingList", "packingInput", "packingAddBtn",
-      ["保険証・母子手帳", "常備薬・酔い止め", "日焼け止め・帽子", "タオル", "モバイルバッテリー・充電器", "サンダル", "折りたたみ傘", "カメラ", "免許証・ETCカード"]);
+      ["保険証・母子手帳", "常備薬・酔い止め", "日焼け止め・帽子", "モバイルバッテリー・充電器", "サンダル", "折りたたみ傘", "カメラ", "免許証・ETCカード"]);
     setupChecklist("okinawa-trip-2026-souvenir", "souvenirList", "souvenirInput", "souvenirAddBtn",
       ["ちんすこう", "紅芋タルト", "シークヮーサー関連", "琉球グラス", "ポケモンセンター限定グッズ"]);
 
@@ -1820,21 +1820,24 @@
 
   (function setupTabScrollHint(){
     var bar = document.getElementById("tabbar");
-    var hint = document.getElementById("tabScrollHint");
+    var hintLeft = document.getElementById("tabScrollHintLeft");
+    var hintRight = document.getElementById("tabScrollHintRight");
     var fadeLeft = document.getElementById("tabFadeLeft");
     var fadeRight = document.getElementById("tabFadeRight");
-    if(!bar || !hint) return;
+    if(!bar) return;
     function update(){
       var atStart = bar.scrollLeft <= 2;
       var atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 2;
       if(fadeLeft) fadeLeft.classList.toggle("visible", !atStart);
       if(fadeRight) fadeRight.classList.toggle("visible", !atEnd);
-      hint.classList.toggle("visible", !atEnd);
+      if(hintLeft) hintLeft.classList.toggle("visible", !atStart);
+      if(hintRight) hintRight.classList.toggle("visible", !atEnd);
     }
     bar.addEventListener("scroll", update);
     window.addEventListener("resize", update);
-    setTimeout(update, 100);
     window.addEventListener("load", update);
+    setTimeout(update, 100);
+    window.updateTabScrollHint = update;
   })();
 
   init();
