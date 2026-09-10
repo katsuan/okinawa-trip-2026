@@ -294,6 +294,17 @@
   .pika .place::before{content:"⚡";margin-right:3px;}
   .pika .badge{color:#6b4d00;background:var(--pika);}
   .rest .badge{color:var(--text-sub);background:var(--border);}
+  .badge.day-tag{color:#fff;background:var(--sea);}
+  .badge.off-tag{color:var(--text-sub);background:var(--border);}
+  .pf-intro{
+    font-size:.82rem;
+    color:var(--text-sub);
+    background:var(--sand-card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 14px;
+    margin-bottom:12px;
+  }
 
   .day-note{
     font-size:.8rem;
@@ -365,6 +376,7 @@
     <button class="tab-btn" data-day="3">DAY3<span class="d">9/16 水</span></button>
     <button class="tab-btn" data-day="4">DAY4<span class="d">9/17 木</span></button>
     <button class="tab-btn" data-day="5">DAY5<span class="d">9/18 金</span></button>
+    <button class="tab-btn" data-day="pf">🎯図鑑<span class="d">ポケふた12</span></button>
   </nav>
 
   <!-- DAY 1 -->
@@ -397,17 +409,6 @@
         <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" target="_blank" rel="noopener">📍 Google Map</a>
       </div>
     </div>
-    <div class="card pika" data-id="d1-airport-pokefuta" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
-      <div class="body">
-        <div class="time">道中</div>
-        <div class="place">那覇空港 ポケふた<span class="badge">任意・ポケふた</span></div>
-        <div class="desc">空港内に設置。時間があれば出発前後にチェック</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Google Map</a>
-        <a class="maplink" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 公式で見る</a>
-      </div>
-    </div>
     <div class="card" data-id="d1-checkin">
       <input type="checkbox">
       <div class="body">
@@ -430,15 +431,15 @@
         <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" rel="noopener">📍 Google Map</a>
       </div>
     </div>
-    <div class="card pika" data-id="d2-kaiyohaku-pokefuta" data-pokefuta="1">
+    <div class="card pika" data-id="pf-motobu" data-pokefuta="1">
       <input type="checkbox">
       <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
       <div class="body">
         <div class="time">午前〜昼</div>
-        <div class="place">海洋博公園 ポケふた<span class="badge">任意・ポケふた</span></div>
-        <div class="desc">水族館と同じ園内エリア。あわせて回収</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 Google Map</a>
-        <a class="maplink" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 公式で見る</a>
+        <div class="place">本部町 ポケふた(ホエルオー)<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">海洋博公園地内。水族館と同じエリアなので、あわせて回収しやすい</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/232/" target="_blank" rel="noopener">🔗 公式で見る</a>
       </div>
     </div>
     <div class="card" data-id="d2-lunch">
@@ -449,15 +450,15 @@
         <div class="desc">園内・近隣の飲食店でランチ</div>
       </div>
     </div>
-    <div class="card pika" data-id="d2-nago-pokefuta" data-pokefuta="1">
+    <div class="card pika" data-id="pf-nago" data-pokefuta="1">
       <input type="checkbox">
       <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
       <div class="body">
         <div class="time">午後</div>
-        <div class="place">名護市 ポケふた巡り(ピカチュウひろば)<span class="badge">任意・ポケふた</span></div>
-        <div class="desc">名護市役所周辺に複数のピカチュウ・マンホールが点在。水族館からの帰り道に立ち寄り◎</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E8%AD%B7%E5%B8%82%E5%BD%B9%E6%89%80" target="_blank" rel="noopener">📍 Google Map</a>
-        <a class="maplink" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 公式で見る</a>
+        <div class="place">名護市 ポケふた(エモンガ・ツツケラ)<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">名護城二丁目・名護城址/ひんぷんガジュマル周辺。水族館からの帰り道に立ち寄り◎</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/230/" target="_blank" rel="noopener">🔗 公式で見る</a>
       </div>
     </div>
     <div class="card" data-id="d2-return">
@@ -498,6 +499,17 @@
         <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A" target="_blank" rel="noopener">📍 Google Map</a>
       </div>
     </div>
+    <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="time">午後</div>
+        <div class="place">那覇市牧志 ポケふた(ウインディ)<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">牧志3丁目、国際通りのすぐ近く。お土産巡りのついでに立ち寄れる</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/174/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
     <div class="card" data-id="d3-return">
       <input type="checkbox">
       <div class="body">
@@ -519,15 +531,18 @@
         <div class="desc">プール・ビーチ・園内カートでのんびり。予定を詰めず、体調優先の休息日</div>
       </div>
     </div>
-    <div class="card pika" data-id="d4-extra-pokefuta" data-pokefuta="1">
+    <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
       <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
       <div class="body">
         <div class="time">任意</div>
-        <div class="place">名護市内 未訪問ポケふたの追加巡り<span class="badge">任意・ポケふた</span></div>
-        <div class="desc">2日目に回りきれなかった分があれば、近場のみ軽く</div>
+        <div class="place">うるま市 ポケふた(ケンタロス)<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">石川エリア。カヌチャから車で約30〜40分と比較的近め。フリーデーの気分転換に</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/177/" target="_blank" rel="noopener">🔗 公式で見る</a>
       </div>
     </div>
-    <div class="day-note">予備日。天候や体調に応じて2〜3日目の予定をここに移動してもよい。</div>
+    <div class="day-note">予備日。天候や体調に応じて2〜3日目の予定をここに移動してもよい。他のポケふたは「🎯図鑑」タブ参照。</div>
   </section>
 
   <!-- DAY 5 -->
@@ -550,12 +565,160 @@
         <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" target="_blank" rel="noopener">📍 Google Map</a>
       </div>
     </div>
+    <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="time">時間があれば</div>
+        <div class="place">豊見城市 ポケふた(キバゴ・ジャラコ)<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">瀬長島ウミカジテラス方面、豊崎エリア。空港から近く最終日のラストチェックに向く</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/233/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
     <div class="card" data-id="d5-depart">
       <input type="checkbox">
       <div class="body">
         <div class="time">16:25</div>
         <div class="place">那覇空港 発</div>
         <div class="desc">✈️ ANA1862 広島行き(到着目安 18:30頃)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POKEFUTA ZUKAN -->
+  <section class="day-panel" data-day="pf">
+    <div class="pf-intro">沖縄本島に設置されている「ポケふた」は全12基(2026年時点で確認)。日程に組み込み済みのものには日程バッジ、ルート外は「ルート外」バッジがついています。チェックはどのタブから入れても連動します。</div>
+
+    <div class="card pika" data-id="pf-naha-shuri" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">那覇市首里 ポケふた(ガーディ)<span class="badge off-tag">ルート外(首里城近く)</span></div>
+        <div class="desc">那覇市首里池端町18</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/446/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">那覇市牧志 ポケふた(ウインディ)<span class="badge day-tag">DAY3に掲載</span></div>
+        <div class="desc">那覇市牧志3丁目2・国際通りのすぐ近く</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/174/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-chatan" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">北谷町 ポケふた(ガーディ)<span class="badge day-tag">DAY3圏内(美浜アメリカンビレッジ)</span></div>
+        <div class="desc">北谷町美浜20番</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/422/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-nanjo" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">南城市 ポケふた(ハブネーク・ザングース)<span class="badge off-tag">ルート外(斎場御嶽方面)</span></div>
+        <div class="desc">南城市知念久手堅541</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82%E7%9F%A5%E5%BF%B5%E4%B9%85%E6%89%8B%E5%A0%85541" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/234/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">豊見城市 ポケふた(キバゴ・ジャラコ)<span class="badge day-tag">DAY5に掲載</span></div>
+        <div class="desc">豊見城市字豊崎1-1162・空港近く</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/233/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-motobu" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">本部町 ポケふた(ホエルオー)<span class="badge day-tag">DAY2に掲載</span></div>
+        <div class="desc">本部町字石川・海洋博公園地内</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/232/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-itoman" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">糸満市 ポケふた(カメール・スナバァ)<span class="badge off-tag">ルート外(南部)</span></div>
+        <div class="desc">糸満市西崎町4丁目19-1</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82%E8%A5%BF%E5%B4%8E%E7%94%BA4%E4%B8%81%E7%9B%AE19" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/231/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-nago" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">名護市 ポケふた(エモンガ・ツツケラ)<span class="badge day-tag">DAY2に掲載</span></div>
+        <div class="desc">名護市城二丁目321-3・名護城址周辺</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/230/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-urasoe" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">浦添市 ポケふた(ソルロック・ポポッコ)<span class="badge day-tag">DAY3圏内</span></div>
+        <div class="desc">浦添市勢理客4-14-1</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/229/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">うるま市 ポケふた(ケンタロス)<span class="badge day-tag">DAY4に掲載</span></div>
+        <div class="desc">うるま市石川2316</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/177/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-okinawacity" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">沖縄市 ポケふた(バチンキー・ラランテス)<span class="badge day-tag">DAY3圏内(ライカム近く)</span></div>
+        <div class="desc">沖縄市胡屋5-7-1</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/176/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+
+    <div class="card pika" data-id="pf-ginowan" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="place">宜野湾市 ポケふた(サニーゴ・ラブカス)<span class="badge day-tag">DAY3圏内</span></div>
+        <div class="desc">宜野湾市真志喜4-2-1</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/desc/175/" target="_blank" rel="noopener">🔗 公式で見る</a>
       </div>
     </div>
   </section>
@@ -595,6 +758,10 @@
 
   var checks = loadChecks();
 
+  function cardsWithId(id){
+    return document.querySelectorAll(".card[data-id=\"" + id + "\"]");
+  }
+
   function applyChecksToDOM(){
     document.querySelectorAll(".card[data-id]").forEach(function(card){
       var id = card.getAttribute("data-id");
@@ -606,13 +773,13 @@
   }
 
   function updatePokefutaProgress(){
-    var boxes = document.querySelectorAll(".card[data-pokefuta='1']");
-    var total = boxes.length;
-    var done = 0;
-    boxes.forEach(function(card){
-      var id = card.getAttribute("data-id");
-      if(checks[id]) done++;
+    var ids = new Set();
+    document.querySelectorAll(".card[data-pokefuta='1']").forEach(function(card){
+      ids.add(card.getAttribute("data-id"));
     });
+    var total = ids.size;
+    var done = 0;
+    ids.forEach(function(id){ if(checks[id]) done++; });
     document.getElementById("pfChecked").textContent = done;
     document.getElementById("pfTotal").textContent = total;
     var pct = total ? Math.round((done/total)*100) : 0;
@@ -625,8 +792,12 @@
     var card = cb.closest(".card[data-id]");
     if(!card) return;
     var id = card.getAttribute("data-id");
-    checks[id] = cb.checked;
-    card.classList.toggle("done", cb.checked);
+    var on = cb.checked;
+    checks[id] = on;
+    cardsWithId(id).forEach(function(c){
+      c.querySelector("input[type=checkbox]").checked = on;
+      c.classList.toggle("done", on);
+    });
     saveChecks(checks);
     updatePokefutaProgress();
   }
