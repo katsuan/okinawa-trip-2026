@@ -558,14 +558,14 @@
 </div>
 <div class="tab-wrap">
 <nav class="tabbar" id="tabbar">
-<button class="tab-btn" data-day="1">🛫<span class="d">往路</span></button>
-<button class="tab-btn" data-day="2">🐠<span class="d">水族館</span></button>
-<button class="tab-btn" data-day="3">🛍️<span class="d">買い物</span></button>
-<button class="tab-btn" data-day="4">🏝️<span class="d">フリー</span></button>
-<button class="tab-btn" data-day="5">🛬<span class="d">復路</span></button>
-<button class="tab-btn" data-day="pf">🎯<span class="d">図鑑</span></button>
-<button class="tab-btn" data-day="packing">🎒<span class="d">持ち物</span></button>
-<button class="tab-btn" data-day="souvenir">🎁<span class="d">お土産</span></button>
+<button class="tab-btn" data-tab="1">🛫<span class="d">往路</span></button>
+<button class="tab-btn" data-tab="2">🐠<span class="d">水族館</span></button>
+<button class="tab-btn" data-tab="3">🛍️<span class="d">買い物</span></button>
+<button class="tab-btn" data-tab="4">🏝️<span class="d">フリー</span></button>
+<button class="tab-btn" data-tab="5">🛬<span class="d">復路</span></button>
+<button class="tab-btn" data-tab="pf">🎯<span class="d">図鑑</span></button>
+<button class="tab-btn" data-tab="packing">🎒<span class="d">持ち物</span></button>
+<button class="tab-btn" data-tab="souvenir">🎁<span class="d">お土産</span></button>
 </nav>
 <div class="tab-fade tab-fade-left" id="tabFadeLeft"></div>
 <div class="tab-fade tab-fade-right" id="tabFadeRight"></div>
@@ -583,7 +583,7 @@
 </div>
 </div>
 <!-- DAY 1 -->
-<section class="day-panel" data-day="1">
+<section class="day-panel" data-tab="1">
     <div class="card" data-id="d1-home">
       <div class="row1">
         <input type="checkbox">
@@ -712,6 +712,7 @@
         <div class="thumb emoji">🎫</div>
         <div class="body">
           <div class="desc">糸満市から車で約1時間。沖縄自動車道 許田IC近く、国道58号沿いで寄り道なし。美ら海水族館の割引券(330円引き)を購入(要現地確認)</div>
+        <div class="foodpicks">🍽️ 食べ歩き候補<br>・もずく天ぷら(1個100円、もちもち食感)<br>・タコス(オリジナルサルサソース)<br>・サーターアンダギー(琉球銘菓三矢)<br>・おっぱジェラート(今帰仁産ミルク使用)</div>
         </div>
       </div>
     </div>
@@ -735,7 +736,7 @@
 <div class="day-note">初日は移動がメイン。無理に予定を詰めない。</div>
 </section>
 <!-- DAY 2 -->
-<section class="day-panel" data-day="2">
+<section class="day-panel" data-tab="2">
     <div class="card must" data-id="d2-churaumi" data-map-id="churaumi">
       <div class="row1">
         <input type="checkbox">
@@ -790,6 +791,23 @@
       </div>
     </div>
 
+    <div class="card optional" data-id="d2-kouri" data-map-id="kouri">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">任意(+片道40分)</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E5%B3%B6%20%E3%83%8F%E3%83%BC%E3%83%88%E3%83%AD%E3%83%83%E3%82%AF" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="place">古宇利島(ハートロック)</div>
+      <div class="row3">
+        <div class="thumb emoji">💙</div>
+        <div class="body">
+          <div class="desc">本部から車で約40分(古宇利大橋を渡って島へ)。エメラルドグリーンの海とハート型の奇岩ティーヌ浜が絶景。片道40分・往復1時間20分かかるため、時間と体力に余裕があれば。無理せず次回でもOK</div>
+        <div class="parking">🅿️ 有料(周辺の民間駐車場、100〜300円程度)</div>
+        </div>
+      </div>
+    </div>
+
     <div class="card" data-id="d2-lunch" data-map-id="churaumi">
       <div class="row1">
         <input type="checkbox">
@@ -802,6 +820,7 @@
         <div class="thumb emoji">🍴</div>
         <div class="body">
           <div class="desc">園内・近隣の飲食店でランチ</div>
+        <div class="foodpicks">🍽️ 食べ歩き候補<br>・沖縄そば<br>・タコライス<br>・あぐーメンチカツバーガー<br>・オリジナルソフトクリーム</div>
         </div>
       </div>
     </div>
@@ -859,7 +878,7 @@
 
 </section>
 <!-- DAY 3 -->
-<section class="day-panel" data-day="3">
+<section class="day-panel" data-tab="3">
     <div class="card optional" data-id="d3-shurijo" data-map-id="shurijo">
       <div class="row1">
         <input type="checkbox">
@@ -996,6 +1015,7 @@
         <div class="thumb emoji">🍔</div>
         <div class="body">
           <div class="desc">美浜アメリカンビレッジ周辺。海沿いのカフェ・レストランが多く、この日のランチにちょうど良い</div>
+        <div class="foodpicks">🍽️ 食べ歩き候補<br>・タコライス(タコライスcafeきじむなぁ、オムタコが名物)<br>・タコス(タコスカフェ タコロコ)<br>・ステーキ(ダブルデッカー/JUMBO STEAK HAN'S)</div>
         <div class="parking">🅿️ 無料(北谷町営駐車場・6:00-21:00)</div>
         </div>
       </div>
@@ -1086,7 +1106,7 @@
 <div class="day-note">この日は運転距離が長め(往復3時間超)。朝一番に国際通りを入れることで、10時開店のポケモンセンターを待たずに済む順番。疲れが出そうなら国際通りとポケモンセンターは別日に振り替えてもOK。</div>
 </section>
 <!-- DAY 4 -->
-<section class="day-panel" data-day="4">
+<section class="day-panel" data-tab="4">
     <div class="card rest lodging" data-id="d4-free" data-map-id="lodging">
       <div class="row1">
         <input type="checkbox">
@@ -1106,7 +1126,7 @@
 <div class="day-note">完全フリーデー。予定は入れず、天候や体調に応じて他の日の予定をここに移動してもよい。ポケふたは「🎯図鑑」タブ参照。</div>
 </section>
 <!-- DAY 5 -->
-<section class="day-panel" data-day="5">
+<section class="day-panel" data-tab="5">
     <div class="card lodging" data-id="d5-checkout" data-map-id="lodging">
       <div class="row1">
         <input type="checkbox">
@@ -1123,6 +1143,22 @@
       </div>
     </div>
 
+    <div class="card optional" data-id="d5-seifa" data-map-id="seifa-utaki">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">時間があれば</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%96%8E%E5%A0%B4%E5%BE%A1%E5%B5%98" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="place">斎場御嶽(せーふぁうたき)</div>
+      <div class="row3">
+        <div class="thumb emoji">⛩️</div>
+        <div class="body">
+          <div class="desc">世界遺産、琉球王国最高の聖地。見学は1時間程度。南城市地域物産館で入場券購入後、参道入口まで徒歩7〜10分。9:00〜18:00(最終入館17:30)、入館料 大人300円・小中学生150円。神聖な場所なので露出の多い服装・厚底靴は避ける</div>
+        <div class="parking">🅿️ 南城市地域物産館に併設(入場券購入者向け)</div>
+        </div>
+      </div>
+    </div>
     <div class="card pika" data-id="pf-nanjo" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1206,7 +1242,7 @@
 
 </section>
 <!-- POKEFUTA ZUKAN -->
-<section class="day-panel" data-day="pf">
+<section class="day-panel" data-tab="pf">
 <div class="pokefuta-box">
 <div class="row">
 <div class="title"><img class="pf-logo" src="img/manhole_logo_jp.png" alt="ポケふた">ポケふた回収率</div>
@@ -1436,7 +1472,7 @@
 </section>
 
 <!-- PACKING LIST -->
-<section class="day-panel" data-day="packing">
+<section class="day-panel" data-tab="packing">
   <div class="checklist-add">
     <input type="text" id="packingInput" placeholder="持ち物を追加">
     <button type="button" id="packingAddBtn">追加</button>
@@ -1445,7 +1481,7 @@
 </section>
 
 <!-- SOUVENIR LIST -->
-<section class="day-panel" data-day="souvenir">
+<section class="day-panel" data-tab="souvenir">
   <div class="checklist-add">
     <input type="text" id="souvenirInput" placeholder="お土産を追加">
     <button type="button" id="souvenirAddBtn">追加</button>
@@ -1567,10 +1603,10 @@
   var NO_MAP_TABS = {packing:true, souvenir:true};
   function showDay(day){
     tabButtons.forEach(function(btn){
-      btn.classList.toggle("active", btn.getAttribute("data-day") === String(day));
+      btn.classList.toggle("active", btn.getAttribute("data-tab") === String(day));
     });
     panels.forEach(function(p){
-      p.classList.toggle("active", p.getAttribute("data-day") === String(day));
+      p.classList.toggle("active", p.getAttribute("data-tab") === String(day));
     });
     try{ localStorage.setItem(TAB_KEY, String(day)); }catch(e){}
     var mapSection = document.getElementById("mapSection");
@@ -1598,6 +1634,8 @@
     {id:"bise", name:"備瀬のフクギ並木", rank:"optional", emoji:"🌳", days:[2], cardIds:{2:"d2-bise"}, lat:26.7026, lng:127.8807, link:"https://www.google.com/maps/search/?api=1&query=%E5%82%99%E7%80%AC%E3%81%AE%E3%83%95%E3%82%AF%E3%82%AE%E4%B8%A6%E6%9C%A8"},
     {id:"chatan-gourmet", name:"北谷グルメ(美浜アメリカンビレッジ)", rank:"optional", emoji:"🍔", days:[3], cardIds:{3:"d3-chatan-gourmet"}, lat:26.3186, lng:127.7552, link:"https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E6%B5%9C%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%83%B3%E3%83%93%E3%83%AC%E3%83%83%E3%82%B8%20%E3%82%B0%E3%83%AB%E3%83%A1"},
     {id:"deckers-kitchen", name:"デッカーズキッチン", rank:"optional", emoji:"🍳", days:[3], cardIds:{3:"d3-deckers"}, lat:26.315796, lng:127.754322, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%87%E3%83%83%E3%82%AB%E3%83%BC%E3%82%BA%E3%82%AD%E3%83%83%E3%83%81%E3%83%B3%20%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C9-1"},
+    {id:"kouri", name:"古宇利島(ハートロック)", rank:"optional", emoji:"💙", days:[2], cardIds:{2:"d2-kouri"}, lat:26.6886, lng:128.0217, link:"https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E5%B3%B6%20%E3%83%8F%E3%83%BC%E3%83%88%E3%83%AD%E3%83%83%E3%82%AF"},
+    {id:"seifa-utaki", name:"斎場御嶽", rank:"optional", emoji:"⛩️", days:[5], cardIds:{5:"d5-seifa"}, lat:26.1698, lng:127.8320, link:"https://www.google.com/maps/search/?api=1&query=%E6%96%8E%E5%A0%B4%E5%BE%A1%E5%B5%98"},
     {id:"pf-naha-shuri", name:"那覇市首里 ポケふた(ガーディ)", rank:"pokefuta", days:[3], img:"6ea8d929a518be32eb78754371390526_m.png", lat:26.22005, lng:127.71657, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18"},
     {id:"pf-naha-makishi", name:"那覇市牧志 ポケふた(ウインディ)", rank:"pokefuta", days:[3], img:"38ee8e633d933570a2506d1ceba9290b_m.png", lat:26.21641, lng:127.68942, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2"},
     {id:"pf-chatan", name:"北谷町 ポケふた(ガーディ)", rank:"pokefuta", days:[3], img:"5607d35bb32e267fd37f06948e578902_m.png", lat:26.315733, lng:127.753613, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20"},
@@ -1732,7 +1770,7 @@
   var mapShowAll = false;
   tabButtons.forEach(function(btn){
     btn.addEventListener("click", function(){
-      var day = btn.getAttribute("data-day");
+      var day = btn.getAttribute("data-tab");
       var isAlreadyActive = btn.classList.contains("active");
       if(isAlreadyActive && !NO_MAP_TABS[day]){
         mapShowAll = !mapShowAll;
@@ -1790,7 +1828,7 @@
       banner.classList.remove("show");
     }
     tabButtons.forEach(function(btn){
-      btn.classList.toggle("is-today", todayDay && btn.getAttribute("data-day") === String(todayDay));
+      btn.classList.toggle("is-today", todayDay && btn.getAttribute("data-tab") === String(todayDay));
     });
   }
 
