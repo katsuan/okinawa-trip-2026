@@ -1326,11 +1326,11 @@
     {id:"pf-ginowan", name:"宜野湾市 ポケふた(サニーゴ・ラブカス)", rank:"pokefuta", days:[3], img:"130f21e980593ce7e537a81a804a1bc3_m.png", lat:26.28139, lng:127.732215, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1"}
   ];
   var RANK_EMOJI = {must:"★", optional:"●", lodging:"🏝"};
+  var RANK_Z = {must:300, lodging:250, optional:200, pokefuta:100};
   var markersById = {};
 
   function pointMatchesDay(pt, day){
-    if(day === "all") return true;
-    if(day === "pf") return pt.rank === "pokefuta" || pt.rank === "lodging";
+    if(day === "all" || day === "pf") return true;
     var d = Number(day);
     return pt.rank === "lodging" || (pt.days && pt.days.indexOf(d) !== -1);
   }
@@ -1354,7 +1354,8 @@
         popupAnchor: [0,-24]
       });
     }
-    return L.marker([pt.lat, pt.lng], {icon: icon})
+    var zIndexOffset = RANK_Z[pt.rank] || 0;
+    return L.marker([pt.lat, pt.lng], {icon: icon, zIndexOffset: zIndexOffset})
       .bindPopup(pt.name + '<br><a href="' + pt.link + '" target="_blank" rel="noopener">📍 Google Mapで開く</a>');
   }
 
