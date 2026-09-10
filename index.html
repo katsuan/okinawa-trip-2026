@@ -53,11 +53,6 @@
     font-size:1.5rem;
     letter-spacing:.02em;
   }
-  header .dates{
-    font-size:.92rem;
-    opacity:.92;
-    font-weight:600;
-  }
   main{
     max-width:640px;
     margin:0 auto;
@@ -97,34 +92,7 @@
     text-align:center;
   }
   .flight-card .label{font-size:.64rem;color:var(--text-sub);font-weight:600;}
-  .flight-card .route{font-size:.84rem;font-weight:700;margin:4px 0 1px;}
   .flight-card .time{font-size:1.02rem;font-weight:800;color:var(--sea-deep);}
-
-  .notice{
-    background:#fff1e8;
-    border:1px solid #f6cdb2;
-    border-radius:14px;
-    padding:12px 15px;
-    font-size:.84rem;
-    color:#8a4a1f;
-    margin-bottom:14px;
-  }
-  .notice b{color:var(--coral);}
-
-  .lodging-card{
-    background:var(--sand-card);
-    border-radius:14px;
-    padding:10px 14px;
-    box-shadow:0 4px 14px rgba(10,92,120,.08);
-    margin-bottom:14px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .lodging-card .icon{font-size:1.3rem;}
-  .lodging-card .name{font-weight:700;font-size:.92rem;}
-  .lodging-card .sub{font-size:.72rem;color:var(--text-sub);}
-  .lodging-card a.chip{margin-left:auto;font-size:.72rem;padding:5px 10px;}
 
   /* Pokefuta progress */
   .pokefuta-box{
@@ -254,26 +222,12 @@
     justify-content:center;
     overflow:hidden;
   }
-  .card .thumb svg{width:34px;height:34px;}
   .card .thumb img{width:100%;height:100%;object-fit:cover;}
   .card .thumb.emoji{background:var(--sand);font-size:1.7rem;}
   .card.done .thumb{opacity:.5;}
   .card.done{opacity:.5;}
   .card .body{flex:1;min-width:0;}
   .card .desc{font-size:.84rem;color:var(--text-sub);}
-  .card .maplink{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    margin-top:8px;
-    font-size:.76rem;
-    color:var(--sea-deep);
-    text-decoration:none;
-    font-weight:700;
-    background:#eaf6fa;
-    border-radius:999px;
-    padding:5px 11px;
-  }
   .chip{
     font-size:.66rem;
     font-weight:800;
@@ -290,10 +244,8 @@
   .chip-map{color:var(--sea-deep);background:#eaf6fa;}
   .chip-shop{color:var(--sea-deep);background:#eaf6fa;}
   .chip-must{color:#fff;background:var(--coral);}
-  .chip-optional{color:var(--text-sub);background:var(--border);}
   .chip-pokefuta{color:#6b4d00;background:var(--pika);}
   .chip-tag.day-tag{color:var(--sea-deep);background:#eaf6fa;}
-  .chip-tag.off-tag{color:var(--text-sub);background:var(--border);}
   .must{border-left:4px solid var(--coral);}
   .pika{border-left:4px solid var(--pika-border);}
   .pika .pf-mon{font-size:.8rem;font-weight:500;color:var(--text-sub);margin:0 0 4px;}
@@ -444,14 +396,6 @@
 <div class="time">16:25発</div>
 </div>
 </div>
-<div class="lodging-card">
-<div class="icon">🏝️</div>
-<div>
-<div class="name">カヌチャリゾート</div>
-<div class="sub">名護市字安部 / 全泊利用</div>
-</div>
-<a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88" rel="noopener" target="_blank">📍 Map</a>
-</div>
 <div class="memo-box">
 <button class="memo-toggle" id="memoToggle" type="button">
 <span>📝 メモ</span>
@@ -589,7 +533,7 @@
       <div class="row3">
         <div class="thumb emoji">🏝️</div>
         <div class="body">
-          <div class="desc">初日は移動のみ。ホテル内でゆっくり過ごす</div>
+          <div class="desc">初日は移動中心。ホテル内でゆっくり過ごす</div>
         </div>
       </div>
     </div>
@@ -953,6 +897,21 @@
         <div class="thumb emoji">🛫</div>
         <div class="body">
           <div class="desc">✈️ ANA1862 広島行き(到着目安 18:30頃)</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-id="d5-hij-arrive">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">18:30頃</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E7%A9%BA%E6%B8%AF" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="place">広島空港 着</div>
+      <div class="row3">
+        <div class="thumb emoji">🛬</div>
+        <div class="body">
+          <div class="desc">手荷物受取後、駐車場から自宅へ出発</div>
         </div>
       </div>
     </div>
