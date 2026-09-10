@@ -245,7 +245,6 @@
     width:52px;
     height:52px;
     border-radius:12px;
-    background:radial-gradient(circle at 35% 30%,#fff7d6,var(--pika) 70%);
     border:2px solid var(--pika-border);
     display:flex;
     align-items:center;
@@ -253,6 +252,7 @@
     overflow:hidden;
   }
   .card .thumb svg{width:34px;height:34px;}
+  .card .thumb img{width:100%;height:100%;object-fit:cover;}
   .card.done .thumb{opacity:.5;}
   .card.done{opacity:.5;}
   .card input[type=checkbox]{
@@ -342,12 +342,24 @@
     border:2px solid #fff;
   }
   .pin span{transform:rotate(45deg);font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;}
-  .pin span img{width:22px;height:22px;image-rendering:pixelated;display:block;}
-  .pin.pokefuta{width:32px;height:32px;background:var(--pika-border);}
   .pin.must{background:var(--coral);}
   .pin.optional{background:var(--sea);}
-  .pin.pokefuta{background:var(--pika-border);}
   .pin.lodging{background:#3a9d6f;}
+  .pin-photo{
+    width:36px;height:36px;
+    border-radius:50%;
+    overflow:hidden;
+    border:2px solid #fff;
+    box-shadow:0 2px 6px rgba(0,0,0,.4);
+    background:#fff;
+  }
+  .pin-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pin-photo.highlight{animation:pinPulse 1.4s ease 2;}
+  @keyframes pinPulse{
+    0%{box-shadow:0 2px 6px rgba(0,0,0,.4), 0 0 0 0 rgba(240,112,79,.7);}
+    70%{box-shadow:0 2px 6px rgba(0,0,0,.4), 0 0 0 14px rgba(240,112,79,0);}
+    100%{box-shadow:0 2px 6px rgba(0,0,0,.4), 0 0 0 0 rgba(240,112,79,0);}
+  }
   .leaflet-popup-content{font-size:.82rem;line-height:1.5;}
   .leaflet-popup-content a{color:var(--sea-deep);font-weight:700;}
 
@@ -439,7 +451,7 @@
         <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Google Map</a>
       </div>
     </div>
-    <div class="card" data-id="d1-arrive">
+    <div class="card" data-id="d1-arrive" data-map-id="naha-airport">
       <input type="checkbox">
       <div class="body">
         <div class="time">13:25頃</div>
@@ -448,7 +460,7 @@
         <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Google Map</a>
       </div>
     </div>
-    <div class="card" data-id="d1-rentalcar">
+    <div class="card" data-id="d1-rentalcar" data-map-id="rentalcar">
       <input type="checkbox">
       <div class="body">
         <div class="time">14:00</div>
@@ -471,7 +483,7 @@
 
   <!-- DAY 2 -->
   <section class="day-panel" data-day="2">
-    <div class="card must" data-id="d2-churaumi">
+    <div class="card must" data-id="d2-churaumi" data-map-id="churaumi">
       <input type="checkbox">
       <div class="body">
         <div class="time">午前</div>
@@ -482,7 +494,7 @@
     </div>
     <div class="card pika" data-id="pf-motobu" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/ace6dd945ee55438d6cc274d7d64dce2_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="time">午前〜昼</div>
         <div class="place">本部町 ポケふた(ホエルオー)<span class="badge">任意・ポケふた</span></div>
@@ -501,7 +513,7 @@
     </div>
     <div class="card pika" data-id="pf-nago" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/73c010eaa7438086463ffc02641320d9_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="time">午後</div>
         <div class="place">名護市 ポケふた(エモンガ・ツツケラ)<span class="badge">任意・ポケふた</span></div>
@@ -522,7 +534,7 @@
 
   <!-- DAY 3 -->
   <section class="day-panel" data-day="3">
-    <div class="card" data-id="d3-pokecenter">
+    <div class="card" data-id="d3-pokecenter" data-map-id="pokecenter">
       <input type="checkbox">
       <div class="body">
         <div class="time">午前</div>
@@ -539,7 +551,7 @@
         <div class="desc">フードコート・レストラン充実</div>
       </div>
     </div>
-    <div class="card must" data-id="d3-kokusai">
+    <div class="card must" data-id="d3-kokusai" data-map-id="kokusai">
       <input type="checkbox">
       <div class="body">
         <div class="time">午後</div>
@@ -550,7 +562,7 @@
     </div>
     <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/38ee8e633d933570a2506d1ceba9290b_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="time">午後</div>
         <div class="place">那覇市牧志 ポケふた(ウインディ)<span class="badge">任意・ポケふた</span></div>
@@ -582,7 +594,7 @@
     </div>
     <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/1a8c0a85ed3586e6076dac22272185d7_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="time">任意</div>
         <div class="place">うるま市 ポケふた(ケンタロス)<span class="badge">任意・ポケふた</span></div>
@@ -604,7 +616,7 @@
         <div class="desc">レンタカー返却の時間を逆算し、余裕をもって出発</div>
       </div>
     </div>
-    <div class="card" data-id="d5-move">
+    <div class="card" data-id="d5-move" data-map-id="rentalcar">
       <input type="checkbox">
       <div class="body">
         <div class="time">〜14:00</div>
@@ -616,7 +628,7 @@
     </div>
     <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/07ed34f46b856337cea843d294287933_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="time">時間があれば</div>
         <div class="place">豊見城市 ポケふた(キバゴ・ジャラコ)<span class="badge">任意・ポケふた</span></div>
@@ -641,7 +653,7 @@
 
     <div class="card pika" data-id="pf-naha-shuri" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/6ea8d929a518be32eb78754371390526_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">那覇市首里 ポケふた(ガーディ)<span class="badge off-tag">ルート外(首里城近く)</span></div>
         <div class="desc">那覇市首里池端町18</div>
@@ -652,7 +664,7 @@
 
     <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/38ee8e633d933570a2506d1ceba9290b_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">那覇市牧志 ポケふた(ウインディ)<span class="badge day-tag">DAY3に掲載</span></div>
         <div class="desc">那覇市牧志3丁目2・国際通りのすぐ近く</div>
@@ -663,7 +675,7 @@
 
     <div class="card pika" data-id="pf-chatan" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/5607d35bb32e267fd37f06948e578902_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">北谷町 ポケふた(ガーディ)<span class="badge day-tag">DAY3圏内(美浜アメリカンビレッジ)</span></div>
         <div class="desc">北谷町美浜20番</div>
@@ -674,7 +686,7 @@
 
     <div class="card pika" data-id="pf-nanjo" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/037ab104126f6843a4d1264f42926ab5_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">南城市 ポケふた(ハブネーク・ザングース)<span class="badge off-tag">ルート外(斎場御嶽方面)</span></div>
         <div class="desc">南城市知念久手堅541</div>
@@ -685,7 +697,7 @@
 
     <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/07ed34f46b856337cea843d294287933_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">豊見城市 ポケふた(キバゴ・ジャラコ)<span class="badge day-tag">DAY5に掲載</span></div>
         <div class="desc">豊見城市字豊崎1-1162・空港近く</div>
@@ -696,7 +708,7 @@
 
     <div class="card pika" data-id="pf-motobu" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/ace6dd945ee55438d6cc274d7d64dce2_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">本部町 ポケふた(ホエルオー)<span class="badge day-tag">DAY2に掲載</span></div>
         <div class="desc">本部町字石川・海洋博公園地内</div>
@@ -707,7 +719,7 @@
 
     <div class="card pika" data-id="pf-itoman" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/e3d0f526cfd0d3725b9814853efd7932_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">糸満市 ポケふた(カメール・スナバァ)<span class="badge off-tag">ルート外(南部)</span></div>
         <div class="desc">糸満市西崎町4丁目19-1</div>
@@ -718,7 +730,7 @@
 
     <div class="card pika" data-id="pf-nago" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/73c010eaa7438086463ffc02641320d9_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">名護市 ポケふた(エモンガ・ツツケラ)<span class="badge day-tag">DAY2に掲載</span></div>
         <div class="desc">名護市城二丁目321-3・名護城址周辺</div>
@@ -729,7 +741,7 @@
 
     <div class="card pika" data-id="pf-urasoe" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/f845741c04f2845bd5ca99241c714706_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">浦添市 ポケふた(ソルロック・ポポッコ)<span class="badge day-tag">DAY3圏内</span></div>
         <div class="desc">浦添市勢理客4-14-1</div>
@@ -740,7 +752,7 @@
 
     <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/1a8c0a85ed3586e6076dac22272185d7_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">うるま市 ポケふた(ケンタロス)<span class="badge day-tag">DAY4に掲載</span></div>
         <div class="desc">うるま市石川2316</div>
@@ -751,7 +763,7 @@
 
     <div class="card pika" data-id="pf-okinawacity" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/b084912808574bde91de683704e1503d_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">沖縄市 ポケふた(バチンキー・ラランテス)<span class="badge day-tag">DAY3圏内(ライカム近く)</span></div>
         <div class="desc">沖縄市胡屋5-7-1</div>
@@ -762,7 +774,7 @@
 
     <div class="card pika" data-id="pf-ginowan" data-pokefuta="1">
       <input type="checkbox">
-      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="thumb"><img src="img/130f21e980593ce7e537a81a804a1bc3_m.png" alt="ポケふた"></div>
       <div class="body">
         <div class="place">宜野湾市 ポケふた(サニーゴ・ラブカス)<span class="badge day-tag">DAY3圏内</span></div>
         <div class="desc">宜野湾市真志喜4-2-1</div>
@@ -855,6 +867,32 @@
 
   document.addEventListener("change", onCheckboxChange);
 
+  function highlightMarker(mapId){
+    if(!tripMap) return;
+    var m = markersById[mapId];
+    if(!m) return;
+    document.getElementById("tripMap").scrollIntoView({behavior:"smooth", block:"center"});
+    tripMap.flyTo(m.getLatLng(), Math.max(tripMap.getZoom(), 13), {duration:0.6});
+    m.openPopup();
+    var el = m.getElement();
+    if(el){
+      var pin = el.querySelector(".pin-photo, .pin");
+      if(pin){
+        pin.classList.remove("highlight");
+        void pin.offsetWidth;
+        pin.classList.add("highlight");
+      }
+    }
+  }
+
+  document.addEventListener("click", function(e){
+    if(e.target.closest("input, a")) return;
+    var card = e.target.closest(".card[data-id], .card[data-map-id]");
+    if(!card) return;
+    var mapId = card.getAttribute("data-map-id") || card.getAttribute("data-id");
+    if(mapId) highlightMarker(mapId);
+  });
+
   /* Tabs */
   var tabButtons = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
   var panels = Array.prototype.slice.call(document.querySelectorAll(".day-panel"));
@@ -874,27 +912,27 @@
   var tripMap = null;
   var markerLayer = null;
   var MAP_POINTS = [
-    {name:"カヌチャリゾート(宿泊)", rank:"lodging", days:[1,2,3,4,5], lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
-    {name:"沖縄美ら海水族館(必須)", rank:"must", days:[2], lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
-    {name:"国際通り(必須)", rank:"must", days:[3], lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
-    {name:"那覇空港", rank:"optional", days:[1,5], lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
-    {name:"Timesレンタカー那覇空港店", rank:"optional", days:[1,5], lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
-    {name:"ポケモンセンターオキナワ", rank:"optional", days:[3], lat:26.3306, lng:127.8064, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
-    {name:"那覇市首里 ポケふた(ガーディ)", rank:"pokefuta", days:[], pokeIds:[58], lat:26.22005, lng:127.71657, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18"},
-    {name:"那覇市牧志 ポケふた(ウインディ)", rank:"pokefuta", days:[3], pokeIds:[59], lat:26.21641, lng:127.68942, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2"},
-    {name:"北谷町 ポケふた(ガーディ)", rank:"pokefuta", days:[3], pokeIds:[58], lat:26.315733, lng:127.753613, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20"},
-    {name:"南城市 ポケふた(ハブネーク・ザングース)", rank:"pokefuta", days:[], pokeIds:[336,335], lat:26.169111, lng:127.827083, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82%E7%9F%A5%E5%BF%B5%E4%B9%85%E6%89%8B%E5%A0%85541"},
-    {name:"豊見城市 ポケふた(キバゴ・ジャラコ)", rank:"pokefuta", days:[5], pokeIds:[610,782], lat:26.15755646, lng:127.656121, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162"},
-    {name:"本部町 ポケふた(ホエルオー)", rank:"pokefuta", days:[2], pokeIds:[321], lat:26.691694, lng:127.877972, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92"},
-    {name:"糸満市 ポケふた(カメール・スナバァ)", rank:"pokefuta", days:[], pokeIds:[8,769], lat:26.13828, lng:127.661336, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82%E8%A5%BF%E5%B4%8E%E7%94%BA4%E4%B8%81%E7%9B%AE19"},
-    {name:"名護市 ポケふた(エモンガ・ツツケラ)", rank:"pokefuta", days:[2], pokeIds:[587,731], lat:26.587352, lng:127.985744, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321"},
-    {name:"浦添市 ポケふた(ソルロック・ポポッコ)", rank:"pokefuta", days:[3], pokeIds:[338,188], lat:26.245559, lng:127.687899, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1"},
-    {name:"うるま市 ポケふた(ケンタロス)", rank:"pokefuta", days:[4], pokeIds:[128], lat:26.436181, lng:127.826113, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316"},
-    {name:"沖縄市 ポケふた(バチンキー・ラランテス)", rank:"pokefuta", days:[3], pokeIds:[811,754], lat:26.32766, lng:127.803001, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1"},
-    {name:"宜野湾市 ポケふた(サニーゴ・ラブカス)", rank:"pokefuta", days:[3], pokeIds:[222,370], lat:26.28139, lng:127.732215, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1"}
+    {id:"lodging", name:"カヌチャリゾート(宿泊)", rank:"lodging", days:[1,2,3,4,5], lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
+    {id:"churaumi", name:"沖縄美ら海水族館(必須)", rank:"must", days:[2], lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
+    {id:"kokusai", name:"国際通り(必須)", rank:"must", days:[3], lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
+    {id:"naha-airport", name:"那覇空港", rank:"optional", days:[1,5], lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
+    {id:"rentalcar", name:"Timesレンタカー那覇空港店", rank:"optional", days:[1,5], lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
+    {id:"pokecenter", name:"ポケモンセンターオキナワ", rank:"optional", days:[3], lat:26.3306, lng:127.8064, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
+    {id:"pf-naha-shuri", name:"那覇市首里 ポケふた(ガーディ)", rank:"pokefuta", days:[], img:"6ea8d929a518be32eb78754371390526_m.png", lat:26.22005, lng:127.71657, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18"},
+    {id:"pf-naha-makishi", name:"那覇市牧志 ポケふた(ウインディ)", rank:"pokefuta", days:[3], img:"38ee8e633d933570a2506d1ceba9290b_m.png", lat:26.21641, lng:127.68942, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2"},
+    {id:"pf-chatan", name:"北谷町 ポケふた(ガーディ)", rank:"pokefuta", days:[3], img:"5607d35bb32e267fd37f06948e578902_m.png", lat:26.315733, lng:127.753613, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20"},
+    {id:"pf-nanjo", name:"南城市 ポケふた(ハブネーク・ザングース)", rank:"pokefuta", days:[], img:"037ab104126f6843a4d1264f42926ab5_m.png", lat:26.169111, lng:127.827083, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82%E7%9F%A5%E5%BF%B5%E4%B9%85%E6%89%8B%E5%A0%85541"},
+    {id:"pf-tomigusuku", name:"豊見城市 ポケふた(キバゴ・ジャラコ)", rank:"pokefuta", days:[5], img:"07ed34f46b856337cea843d294287933_m.png", lat:26.15755646, lng:127.656121, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162"},
+    {id:"pf-motobu", name:"本部町 ポケふた(ホエルオー)", rank:"pokefuta", days:[2], img:"ace6dd945ee55438d6cc274d7d64dce2_m.png", lat:26.691694, lng:127.877972, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92"},
+    {id:"pf-itoman", name:"糸満市 ポケふた(カメール・スナバァ)", rank:"pokefuta", days:[], img:"e3d0f526cfd0d3725b9814853efd7932_m.png", lat:26.13828, lng:127.661336, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82%E8%A5%BF%E5%B4%8E%E7%94%BA4%E4%B8%81%E7%9B%AE19"},
+    {id:"pf-nago", name:"名護市 ポケふた(エモンガ・ツツケラ)", rank:"pokefuta", days:[2], img:"73c010eaa7438086463ffc02641320d9_m.png", lat:26.587352, lng:127.985744, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321"},
+    {id:"pf-urasoe", name:"浦添市 ポケふた(ソルロック・ポポッコ)", rank:"pokefuta", days:[3], img:"f845741c04f2845bd5ca99241c714706_m.png", lat:26.245559, lng:127.687899, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1"},
+    {id:"pf-uruma", name:"うるま市 ポケふた(ケンタロス)", rank:"pokefuta", days:[4], img:"1a8c0a85ed3586e6076dac22272185d7_m.png", lat:26.436181, lng:127.826113, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316"},
+    {id:"pf-okinawacity", name:"沖縄市 ポケふた(バチンキー・ラランテス)", rank:"pokefuta", days:[3], img:"b084912808574bde91de683704e1503d_m.png", lat:26.32766, lng:127.803001, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1"},
+    {id:"pf-ginowan", name:"宜野湾市 ポケふた(サニーゴ・ラブカス)", rank:"pokefuta", days:[3], img:"130f21e980593ce7e537a81a804a1bc3_m.png", lat:26.28139, lng:127.732215, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1"}
   ];
   var RANK_EMOJI = {must:"★", optional:"●", lodging:"🏝"};
-  var SPRITE_BASE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+  var markersById = {};
 
   function pointMatchesDay(pt, day){
     if(day === "pf") return pt.rank === "pokefuta" || pt.rank === "lodging";
@@ -903,21 +941,24 @@
   }
 
   function markerFor(pt){
-    var innerHtml;
-    if(pt.rank === "pokefuta" && pt.pokeIds && pt.pokeIds.length){
-      innerHtml = pt.pokeIds.map(function(id){
-        return '<img src="' + SPRITE_BASE + id + '.png" alt="">';
-      }).join("");
+    var icon;
+    if(pt.rank === "pokefuta" && pt.img){
+      icon = L.divIcon({
+        className: "",
+        html: '<div class="pin-photo"><img src="img/' + pt.img + '" alt=""></div>',
+        iconSize: [36,36],
+        iconAnchor: [18,18],
+        popupAnchor: [0,-18]
+      });
     }else{
-      innerHtml = '<span>' + RANK_EMOJI[pt.rank] + '</span>';
+      icon = L.divIcon({
+        className: "",
+        html: '<div class="pin ' + pt.rank + '"><span>' + RANK_EMOJI[pt.rank] + '</span></div>',
+        iconSize: [26,26],
+        iconAnchor: [13,26],
+        popupAnchor: [0,-24]
+      });
     }
-    var icon = L.divIcon({
-      className: "",
-      html: '<div class="pin ' + pt.rank + '"><span>' + innerHtml + '</span></div>',
-      iconSize: [pt.rank==="pokefuta" ? 32 : 26, pt.rank==="pokefuta" ? 32 : 26],
-      iconAnchor: [pt.rank==="pokefuta" ? 16 : 13, pt.rank==="pokefuta" ? 32 : 26],
-      popupAnchor: [0,-24]
-    });
     return L.marker([pt.lat, pt.lng], {icon: icon})
       .bindPopup(pt.name + '<br><a href="' + pt.link + '" target="_blank" rel="noopener">📍 Google Mapで開く</a>');
   }
@@ -925,7 +966,7 @@
   function ensureMapInit(){
     if(tripMap || typeof L === "undefined") return;
     tripMap = L.map("tripMap", {scrollWheelZoom:false}).setView([26.42, 127.85], 9);
-    L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
+    L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", {
       maxZoom: 18,
       attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>'
     }).addTo(tripMap);
@@ -936,8 +977,13 @@
     ensureMapInit();
     if(!tripMap) return;
     markerLayer.clearLayers();
+    markersById = {};
     var matched = MAP_POINTS.filter(function(pt){ return pointMatchesDay(pt, day); });
-    matched.forEach(function(pt){ markerFor(pt).addTo(markerLayer); });
+    matched.forEach(function(pt){
+      var m = markerFor(pt);
+      m.addTo(markerLayer);
+      markersById[pt.id] = m;
+    });
     if(matched.length){
       var bounds = L.latLngBounds(matched.map(function(pt){ return [pt.lat, pt.lng]; }));
       tripMap.fitBounds(bounds, {padding: [30,30], maxZoom: 12});
