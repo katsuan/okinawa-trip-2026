@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
 <title>沖縄旅行 2026.9.14-18</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet"/>
 <style>
   :root{
     --sea-deep:#0a5c78;
@@ -123,17 +124,7 @@
   .lodging-card .icon{font-size:1.6rem;}
   .lodging-card .name{font-weight:700;font-size:1rem;}
   .lodging-card .sub{font-size:.78rem;color:var(--text-sub);}
-  .lodging-card a{
-    margin-left:auto;
-    white-space:nowrap;
-    font-size:.78rem;
-    color:var(--sea-deep);
-    text-decoration:none;
-    font-weight:700;
-    border:1px solid var(--sea-light);
-    border-radius:999px;
-    padding:6px 12px;
-  }
+  .lodging-card a.chip{margin-left:auto;font-size:.72rem;padding:5px 10px;}
 
   /* Pokefuta progress */
   .pokefuta-box{
@@ -232,14 +223,26 @@
     background:var(--sand-card);
     border:1px solid var(--border);
     border-radius:14px;
-    padding:13px 15px;
+    padding:11px 15px 13px;
     margin-bottom:10px;
     box-shadow:0 2px 8px rgba(10,92,120,.05);
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
     transition:opacity .2s ease;
   }
+  .card .row1{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:8px;
+  }
+  .card .row1 .spacer{flex:1;}
+  .card input[type=checkbox]{
+    width:20px;
+    height:20px;
+    accent-color:var(--sea-deep);
+    flex:0 0 auto;
+  }
+  .card .time{font-size:.76rem;font-weight:800;color:var(--sea);letter-spacing:.02em;white-space:nowrap;}
+  .card .row2{display:flex;gap:10px;align-items:center;}
   .card .thumb{
     flex:0 0 auto;
     width:52px;
@@ -254,16 +257,8 @@
   .card .thumb img{width:100%;height:100%;object-fit:cover;}
   .card.done .thumb{opacity:.5;}
   .card.done{opacity:.5;}
-  .card input[type=checkbox]{
-    margin-top:3px;
-    width:20px;
-    height:20px;
-    accent-color:var(--sea-deep);
-    flex:0 0 auto;
-  }
   .card .body{flex:1;min-width:0;}
-  .card .time{font-size:.76rem;font-weight:800;color:var(--sea);letter-spacing:.02em;}
-  .card .place{font-size:1rem;font-weight:700;margin:2px 0 4px;}
+  .card .place{font-size:1rem;font-weight:700;margin:0 0 2px;}
   .card.done .place{text-decoration:line-through;}
   .card .desc{font-size:.84rem;color:var(--text-sub);}
   .card .maplink{
@@ -278,14 +273,6 @@
     background:#eaf6fa;
     border-radius:999px;
     padding:5px 11px;
-  }
-  .chips{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    gap:5px;
-    float:right;
-    margin:0 0 6px 8px;
   }
   .chip{
     font-size:.66rem;
@@ -307,9 +294,8 @@
   .chip-tag.day-tag{color:#fff;background:var(--sea);}
   .chip-tag.off-tag{color:var(--text-sub);background:var(--border);}
   .must{border-left:4px solid var(--coral);}
-  .pika{border-left:4px solid var(--pika-border);align-items:center;}
+  .pika{border-left:4px solid var(--pika-border);}
   .pika .pf-mon{font-size:.8rem;font-weight:500;color:var(--text-sub);margin:0 0 4px;}
-  .pika .pf-mon::before{content:"⚡";margin-right:3px;}
   .pf-intro{
     font-size:.82rem;
     color:var(--text-sub);
@@ -394,417 +380,571 @@
 </style>
 </head>
 <body>
-
 <header>
-  <h1>沖縄旅行 🌺</h1>
-  <div class="dates">2026年9月14日(月) 〜 9月18日(金)</div>
+<h1>沖縄旅行 🌺</h1>
+<div class="dates">2026年9月14日(月) 〜 9月18日(金)</div>
 </header>
-
 <main>
-
-  <div id="todayBanner" class="today-banner"></div>
-
-  <div id="flightStrip" class="flight-strip">
-    <div class="flight-card">
-      <div class="label">往路 9/14(月)</div>
-      <div class="route">広島 → 那覇</div>
-      <div class="time">11:20発</div>
-    </div>
-    <div class="flight-card">
-      <div class="label">復路 9/18(金)</div>
-      <div class="route">那覇 → 広島</div>
-      <div class="time">16:25発</div>
-    </div>
-  </div>
-
-  <div class="lodging-card">
-    <div class="icon">🏝️</div>
-    <div>
-      <div class="name">カヌチャリゾート</div>
-      <div class="sub">名護市字安部 / 全泊利用</div>
-    </div>
-    <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88" target="_blank" rel="noopener">Map</a>
-  </div>
-
-
-  <nav class="tabbar" id="tabbar">
-    <button class="tab-btn" data-day="1">DAY1<span class="d">9/14 月</span></button>
-    <button class="tab-btn" data-day="2">DAY2<span class="d">9/15 火</span></button>
-    <button class="tab-btn" data-day="3">DAY3<span class="d">9/16 水</span></button>
-    <button class="tab-btn" data-day="4">DAY4<span class="d">9/17 木</span></button>
-    <button class="tab-btn" data-day="5">DAY5<span class="d">9/18 金</span></button>
-    <button class="tab-btn" data-day="pf">🎯図鑑<span class="d">ポケふた12</span></button>
-  </nav>
-
-  <div id="tripMap"></div>
-  <div class="map-legend">
-    <span class="item"><span class="dot must"></span>必須</span>
-    <span class="item"><span class="dot optional"></span>拠点</span>
-    <span class="item"><span class="dot pokefuta"></span>ポケふた</span>
-    <span class="item"><span class="dot lodging"></span>宿泊</span>
-  </div>
-
-  <!-- DAY 1 -->
-  <section class="day-panel" data-day="1">
+<div class="today-banner" id="todayBanner"></div>
+<div class="flight-strip" id="flightStrip">
+<div class="flight-card">
+<div class="label">往路 9/14(月)</div>
+<div class="route">広島 → 那覇</div>
+<div class="time">11:20発</div>
+</div>
+<div class="flight-card">
+<div class="label">復路 9/18(金)</div>
+<div class="route">那覇 → 広島</div>
+<div class="time">16:25発</div>
+</div>
+</div>
+<div class="lodging-card">
+<div class="icon">🏝️</div>
+<div>
+<div class="name">カヌチャリゾート</div>
+<div class="sub">名護市字安部 / 全泊利用</div>
+</div>
+<a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88" rel="noopener" target="_blank">📍 Map</a>
+</div>
+<nav class="tabbar" id="tabbar">
+<button class="tab-btn" data-day="1">DAY1<span class="d">9/14 月</span></button>
+<button class="tab-btn" data-day="2">DAY2<span class="d">9/15 火</span></button>
+<button class="tab-btn" data-day="3">DAY3<span class="d">9/16 水</span></button>
+<button class="tab-btn" data-day="4">DAY4<span class="d">9/17 木</span></button>
+<button class="tab-btn" data-day="5">DAY5<span class="d">9/18 金</span></button>
+<button class="tab-btn" data-day="pf">🎯図鑑<span class="d">ポケふた12</span></button>
+</nav>
+<div id="tripMap"></div>
+<div class="map-legend">
+<span class="item"><span class="dot must"></span>必須</span>
+<span class="item"><span class="dot optional"></span>拠点</span>
+<span class="item"><span class="dot pokefuta"></span>ポケふた</span>
+<span class="item"><span class="dot lodging"></span>宿泊</span>
+</div>
+<!-- DAY 1 -->
+<section class="day-panel" data-day="1">
     <div class="card" data-id="d1-depart">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Map</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">11:20</div>
-        <div class="place">広島空港 発</div>
-        <div class="desc">✈️ ANA1861 那覇行き</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E7%A9%BA%E6%B8%AF" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">広島空港 発</div>
+          <div class="desc">✈️ ANA1861 那覇行き</div>
         </div>
-    </div>
-    <div class="card" data-id="d1-arrive" data-map-id="naha-airport">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Map</a></div>
-        <div class="time">13:25頃</div>
-        <div class="place">那覇空港 着</div>
-        <div class="desc">国内線出口→横断歩道→送迎バスのりば11番。Timesレンタカーの送迎バスで店舗へ(空港から約1.5km)</div>
-        </div>
-    </div>
-    <div class="card" data-id="d1-rentalcar" data-map-id="rentalcar">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" target="_blank" rel="noopener">📍 Map</a></div>
-        <div class="time">14:00</div>
-        <div class="place">Timesカーレンタル 那覇空港店 受取</div>
-        <div class="desc">TEL 0570-00-1536 / コンパクトクラス(AT・禁煙)。補償料込み合計 32,890円(現地払い 32,810円)。受取後、北部・カヌチャへ移動(車で約1時間30分)</div>
-        <a class="maplink" href="https://rental.timescar.jp/okinawa/shop/4701/?layout=0&btn=0" target="_blank" rel="noopener">🔗 店舗詳細</a>
-        </div>
-    </div>
-    <div class="card" data-id="d1-checkin">
-      <input type="checkbox">
-      <div class="body">
-        <div class="time">15:00頃</div>
-        <div class="place">カヌチャリゾート 到着・チェックイン</div>
-        <div class="desc">初日は移動のみ。ホテル内でゆっくり過ごす</div>
       </div>
     </div>
-    <div class="day-note">初日は移動がメイン。無理に予定を詰めない。</div>
-  </section>
-
-  <!-- DAY 2 -->
-  <section class="day-panel" data-day="2">
-    <div class="card must" data-id="d2-churaumi" data-map-id="churaumi">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" rel="noopener">📍 Map</a><span class="chip chip-must">必須</span></div>
-        <div class="time">午前</div>
-        <div class="place">沖縄美ら海水族館</div>
-        <div class="desc">カヌチャから車で約40分。黒潮の海の大水槽は必見。混雑を避けて午前中がおすすめ</div>
+    <div class="card" data-id="d1-arrive" data-map-id="naha-airport">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">13:25頃</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">那覇空港 着</div>
+          <div class="desc">国内線出口→横断歩道→送迎バスのりば11番。Timesレンタカーの送迎バスで店舗へ(空港から約1.5km)</div>
         </div>
+      </div>
+    </div>
+    <div class="card" data-id="d1-rentalcar" data-map-id="rentalcar">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">14:00</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">Timesカーレンタル 那覇空港店 受取</div>
+          <div class="desc">TEL 0570-00-1536 / コンパクトクラス(AT・禁煙)。補償料込み合計 32,890円(現地払い 32,810円)。受取後、北部・カヌチャへ移動(車で約1時間30分)</div>
+          <a class="maplink" href="https://rental.timescar.jp/okinawa/shop/4701/?layout=0&btn=0" rel="noopener" target="_blank">🔗 店舗詳細</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-id="d1-checkin">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">15:00頃</div>
+        <div class="spacer"></div>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">カヌチャリゾート 到着・チェックイン</div>
+          <div class="desc">初日は移動のみ。ホテル内でゆっくり過ごす</div>
+        </div>
+      </div>
+    </div>
+<div class="day-note">初日は移動がメイン。無理に予定を詰めない。</div>
+</section>
+<!-- DAY 2 -->
+<section class="day-panel" data-day="2">
+    <div class="card must" data-id="d2-churaumi" data-map-id="churaumi">
+      <div class="row1">
+        <input type="checkbox">
+        <span class="chip chip-must">必須</span>
+        <div class="time">午前</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">沖縄美ら海水族館</div>
+          <div class="desc">カヌチャから車で約40分。黒潮の海の大水槽は必見。混雑を避けて午前中がおすすめ</div>
+        </div>
+      </div>
     </div>
     <div class="card pika" data-id="pf-motobu" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/ace6dd945ee55438d6cc274d7d64dce2_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 Map</a><span class="chip chip-optional">任意</span><a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/232/" target="_blank" rel="noopener">🔗 ポケふた</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">午前〜昼</div>
-        <div class="place">本部町</div>
-        <div class="pf-mon">ポケふた(ホエルオー)</div>
-        <div class="desc">海洋博公園地内。水族館と同じエリアなので、あわせて回収しやすい</div>
+        <div class="spacer"></div>
+        <span class="chip chip-optional">任意</span>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/232/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/ace6dd945ee55438d6cc274d7d64dce2_m.png"/></div>
+        <div class="body">
+          <div class="place">本部町</div>
+          <div class="pf-mon">ホエルオー</div>
+          <div class="desc">海洋博公園地内。水族館と同じエリアなので、あわせて回収しやすい</div>
+        </div>
       </div>
     </div>
     <div class="card" data-id="d2-lunch">
-      <input type="checkbox">
-      <div class="body">
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">昼</div>
-        <div class="place">海洋博公園 周辺で昼食</div>
-        <div class="desc">園内・近隣の飲食店でランチ</div>
+        <div class="spacer"></div>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">海洋博公園 周辺で昼食</div>
+          <div class="desc">園内・近隣の飲食店でランチ</div>
+        </div>
       </div>
     </div>
     <div class="card pika" data-id="pf-nago" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/73c010eaa7438086463ffc02641320d9_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" target="_blank" rel="noopener">📍 Map</a><span class="chip chip-optional">任意</span><a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/230/" target="_blank" rel="noopener">🔗 ポケふた</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">午後</div>
-        <div class="place">名護市</div>
-        <div class="pf-mon">ポケふた(エモンガ・ツツケラ)</div>
-        <div class="desc">名護城二丁目・名護城址/ひんぷんガジュマル周辺。水族館からの帰り道に立ち寄り◎</div>
+        <div class="spacer"></div>
+        <span class="chip chip-optional">任意</span>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/230/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/73c010eaa7438086463ffc02641320d9_m.png"/></div>
+        <div class="body">
+          <div class="place">名護市</div>
+          <div class="pf-mon">エモンガ・ツツケラ</div>
+          <div class="desc">名護城二丁目・名護城址/ひんぷんガジュマル周辺。水族館からの帰り道に立ち寄り◎</div>
+        </div>
       </div>
     </div>
     <div class="card" data-id="d2-return">
-      <input type="checkbox">
-      <div class="body">
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">夕方</div>
-        <div class="place">カヌチャリゾートへ戻る</div>
-        <div class="desc">ホテルでゆっくり夕食・プールなど</div>
+        <div class="spacer"></div>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">カヌチャリゾートへ戻る</div>
+          <div class="desc">ホテルでゆっくり夕食・プールなど</div>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- DAY 3 -->
-  <section class="day-panel" data-day="3">
+</section>
+<!-- DAY 3 -->
+<section class="day-panel" data-day="3">
     <div class="card" data-id="d3-pokecenter" data-map-id="pokecenter">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF" target="_blank" rel="noopener">📍 Map</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">午前</div>
-        <div class="place">ポケモンセンターオキナワ</div>
-        <div class="desc">イオンモール沖縄ライカム内。カヌチャから車で約40分、那覇へ向かう中継地点</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">ポケモンセンターオキナワ</div>
+          <div class="desc">イオンモール沖縄ライカム内。カヌチャから車で約40分、那覇へ向かう中継地点</div>
         </div>
+      </div>
     </div>
     <div class="card" data-id="d3-lunch">
-      <input type="checkbox">
-      <div class="body">
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">昼</div>
-        <div class="place">イオンモール沖縄ライカムでランチ</div>
-        <div class="desc">フードコート・レストラン充実</div>
+        <div class="spacer"></div>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">イオンモール沖縄ライカムでランチ</div>
+          <div class="desc">フードコート・レストラン充実</div>
+        </div>
       </div>
     </div>
     <div class="card must" data-id="d3-kokusai" data-map-id="kokusai">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A" target="_blank" rel="noopener">📍 Map</a><span class="chip chip-must">必須</span></div>
+      <div class="row1">
+        <input type="checkbox">
+        <span class="chip chip-must">必須</span>
         <div class="time">午後</div>
-        <div class="place">国際通り</div>
-        <div class="desc">ライカムから車で約20分。お土産・食べ歩き。人混みが多いので歩きすぎ注意</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">国際通り</div>
+          <div class="desc">ライカムから車で約20分。お土産・食べ歩き。人混みが多いので歩きすぎ注意</div>
         </div>
+      </div>
     </div>
     <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/38ee8e633d933570a2506d1ceba9290b_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" target="_blank" rel="noopener">📍 Map</a><span class="chip chip-optional">任意</span><a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/174/" target="_blank" rel="noopener">🔗 ポケふた</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">午後</div>
-        <div class="place">那覇市牧志</div>
-        <div class="pf-mon">ポケふた(ウインディ)</div>
-        <div class="desc">牧志3丁目、国際通りのすぐ近く。お土産巡りのついでに立ち寄れる</div>
+        <div class="spacer"></div>
+        <span class="chip chip-optional">任意</span>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/174/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/38ee8e633d933570a2506d1ceba9290b_m.png"/></div>
+        <div class="body">
+          <div class="place">那覇市牧志</div>
+          <div class="pf-mon">ウインディ</div>
+          <div class="desc">牧志3丁目、国際通りのすぐ近く。お土産巡りのついでに立ち寄れる</div>
+        </div>
       </div>
     </div>
     <div class="card" data-id="d3-return">
-      <input type="checkbox">
-      <div class="body">
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">夕方〜夜</div>
-        <div class="place">カヌチャリゾートへ戻る</div>
-        <div class="desc">那覇からカヌチャまで車で約1時間30分〜2時間</div>
+        <div class="spacer"></div>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">カヌチャリゾートへ戻る</div>
+          <div class="desc">那覇からカヌチャまで車で約1時間30分〜2時間</div>
+        </div>
       </div>
     </div>
-    <div class="day-note">この日は運転距離が長め(往復3時間超)。疲れが出そうなら国際通りとポケモンセンターは日を分けて2日目・4日目に振り替えてもOK。</div>
-  </section>
-
-  <!-- DAY 4 -->
-  <section class="day-panel" data-day="4">
+<div class="day-note">この日は運転距離が長め(往復3時間超)。疲れが出そうなら国際通りとポケモンセンターは日を分けて2日目・4日目に振り替えてもOK。</div>
+</section>
+<!-- DAY 4 -->
+<section class="day-panel" data-day="4">
     <div class="card rest" data-id="d4-free">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><span class="chip chip-optional">任意</span></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">終日</div>
-        <div class="place">カヌチャリゾート フリーデー</div>
-        <div class="desc">プール・ビーチ・園内カートでのんびり。予定を詰めず、体調優先の休息日</div>
+        <div class="spacer"></div>
+        <span class="chip chip-optional">任意</span>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">カヌチャリゾート フリーデー</div>
+          <div class="desc">プール・ビーチ・園内カートでのんびり。予定を詰めず、体調優先の休息日</div>
+        </div>
       </div>
     </div>
     <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/1a8c0a85ed3586e6076dac22272185d7_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" target="_blank" rel="noopener">📍 Map</a><span class="chip chip-optional">任意</span><a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/177/" target="_blank" rel="noopener">🔗 ポケふた</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">任意</div>
-        <div class="place">うるま市</div>
-        <div class="pf-mon">ポケふた(ケンタロス)</div>
-        <div class="desc">石川エリア。カヌチャから車で約30〜40分と比較的近め。フリーデーの気分転換に</div>
+        <div class="spacer"></div>
+        <span class="chip chip-optional">任意</span>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/177/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/1a8c0a85ed3586e6076dac22272185d7_m.png"/></div>
+        <div class="body">
+          <div class="place">うるま市</div>
+          <div class="pf-mon">ケンタロス</div>
+          <div class="desc">石川エリア。カヌチャから車で約30〜40分と比較的近め。フリーデーの気分転換に</div>
+        </div>
       </div>
     </div>
-    <div class="day-note">予備日。天候や体調に応じて2〜3日目の予定をここに移動してもよい。他のポケふたは「🎯図鑑」タブ参照。</div>
-  </section>
-
-  <!-- DAY 5 -->
-  <section class="day-panel" data-day="5">
+<div class="day-note">予備日。天候や体調に応じて2〜3日目の予定をここに移動してもよい。他のポケふたは「🎯図鑑」タブ参照。</div>
+</section>
+<!-- DAY 5 -->
+<section class="day-panel" data-day="5">
     <div class="card" data-id="d5-checkout">
-      <input type="checkbox">
-      <div class="body">
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">午前</div>
-        <div class="place">カヌチャリゾート チェックアウト</div>
-        <div class="desc">レンタカー返却の時間を逆算し、余裕をもって出発</div>
+        <div class="spacer"></div>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">カヌチャリゾート チェックアウト</div>
+          <div class="desc">レンタカー返却の時間を逆算し、余裕をもって出発</div>
+        </div>
       </div>
     </div>
     <div class="card" data-id="d5-move" data-map-id="rentalcar">
-      <input type="checkbox">
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" target="_blank" rel="noopener">📍 Map</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">〜14:00</div>
-        <div class="place">Timesカーレンタル 那覇空港店 返却</div>
-        <div class="desc">TEL 0570-00-1536。フライト90分前目安で返却→店舗から空港まで送迎あり。カヌチャから店舗まで車で約1時間30分〜2時間、余裕をもって出発</div>
-        <a class="maplink" href="https://rental.timescar.jp/okinawa/shop/4701/?layout=0&btn=0" target="_blank" rel="noopener">🔗 店舗詳細</a>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">Timesカーレンタル 那覇空港店 返却</div>
+          <div class="desc">TEL 0570-00-1536。フライト90分前目安で返却→店舗から空港まで送迎あり。カヌチャから店舗まで車で約1時間30分〜2時間、余裕をもって出発</div>
+          <a class="maplink" href="https://rental.timescar.jp/okinawa/shop/4701/?layout=0&btn=0" rel="noopener" target="_blank">🔗 店舗詳細</a>
         </div>
+      </div>
     </div>
     <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/07ed34f46b856337cea843d294287933_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" target="_blank" rel="noopener">📍 Map</a><span class="chip chip-optional">任意</span><a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/233/" target="_blank" rel="noopener">🔗 ポケふた</a></div>
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">時間があれば</div>
-        <div class="place">豊見城市</div>
-        <div class="pf-mon">ポケふた(キバゴ・ジャラコ)</div>
-        <div class="desc">瀬長島ウミカジテラス方面、豊崎エリア。空港から近く最終日のラストチェックに向く</div>
+        <div class="spacer"></div>
+        <span class="chip chip-optional">任意</span>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/233/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/07ed34f46b856337cea843d294287933_m.png"/></div>
+        <div class="body">
+          <div class="place">豊見城市</div>
+          <div class="pf-mon">キバゴ・ジャラコ</div>
+          <div class="desc">瀬長島ウミカジテラス方面、豊崎エリア。空港から近く最終日のラストチェックに向く</div>
+        </div>
       </div>
     </div>
     <div class="card" data-id="d5-depart">
-      <input type="checkbox">
-      <div class="body">
+      <div class="row1">
+        <input type="checkbox">
         <div class="time">16:25</div>
-        <div class="place">那覇空港 発</div>
-        <div class="desc">✈️ ANA1862 広島行き(到着目安 18:30頃)</div>
+        <div class="spacer"></div>
+      </div>
+      <div class="row2">
+        <div class="body">
+          <div class="place">那覇空港 発</div>
+          <div class="desc">✈️ ANA1862 広島行き(到着目安 18:30頃)</div>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- POKEFUTA ZUKAN -->
-  <section class="day-panel" data-day="pf">
-    <div class="pokefuta-box">
-      <div class="row">
-        <div class="title">⚡ ポケふた回収率</div>
-        <div class="count"><span id="pfChecked">0</span> / <span id="pfTotal">0</span></div>
-      </div>
-      <div class="pf-bar"><div class="pf-bar-fill" id="pfBarFill"></div></div>
-      <div class="hint">チェックを入れると自動集計・端末に保存されます(場所・基数は現地情報で要確認)</div>
-      <a class="official-link" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 ポケふた公式サイトで写真・設置場所を見る</a>
-    </div>
-    <div class="pf-intro">沖縄本島に設置されている「ポケふた」は全12基(2026年時点で確認)。日程に組み込み済みのものには日程バッジ、ルート外は「ルート外」バッジがついています。チェックはどのタブから入れても連動します。</div>
-
+</section>
+<!-- POKEFUTA ZUKAN -->
+<section class="day-panel" data-day="pf">
+<div class="pokefuta-box">
+<div class="row">
+<div class="title">⚡ ポケふた回収率</div>
+<div class="count"><span id="pfChecked">0</span> / <span id="pfTotal">0</span></div>
+</div>
+<div class="pf-bar"><div class="pf-bar-fill" id="pfBarFill"></div></div>
+<div class="hint">チェックを入れると自動集計・端末に保存されます(場所・基数は現地情報で要確認)</div>
+<a class="official-link" href="https://local.pokemon.jp/manhole/" rel="noopener" target="_blank">🔗 ポケふた公式サイトで写真・設置場所を見る</a>
+</div>
+<div class="pf-intro">沖縄本島に設置されている「ポケふた」は全12基(2026年時点で確認)。日程に組み込み済みのものには日程バッジ、ルート外は「ルート外」バッジがついています。チェックはどのタブから入れても連動します。</div>
     <div class="card pika" data-id="pf-naha-shuri" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/6ea8d929a518be32eb78754371390526_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/446/" target="_blank" rel="noopener">🔗 ルート外(首里城近く)</a></div>
-        <div class="place">那覇市首里</div>
-        <div class="pf-mon">ポケふた(ガーディ)</div>
-        <div class="desc">那覇市首里池端町18</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/446/" rel="noopener" target="_blank">🔗 ルート外(首里城近く)</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/6ea8d929a518be32eb78754371390526_m.png"/></div>
+        <div class="body">
+          <div class="place">那覇市首里</div>
+          <div class="pf-mon">ガーディ</div>
+          <div class="desc">那覇市首里池端町18</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/38ee8e633d933570a2506d1ceba9290b_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/174/" target="_blank" rel="noopener">🔗 DAY3に掲載</a></div>
-        <div class="place">那覇市牧志</div>
-        <div class="pf-mon">ポケふた(ウインディ)</div>
-        <div class="desc">那覇市牧志3丁目2・国際通りのすぐ近く</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/174/" rel="noopener" target="_blank">🔗 DAY3に掲載</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/38ee8e633d933570a2506d1ceba9290b_m.png"/></div>
+        <div class="body">
+          <div class="place">那覇市牧志</div>
+          <div class="pf-mon">ウインディ</div>
+          <div class="desc">那覇市牧志3丁目2・国際通りのすぐ近く</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-chatan" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/5607d35bb32e267fd37f06948e578902_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/422/" target="_blank" rel="noopener">🔗 DAY3圏内(美浜アメリカンビレッジ)</a></div>
-        <div class="place">北谷町</div>
-        <div class="pf-mon">ポケふた(ガーディ)</div>
-        <div class="desc">北谷町美浜20番</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/422/" rel="noopener" target="_blank">🔗 DAY3圏内(美浜アメリカンビレッジ)</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/5607d35bb32e267fd37f06948e578902_m.png"/></div>
+        <div class="body">
+          <div class="place">北谷町</div>
+          <div class="pf-mon">ガーディ</div>
+          <div class="desc">北谷町美浜20番</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-nanjo" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/037ab104126f6843a4d1264f42926ab5_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82%E7%9F%A5%E5%BF%B5%E4%B9%85%E6%89%8B%E5%A0%85541" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/234/" target="_blank" rel="noopener">🔗 ルート外(斎場御嶽方面)</a></div>
-        <div class="place">南城市</div>
-        <div class="pf-mon">ポケふた(ハブネーク・ザングース)</div>
-        <div class="desc">南城市知念久手堅541</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/234/" rel="noopener" target="_blank">🔗 ルート外(斎場御嶽方面)</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82%E7%9F%A5%E5%BF%B5%E4%B9%85%E6%89%8B%E5%A0%85541" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/037ab104126f6843a4d1264f42926ab5_m.png"/></div>
+        <div class="body">
+          <div class="place">南城市</div>
+          <div class="pf-mon">ハブネーク・ザングース</div>
+          <div class="desc">南城市知念久手堅541</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/07ed34f46b856337cea843d294287933_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/233/" target="_blank" rel="noopener">🔗 DAY5に掲載</a></div>
-        <div class="place">豊見城市</div>
-        <div class="pf-mon">ポケふた(キバゴ・ジャラコ)</div>
-        <div class="desc">豊見城市字豊崎1-1162・空港近く</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/233/" rel="noopener" target="_blank">🔗 DAY5に掲載</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/07ed34f46b856337cea843d294287933_m.png"/></div>
+        <div class="body">
+          <div class="place">豊見城市</div>
+          <div class="pf-mon">キバゴ・ジャラコ</div>
+          <div class="desc">豊見城市字豊崎1-1162・空港近く</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-motobu" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/ace6dd945ee55438d6cc274d7d64dce2_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/232/" target="_blank" rel="noopener">🔗 DAY2に掲載</a></div>
-        <div class="place">本部町</div>
-        <div class="pf-mon">ポケふた(ホエルオー)</div>
-        <div class="desc">本部町字石川・海洋博公園地内</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/232/" rel="noopener" target="_blank">🔗 DAY2に掲載</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/ace6dd945ee55438d6cc274d7d64dce2_m.png"/></div>
+        <div class="body">
+          <div class="place">本部町</div>
+          <div class="pf-mon">ホエルオー</div>
+          <div class="desc">本部町字石川・海洋博公園地内</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-itoman" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/e3d0f526cfd0d3725b9814853efd7932_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82%E8%A5%BF%E5%B4%8E%E7%94%BA4%E4%B8%81%E7%9B%AE19" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/231/" target="_blank" rel="noopener">🔗 ルート外(南部)</a></div>
-        <div class="place">糸満市</div>
-        <div class="pf-mon">ポケふた(カメール・スナバァ)</div>
-        <div class="desc">糸満市西崎町4丁目19-1</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/231/" rel="noopener" target="_blank">🔗 ルート外(南部)</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82%E8%A5%BF%E5%B4%8E%E7%94%BA4%E4%B8%81%E7%9B%AE19" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/e3d0f526cfd0d3725b9814853efd7932_m.png"/></div>
+        <div class="body">
+          <div class="place">糸満市</div>
+          <div class="pf-mon">カメール・スナバァ</div>
+          <div class="desc">糸満市西崎町4丁目19-1</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-nago" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/73c010eaa7438086463ffc02641320d9_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/230/" target="_blank" rel="noopener">🔗 DAY2に掲載</a></div>
-        <div class="place">名護市</div>
-        <div class="pf-mon">ポケふた(エモンガ・ツツケラ)</div>
-        <div class="desc">名護市城二丁目321-3・名護城址周辺</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/230/" rel="noopener" target="_blank">🔗 DAY2に掲載</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/73c010eaa7438086463ffc02641320d9_m.png"/></div>
+        <div class="body">
+          <div class="place">名護市</div>
+          <div class="pf-mon">エモンガ・ツツケラ</div>
+          <div class="desc">名護市城二丁目321-3・名護城址周辺</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-urasoe" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/f845741c04f2845bd5ca99241c714706_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/229/" target="_blank" rel="noopener">🔗 DAY3圏内</a></div>
-        <div class="place">浦添市</div>
-        <div class="pf-mon">ポケふた(ソルロック・ポポッコ)</div>
-        <div class="desc">浦添市勢理客4-14-1</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/229/" rel="noopener" target="_blank">🔗 DAY3圏内</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/f845741c04f2845bd5ca99241c714706_m.png"/></div>
+        <div class="body">
+          <div class="place">浦添市</div>
+          <div class="pf-mon">ソルロック・ポポッコ</div>
+          <div class="desc">浦添市勢理客4-14-1</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/1a8c0a85ed3586e6076dac22272185d7_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/177/" target="_blank" rel="noopener">🔗 DAY4に掲載</a></div>
-        <div class="place">うるま市</div>
-        <div class="pf-mon">ポケふた(ケンタロス)</div>
-        <div class="desc">うるま市石川2316</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/177/" rel="noopener" target="_blank">🔗 DAY4に掲載</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/1a8c0a85ed3586e6076dac22272185d7_m.png"/></div>
+        <div class="body">
+          <div class="place">うるま市</div>
+          <div class="pf-mon">ケンタロス</div>
+          <div class="desc">うるま市石川2316</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-okinawacity" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/b084912808574bde91de683704e1503d_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/176/" target="_blank" rel="noopener">🔗 DAY3圏内(ライカム近く)</a></div>
-        <div class="place">沖縄市</div>
-        <div class="pf-mon">ポケふた(バチンキー・ラランテス)</div>
-        <div class="desc">沖縄市胡屋5-7-1</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/176/" rel="noopener" target="_blank">🔗 DAY3圏内(ライカム近く)</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/b084912808574bde91de683704e1503d_m.png"/></div>
+        <div class="body">
+          <div class="place">沖縄市</div>
+          <div class="pf-mon">バチンキー・ラランテス</div>
+          <div class="desc">沖縄市胡屋5-7-1</div>
+        </div>
       </div>
     </div>
-
     <div class="card pika" data-id="pf-ginowan" data-pokefuta="1">
-      <input type="checkbox">
-      <div class="thumb"><img src="img/130f21e980593ce7e537a81a804a1bc3_m.png" alt="ポケふた"></div>
-      <div class="body">
-        <div class="chips"><a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1" target="_blank" rel="noopener">📍 Map</a><a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/175/" target="_blank" rel="noopener">🔗 DAY3圏内</a></div>
-        <div class="place">宜野湾市</div>
-        <div class="pf-mon">ポケふた(サニーゴ・ラブカス)</div>
-        <div class="desc">宜野湾市真志喜4-2-1</div>
+      <div class="row1">
+        <input type="checkbox">
+        <div class="spacer"></div>
+        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/175/" rel="noopener" target="_blank">🔗 DAY3圏内</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/130f21e980593ce7e537a81a804a1bc3_m.png"/></div>
+        <div class="body">
+          <div class="place">宜野湾市</div>
+          <div class="pf-mon">サニーゴ・ラブカス</div>
+          <div class="desc">宜野湾市真志喜4-2-1</div>
+        </div>
       </div>
     </div>
-  </section>
-
-
+</section>
 </main>
-
 <footer>
   沖縄旅行 2026.9.14–9.18 / 私的な旅程メモ
 </footer>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 (function(){
@@ -981,7 +1121,7 @@
   function ensureMapInit(){
     if(tripMap || typeof L === "undefined") return;
     tripMap = L.map("tripMap", {scrollWheelZoom:false}).setView([26.42, 127.85], 9);
-    L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", {
+    L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png", {
       maxZoom: 18,
       attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>'
     }).addTo(tripMap);
@@ -1061,6 +1201,6 @@
   init();
 })();
 </script>
-
 </body>
 </html>
+
