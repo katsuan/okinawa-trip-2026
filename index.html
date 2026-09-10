@@ -335,6 +335,51 @@
   .dot.optional{background:var(--sea);}
   .dot.pokefuta{background:var(--pika-border);}
   .dot.lodging{background:#3a9d6f;}
+
+  /* Memo */
+  .memo-box{
+    background:var(--sand-card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .memo-toggle{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:none;
+    border:none;
+    padding:12px 15px;
+    font-size:.86rem;
+    font-weight:700;
+    color:var(--text);
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .memo-chevron{transition:transform .2s ease;color:var(--text-sub);}
+  .memo-box.open .memo-chevron{transform:rotate(180deg);}
+  .memo-body{
+    display:none;
+    padding:0 15px 14px;
+  }
+  .memo-box.open .memo-body{display:block;}
+  #memoText{
+    width:100%;
+    min-height:90px;
+    resize:vertical;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:inherit;
+    font-size:.88rem;
+    color:var(--text);
+    background:var(--sand);
+    box-sizing:border-box;
+  }
+  #memoText:focus{outline:2px solid var(--sea-light);outline-offset:1px;}
+  .memo-hint{font-size:.7rem;color:var(--text-sub);margin-top:6px;}
   .pin{
     width:26px;height:26px;
     border-radius:50% 50% 50% 0;
@@ -424,6 +469,18 @@
 <span class="item"><span class="dot pokefuta"></span>ポケふた</span>
 <span class="item"><span class="dot lodging"></span>宿泊</span>
 </div>
+
+<div class="memo-box">
+  <button class="memo-toggle" id="memoToggle" type="button">
+    <span>📝 メモ</span>
+    <span class="memo-chevron" id="memoChevron">▾</span>
+  </button>
+  <div class="memo-body" id="memoBody">
+    <textarea id="memoText" placeholder="持ち物・買うもの・気づいたことなど自由にメモ"></textarea>
+    <div class="memo-hint">端末に自動保存されます(この端末だけで見られます)</div>
+  </div>
+</div>
+
 <!-- DAY 1 -->
 <section class="day-panel" data-day="1">
     <div class="card" data-id="d1-depart">
@@ -489,8 +546,8 @@
     <div class="card must" data-id="d2-churaumi" data-map-id="churaumi">
       <div class="row1">
         <input type="checkbox">
-        <span class="chip chip-must">必須</span>
         <div class="time">午前</div>
+        <span class="chip chip-must">必須</span>
         <div class="spacer"></div>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8" rel="noopener" target="_blank">📍 Map</a>
       </div>
@@ -506,7 +563,6 @@
         <input type="checkbox">
         <div class="time">午前〜昼</div>
         <div class="spacer"></div>
-        <span class="chip chip-optional">任意</span>
         <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/232/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" rel="noopener" target="_blank">📍 Map</a>
       </div>
@@ -537,7 +593,6 @@
         <input type="checkbox">
         <div class="time">午後</div>
         <div class="spacer"></div>
-        <span class="chip chip-optional">任意</span>
         <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/230/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" rel="noopener" target="_blank">📍 Map</a>
       </div>
@@ -596,8 +651,8 @@
     <div class="card must" data-id="d3-kokusai" data-map-id="kokusai">
       <div class="row1">
         <input type="checkbox">
-        <span class="chip chip-must">必須</span>
         <div class="time">午後</div>
+        <span class="chip chip-must">必須</span>
         <div class="spacer"></div>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A" rel="noopener" target="_blank">📍 Map</a>
       </div>
@@ -613,7 +668,6 @@
         <input type="checkbox">
         <div class="time">午後</div>
         <div class="spacer"></div>
-        <span class="chip chip-optional">任意</span>
         <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/174/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" rel="noopener" target="_blank">📍 Map</a>
       </div>
@@ -623,6 +677,74 @@
           <div class="place">那覇市牧志</div>
           <div class="pf-mon">ウインディ</div>
           <div class="desc">牧志3丁目、国際通りのすぐ近く。お土産巡りのついでに立ち寄れる</div>
+        </div>
+      </div>
+    </div>
+    <div class="card pika" data-id="pf-chatan" data-pokefuta="1">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">任意</div>
+        <div class="spacer"></div>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/422/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/5607d35bb32e267fd37f06948e578902_m.png"/></div>
+        <div class="body">
+          <div class="place">北谷町</div>
+          <div class="pf-mon">ガーディ</div>
+          <div class="desc">美浜アメリカンビレッジ。時間と気力があれば那覇⇔ライカムの道中で立ち寄り</div>
+        </div>
+      </div>
+    </div>
+    <div class="card pika" data-id="pf-urasoe" data-pokefuta="1">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">任意</div>
+        <div class="spacer"></div>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/229/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/f845741c04f2845bd5ca99241c714706_m.png"/></div>
+        <div class="body">
+          <div class="place">浦添市</div>
+          <div class="pf-mon">ソルロック・ポポッコ</div>
+          <div class="desc">那覇⇔ライカムの道中に位置。余裕があれば立ち寄り</div>
+        </div>
+      </div>
+    </div>
+    <div class="card pika" data-id="pf-okinawacity" data-pokefuta="1">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">任意</div>
+        <div class="spacer"></div>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/176/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/b084912808574bde91de683704e1503d_m.png"/></div>
+        <div class="body">
+          <div class="place">沖縄市</div>
+          <div class="pf-mon">バチンキー・ラランテス</div>
+          <div class="desc">ライカムのすぐ近く。ランチのついでに立ち寄りやすい</div>
+        </div>
+      </div>
+    </div>
+    <div class="card pika" data-id="pf-ginowan" data-pokefuta="1">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">任意</div>
+        <div class="spacer"></div>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/175/" rel="noopener" target="_blank">🔗 ポケふた</a>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="row2">
+        <div class="thumb"><img alt="ポケふた" src="img/130f21e980593ce7e537a81a804a1bc3_m.png"/></div>
+        <div class="body">
+          <div class="place">宜野湾市</div>
+          <div class="pf-mon">サニーゴ・ラブカス</div>
+          <div class="desc">那覇⇔ライカムの道中に位置。余裕があれば立ち寄り</div>
         </div>
       </div>
     </div>
@@ -648,7 +770,6 @@
         <input type="checkbox">
         <div class="time">終日</div>
         <div class="spacer"></div>
-        <span class="chip chip-optional">任意</span>
       </div>
       <div class="row2">
         <div class="body">
@@ -662,7 +783,6 @@
         <input type="checkbox">
         <div class="time">任意</div>
         <div class="spacer"></div>
-        <span class="chip chip-optional">任意</span>
         <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/177/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" rel="noopener" target="_blank">📍 Map</a>
       </div>
@@ -712,7 +832,6 @@
         <input type="checkbox">
         <div class="time">時間があれば</div>
         <div class="spacer"></div>
-        <span class="chip chip-optional">任意</span>
         <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/233/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" rel="noopener" target="_blank">📍 Map</a>
       </div>
@@ -754,8 +873,9 @@
     <div class="card pika" data-id="pf-naha-shuri" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag off-tag">ルート外(首里城近く)</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/446/" rel="noopener" target="_blank">🔗 ルート外(首里城近く)</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/446/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -770,8 +890,9 @@
     <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY3に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/174/" rel="noopener" target="_blank">🔗 DAY3に掲載</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/174/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -786,8 +907,9 @@
     <div class="card pika" data-id="pf-chatan" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY3に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/422/" rel="noopener" target="_blank">🔗 DAY3圏内(美浜アメリカンビレッジ)</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/422/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -802,8 +924,9 @@
     <div class="card pika" data-id="pf-nanjo" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag off-tag">ルート外(斎場御嶽方面)</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/234/" rel="noopener" target="_blank">🔗 ルート外(斎場御嶽方面)</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/234/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82%E7%9F%A5%E5%BF%B5%E4%B9%85%E6%89%8B%E5%A0%85541" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -818,8 +941,9 @@
     <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY5に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/233/" rel="noopener" target="_blank">🔗 DAY5に掲載</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/233/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -834,8 +958,9 @@
     <div class="card pika" data-id="pf-motobu" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY2に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/232/" rel="noopener" target="_blank">🔗 DAY2に掲載</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/232/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -850,8 +975,9 @@
     <div class="card pika" data-id="pf-itoman" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag off-tag">ルート外(南部)</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag off-tag" href="https://local.pokemon.jp/manhole/desc/231/" rel="noopener" target="_blank">🔗 ルート外(南部)</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/231/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82%E8%A5%BF%E5%B4%8E%E7%94%BA4%E4%B8%81%E7%9B%AE19" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -866,8 +992,9 @@
     <div class="card pika" data-id="pf-nago" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY2に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/230/" rel="noopener" target="_blank">🔗 DAY2に掲載</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/230/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -882,8 +1009,9 @@
     <div class="card pika" data-id="pf-urasoe" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY3に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/229/" rel="noopener" target="_blank">🔗 DAY3圏内</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/229/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -898,8 +1026,9 @@
     <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY4に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/177/" rel="noopener" target="_blank">🔗 DAY4に掲載</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/177/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -914,8 +1043,9 @@
     <div class="card pika" data-id="pf-okinawacity" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY3に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/176/" rel="noopener" target="_blank">🔗 DAY3圏内(ライカム近く)</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/176/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -930,8 +1060,9 @@
     <div class="card pika" data-id="pf-ginowan" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
+        <span class="chip chip-tag day-tag">DAY3に掲載</span>
         <div class="spacer"></div>
-        <a class="chip chip-tag day-tag" href="https://local.pokemon.jp/manhole/desc/175/" rel="noopener" target="_blank">🔗 DAY3圏内</a>
+        <a class="chip chip-pokefuta" href="https://local.pokemon.jp/manhole/desc/175/" rel="noopener" target="_blank">🔗 ポケふた</a>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1" rel="noopener" target="_blank">📍 Map</a>
       </div>
       <div class="row2">
@@ -1187,9 +1318,43 @@
     });
   }
 
+  /* Memo */
+  var MEMO_KEY = "okinawa-trip-2026-memo";
+  var MEMO_OPEN_KEY = "okinawa-trip-2026-memo-open";
+  function setupMemo(){
+    var box = document.querySelector(".memo-box");
+    var toggle = document.getElementById("memoToggle");
+    var textarea = document.getElementById("memoText");
+    if(!box || !toggle || !textarea) return;
+
+    try{
+      var saved = localStorage.getItem(MEMO_KEY);
+      if(saved) textarea.value = saved;
+    }catch(e){}
+
+    var saveTimer = null;
+    textarea.addEventListener("input", function(){
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function(){
+        try{ localStorage.setItem(MEMO_KEY, textarea.value); }catch(e){}
+      }, 300);
+    });
+
+    var isOpen = false;
+    try{ isOpen = localStorage.getItem(MEMO_OPEN_KEY) === "1" || !!textarea.value; }catch(e){}
+    box.classList.toggle("open", isOpen);
+
+    toggle.addEventListener("click", function(){
+      var open = box.classList.toggle("open");
+      try{ localStorage.setItem(MEMO_OPEN_KEY, open ? "1" : "0"); }catch(e){}
+      if(open) textarea.focus();
+    });
+  }
+
   function init(){
     applyChecksToDOM();
     updatePokefutaProgress();
+    setupMemo();
 
     var todayDay = todayDayNumber();
     setupTodayBanner(todayDay);
