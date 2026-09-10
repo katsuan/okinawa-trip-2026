@@ -140,9 +140,17 @@
   }
 
   /* Tabs */
+  .tab-wrap{position:sticky;top:0;z-index:20;}
+  .tab-wrap::after{
+    content:"";
+    position:absolute;
+    top:0; right:0; bottom:0;
+    width:32px;
+    background:linear-gradient(to right, transparent, var(--sand) 75%);
+    pointer-events:none;
+  }
   .tabbar{
-    position:sticky;
-    top:0;
+    position:relative;
     z-index:20;
     display:flex;
     gap:6px;
@@ -261,6 +269,67 @@
     padding:12px 14px;
     margin-bottom:12px;
   }
+
+  /* Checklists */
+  .checklist-add{
+    display:flex;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .checklist-add input{
+    flex:1;
+    min-width:0;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:9px 12px;
+    font-size:.88rem;
+    font-family:inherit;
+    background:var(--sand-card);
+    color:var(--text);
+  }
+  .checklist-add input:focus{outline:2px solid var(--sea-light);outline-offset:1px;}
+  .checklist-add button{
+    flex:0 0 auto;
+    border:none;
+    border-radius:10px;
+    padding:9px 16px;
+    font-size:.85rem;
+    font-weight:700;
+    font-family:inherit;
+    background:var(--sea-deep);
+    color:#fff;
+    cursor:pointer;
+  }
+  .checklist{list-style:none;margin:0;padding:0;}
+  .checklist li{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--sand-card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:13px 15px;
+    margin-bottom:10px;
+    box-shadow:0 2px 8px rgba(10,92,120,.05);
+  }
+  .checklist li input[type=checkbox]{
+    width:20px;height:20px;
+    accent-color:var(--sea-deep);
+    flex:0 0 auto;
+  }
+  .checklist li .txt{flex:1;min-width:0;font-size:.9rem;word-break:break-word;}
+  .checklist li.checked .txt{opacity:.45;text-decoration:line-through;}
+  .checklist li .del{
+    flex:0 0 auto;
+    border:none;
+    background:none;
+    color:var(--text-sub);
+    font-size:1.1rem;
+    line-height:1;
+    cursor:pointer;
+    padding:4px;
+  }
+  .checklist-empty{font-size:.84rem;color:var(--text-sub);padding:8px 2px;}
 
   /* Map */
   #tripMap{
@@ -381,6 +450,23 @@
   }
   .leaflet-popup-content{font-size:.82rem;line-height:1.5;}
   .leaflet-popup-content a{color:var(--sea-deep);font-weight:700;}
+  .locate-btn{
+    width:34px;height:34px;
+    background:#fff;
+    border:2px solid rgba(0,0,0,.15);
+    border-radius:6px;
+    font-size:1rem;
+    cursor:pointer;
+    box-shadow:0 1px 4px rgba(0,0,0,.2);
+  }
+  .locate-btn:disabled{opacity:.5;}
+  .pin-me{
+    width:16px;height:16px;
+    border-radius:50%;
+    background:#4285f4;
+    border:3px solid #fff;
+    box-shadow:0 0 0 2px #4285f4, 0 2px 6px rgba(0,0,0,.4);
+  }
 
   .day-note{
     font-size:.8rem;
@@ -425,6 +511,7 @@
 <div class="memo-hint">端末に自動保存されます(この端末だけで見られます)</div>
 </div>
 </div>
+<div class="tab-wrap">
 <nav class="tabbar" id="tabbar">
 <button class="tab-btn" data-day="1">🛫<span class="d">往路</span></button>
 <button class="tab-btn" data-day="2">🐠<span class="d">水族館</span></button>
@@ -432,13 +519,18 @@
 <button class="tab-btn" data-day="4">🏝️<span class="d">フリー</span></button>
 <button class="tab-btn" data-day="5">🛬<span class="d">復路</span></button>
 <button class="tab-btn" data-day="pf">🎯<span class="d">図鑑</span></button>
+<button class="tab-btn" data-day="packing">🎒<span class="d">持ち物</span></button>
+<button class="tab-btn" data-day="souvenir">🎁<span class="d">お土産</span></button>
 </nav>
+</div>
+<div id="mapSection">
 <div id="tripMap"></div>
 <div class="map-legend" id="mapLegend">
 <button type="button" class="item" data-rank="must"><span class="dot must"></span>必須</button>
 <button type="button" class="item" data-rank="optional"><span class="dot optional"></span>拠点</button>
 <button type="button" class="item" data-rank="lodging"><span class="dot lodging"></span>宿泊</button>
 <button type="button" class="item" data-rank="pokefuta"><span class="dot pokefuta"></span>ポケふた</button>
+</div>
 </div>
 <!-- DAY 1 -->
 <section class="day-panel" data-day="1">
@@ -1198,6 +1290,24 @@
       </div>
     </div>
 </section>
+
+<!-- PACKING LIST -->
+<section class="day-panel" data-day="packing">
+  <div class="checklist-add">
+    <input type="text" id="packingInput" placeholder="持ち物を追加">
+    <button type="button" id="packingAddBtn">追加</button>
+  </div>
+  <ul class="checklist" id="packingList"></ul>
+</section>
+
+<!-- SOUVENIR LIST -->
+<section class="day-panel" data-day="souvenir">
+  <div class="checklist-add">
+    <input type="text" id="souvenirInput" placeholder="お土産を追加">
+    <button type="button" id="souvenirAddBtn">追加</button>
+  </div>
+  <ul class="checklist" id="souvenirList"></ul>
+</section>
 </main>
 <footer>
   沖縄旅行 2026.9.14–9.18 / 私的な旅程メモ
@@ -1309,6 +1419,7 @@
   var tabButtons = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
   var panels = Array.prototype.slice.call(document.querySelectorAll(".day-panel"));
 
+  var NO_MAP_TABS = {packing:true, souvenir:true};
   function showDay(day){
     tabButtons.forEach(function(btn){
       btn.classList.toggle("active", btn.getAttribute("data-day") === String(day));
@@ -1317,20 +1428,26 @@
       p.classList.toggle("active", p.getAttribute("data-day") === String(day));
     });
     try{ localStorage.setItem(TAB_KEY, String(day)); }catch(e){}
-    updateMapMarkers(day);
+    var mapSection = document.getElementById("mapSection");
+    if(NO_MAP_TABS[day]){
+      if(mapSection) mapSection.style.display = "none";
+    }else{
+      if(mapSection) mapSection.style.display = "";
+      updateMapMarkers(day);
+    }
   }
 
   /* Map */
   var tripMap = null;
   var markerLayer = null;
   var MAP_POINTS = [
-    {id:"lodging", name:"カヌチャリゾート(宿泊)", rank:"lodging", days:[1,2,3,4,5], cardIds:{1:"d1-checkin",2:"d2-return",3:"d3-return",4:"d4-free",5:"d5-checkout"}, lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
-    {id:"churaumi", name:"沖縄美ら海水族館(必須)", rank:"must", days:[2], cardIds:{2:"d2-churaumi"}, lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
-    {id:"kokusai", name:"国際通り(必須)", rank:"must", days:[3], cardIds:{3:"d3-kokusai"}, lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
-    {id:"naha-airport", name:"那覇空港", rank:"optional", days:[1,5], cardIds:{1:"d1-arrive"}, lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
-    {id:"rentalcar", name:"Timesレンタカー那覇空港店", rank:"optional", days:[1,5], cardIds:{1:"d1-rentalcar",5:"d5-move"}, lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
-    {id:"pokecenter", name:"ポケモンセンターオキナワ", rank:"optional", days:[3], cardIds:{3:"d3-pokecenter"}, lat:26.3306, lng:127.8064, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
-    {id:"kyoda", name:"道の駅 許田", rank:"optional", days:[1], cardIds:{1:"d1-kyoda"}, lat:26.5386, lng:127.9693, link:"https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%E8%A8%B1%E7%94%B0"},
+    {id:"lodging", name:"カヌチャリゾート(宿泊)", rank:"lodging", emoji:"🏝️", days:[1,2,3,4,5], cardIds:{1:"d1-checkin",2:"d2-return",3:"d3-return",4:"d4-free",5:"d5-checkout"}, lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
+    {id:"churaumi", name:"沖縄美ら海水族館(必須)", rank:"must", emoji:"🐠", days:[2], cardIds:{2:"d2-churaumi"}, lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
+    {id:"kokusai", name:"国際通り(必須)", rank:"must", emoji:"🛍️", days:[3], cardIds:{3:"d3-kokusai"}, lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
+    {id:"naha-airport", name:"那覇空港", rank:"optional", emoji:"🛫", days:[1,5], cardIds:{1:"d1-arrive"}, lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
+    {id:"rentalcar", name:"Timesレンタカー那覇空港店", rank:"optional", emoji:"🚗", days:[1,5], cardIds:{1:"d1-rentalcar",5:"d5-move"}, lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
+    {id:"pokecenter", name:"ポケモンセンターオキナワ", rank:"optional", emoji:"🎮", days:[3], cardIds:{3:"d3-pokecenter"}, lat:26.3306, lng:127.8064, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
+    {id:"kyoda", name:"道の駅 許田", rank:"optional", emoji:"🎫", days:[1], cardIds:{1:"d1-kyoda"}, lat:26.5386, lng:127.9693, link:"https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%E8%A8%B1%E7%94%B0"},
     {id:"pf-naha-shuri", name:"那覇市首里 ポケふた(ガーディ)", rank:"pokefuta", days:[3], img:"6ea8d929a518be32eb78754371390526_m.png", lat:26.22005, lng:127.71657, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18"},
     {id:"pf-naha-makishi", name:"那覇市牧志 ポケふた(ウインディ)", rank:"pokefuta", days:[3], img:"38ee8e633d933570a2506d1ceba9290b_m.png", lat:26.21641, lng:127.68942, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2"},
     {id:"pf-chatan", name:"北谷町 ポケふた(ガーディ)", rank:"pokefuta", days:[3], img:"5607d35bb32e267fd37f06948e578902_m.png", lat:26.315733, lng:127.753613, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20"},
@@ -1351,6 +1468,7 @@
   function pointMatchesDay(pt, day){
     if(day === "all" || day === "pf") return true;
     var d = Number(day);
+    if(isNaN(d)) return false;
     return pt.rank === "lodging" || (pt.days && pt.days.indexOf(d) !== -1);
   }
 
@@ -1375,7 +1493,7 @@
     }else{
       icon = L.divIcon({
         className: "",
-        html: '<div class="pin ' + pt.rank + '"><span>' + RANK_EMOJI[pt.rank] + '</span></div>',
+        html: '<div class="pin ' + pt.rank + '"><span>' + (pt.emoji || RANK_EMOJI[pt.rank]) + '</span></div>',
         iconSize: [26,26],
         iconAnchor: [13,26],
         popupAnchor: [0,-24]
@@ -1395,7 +1513,44 @@
       attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>'
     }).addTo(tripMap);
     markerLayer = L.layerGroup().addTo(tripMap);
+
+    var LocateControl = L.Control.extend({
+      options: {position: "topright"},
+      onAdd: function(){
+        var btn = L.DomUtil.create("button", "locate-btn");
+        btn.type = "button";
+        btn.innerHTML = "📍";
+        btn.title = "現在地を表示";
+        L.DomEvent.disableClickPropagation(btn);
+        L.DomEvent.on(btn, "click", function(){
+          if(!navigator.geolocation){
+            alert("この端末では位置情報が利用できません");
+            return;
+          }
+          btn.disabled = true;
+          navigator.geolocation.getCurrentPosition(function(pos){
+            btn.disabled = false;
+            var ll = [pos.coords.latitude, pos.coords.longitude];
+            if(meMarker){
+              meMarker.setLatLng(ll);
+            }else{
+              meMarker = L.marker(ll, {
+                icon: L.divIcon({className:"", html:'<div class="pin-me"></div>', iconSize:[18,18], iconAnchor:[9,9]}),
+                zIndexOffset: 1000
+              }).addTo(tripMap).bindPopup("現在地");
+            }
+            tripMap.setView(ll, Math.max(tripMap.getZoom(), 14));
+          }, function(){
+            btn.disabled = false;
+            alert("位置情報を取得できませんでした。ブラウザの位置情報の許可設定をご確認ください");
+          }, {enableHighAccuracy:true, timeout:10000});
+        });
+        return btn;
+      }
+    });
+    tripMap.addControl(new LocateControl());
   }
+  var meMarker = null;
 
   var currentMapDay = "1";
   var hiddenRanks = {};
@@ -1429,7 +1584,7 @@
     btn.addEventListener("click", function(){
       var day = btn.getAttribute("data-day");
       var isAlreadyActive = btn.classList.contains("active");
-      if(isAlreadyActive){
+      if(isAlreadyActive && !NO_MAP_TABS[day]){
         mapShowAll = !mapShowAll;
         updateMapMarkers(mapShowAll ? "all" : day);
       }else{
@@ -1504,10 +1659,89 @@
     });
   }
 
+  /* Checklists (packing / souvenir) */
+  function setupChecklist(storageKey, listId, inputId, btnId, defaults){
+    var listEl = document.getElementById(listId);
+    var inputEl = document.getElementById(inputId);
+    var btnEl = document.getElementById(btnId);
+    if(!listEl) return;
+
+    var items;
+    try{
+      var raw = localStorage.getItem(storageKey);
+      items = raw ? JSON.parse(raw) : defaults.map(function(t){ return {text:t, checked:false}; });
+    }catch(e){
+      items = defaults.map(function(t){ return {text:t, checked:false}; });
+    }
+
+    function save(){
+      try{ localStorage.setItem(storageKey, JSON.stringify(items)); }catch(e){}
+    }
+
+    function render(){
+      listEl.innerHTML = "";
+      if(!items.length){
+        var empty = document.createElement("div");
+        empty.className = "checklist-empty";
+        empty.textContent = "リストは空です。上から追加してください。";
+        listEl.appendChild(empty);
+        return;
+      }
+      items.forEach(function(item, idx){
+        var li = document.createElement("li");
+        li.className = item.checked ? "checked" : "";
+        var cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = item.checked;
+        cb.addEventListener("change", function(){
+          item.checked = cb.checked;
+          li.classList.toggle("checked", cb.checked);
+          save();
+        });
+        var span = document.createElement("span");
+        span.className = "txt";
+        span.textContent = item.text;
+        var del = document.createElement("button");
+        del.type = "button";
+        del.className = "del";
+        del.textContent = "✕";
+        del.addEventListener("click", function(){
+          items.splice(idx, 1);
+          save();
+          render();
+        });
+        li.appendChild(cb);
+        li.appendChild(span);
+        li.appendChild(del);
+        listEl.appendChild(li);
+      });
+    }
+
+    function addItem(){
+      var text = (inputEl.value || "").trim();
+      if(!text) return;
+      items.push({text: text, checked: false});
+      inputEl.value = "";
+      save();
+      render();
+    }
+
+    if(btnEl) btnEl.addEventListener("click", addItem);
+    if(inputEl) inputEl.addEventListener("keydown", function(e){
+      if(e.key === "Enter") addItem();
+    });
+
+    render();
+  }
+
   function init(){
     applyChecksToDOM();
     updatePokefutaProgress();
     setupMemo();
+    setupChecklist("okinawa-trip-2026-packing", "packingList", "packingInput", "packingAddBtn",
+      ["保険証・母子手帳", "常備薬・酔い止め", "日焼け止め・帽子", "タオル", "モバイルバッテリー・充電器", "サンダル", "折りたたみ傘", "カメラ", "免許証・ETCカード"]);
+    setupChecklist("okinawa-trip-2026-souvenir", "souvenirList", "souvenirInput", "souvenirAddBtn",
+      ["ちんすこう", "紅芋タルト", "シークヮーサー関連", "ポケモンセンター限定グッズ"]);
 
     var todayDay = todayDayNumber();
     setupTodayBanner(todayDay);
@@ -1520,6 +1754,12 @@
   }
 
   init();
+
+  if("serviceWorker" in navigator){
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+  }
 })();
 </script>
 </body>
