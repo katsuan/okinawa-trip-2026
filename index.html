@@ -295,11 +295,9 @@
     font-family:inherit;
     cursor:pointer;
   }
-  .map-legend .item.active{
-    background:var(--sand-card);
-    border-color:var(--sea-light);
-    color:var(--sea-deep);
-    font-weight:700;
+  .map-legend .item.off{
+    opacity:.4;
+    text-decoration:line-through;
   }
   .map-legend .dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:0 0 auto;}
   .dot.must{background:var(--coral);}
@@ -1371,7 +1369,7 @@
   }
 
   var currentMapDay = "1";
-  var activeLegendRank = null;
+  var hiddenRanks = {};
 
   function updateMapMarkers(day){
     ensureMapInit();
@@ -1379,9 +1377,9 @@
     if(day !== undefined) currentMapDay = day;
     markerLayer.clearLayers();
     markersById = {};
-    var matched = activeLegendRank
-      ? MAP_POINTS.filter(function(pt){ return pt.rank === activeLegendRank; })
-      : MAP_POINTS.filter(function(pt){ return pointMatchesDay(pt, currentMapDay); });
+    var matched = MAP_POINTS.filter(function(pt){
+      return pointMatchesDay(pt, currentMapDay) && !hiddenRanks[pt.rank];
+    });
     matched.forEach(function(pt){
       var m = markerFor(pt);
       m.addTo(markerLayer);
@@ -1399,8 +1397,6 @@
     btn.addEventListener("click", function(){
       var day = btn.getAttribute("data-day");
       var isAlreadyActive = btn.classList.contains("active");
-      activeLegendRank = null;
-      document.querySelectorAll(".map-legend .item").forEach(function(b){ b.classList.remove("active"); });
       if(isAlreadyActive){
         mapShowAll = !mapShowAll;
         updateMapMarkers(mapShowAll ? "all" : day);
@@ -1414,13 +1410,8 @@
   document.querySelectorAll(".map-legend .item").forEach(function(btn){
     btn.addEventListener("click", function(){
       var rank = btn.getAttribute("data-rank");
-      if(activeLegendRank === rank){
-        activeLegendRank = null;
-        btn.classList.remove("active");
-      }else{
-        activeLegendRank = rank;
-        document.querySelectorAll(".map-legend .item").forEach(function(b){ b.classList.toggle("active", b === btn); });
-      }
+      hiddenRanks[rank] = !hiddenRanks[rank];
+      btn.classList.toggle("off", !!hiddenRanks[rank]);
       updateMapMarkers();
     });
   });
