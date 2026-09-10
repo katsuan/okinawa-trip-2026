@@ -5,16 +5,18 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
 <title>沖縄旅行 2026.9.14-18</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#1b8ba6">
 <meta name="description" content="広島⇄那覇・カヌチャリゾート滞在の旅程しおり。日程、ポケふた図鑑、地図、持ち物リストをまとめた個人用ページです。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="沖縄旅行 2026.9.14-18">
 <meta property="og:description" content="広島⇄那覇・カヌチャリゾート滞在の旅程しおり。日程、ポケふた図鑑、地図、持ち物リストをまとめた個人用ページです。">
 <meta property="og:url" content="https://katsuan.github.io/okinawa-trip-2026/">
-<meta property="og:image" content="https://katsuan.github.io/okinawa-trip-2026/img/manhole_logo_jp.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://katsuan.github.io/okinawa-trip-2026/img/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="沖縄旅行 2026.9.14-18">
 <meta name="twitter:description" content="広島⇄那覇・カヌチャリゾート滞在の旅程しおり。">
-<meta name="twitter:image" content="https://katsuan.github.io/okinawa-trip-2026/img/manhole_logo_jp.png">
+<meta name="twitter:image" content="https://katsuan.github.io/okinawa-trip-2026/img/ogp.png">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet"/>
 <style>
   :root{
@@ -151,15 +153,18 @@
 
   /* Tabs */
   .tab-wrap{position:sticky;top:0;z-index:20;}
-  .tab-wrap::after{
-    content:"";
+  .tab-fade{
     position:absolute;
-    top:0; right:0; bottom:12px;
+    top:0; bottom:12px;
     width:44px;
-    background:linear-gradient(to right, transparent, var(--sand) 70%);
     pointer-events:none;
     z-index:1;
+    opacity:0;
+    transition:opacity .2s ease;
   }
+  .tab-fade.visible{opacity:1;}
+  .tab-fade-left{left:0; background:linear-gradient(to left, transparent, var(--sand) 70%);}
+  .tab-fade-right{right:0; background:linear-gradient(to right, transparent, var(--sand) 70%);}
   .tab-scroll-hint{
     position:absolute;
     top:0; right:2px; bottom:12px;
@@ -170,11 +175,11 @@
     color:var(--sea-deep);
     font-size:1.1rem;
     font-weight:800;
-    opacity:.85;
+    opacity:0;
     animation:hintNudge 1.4s ease-in-out infinite;
     transition:opacity .25s ease;
   }
-  .tab-scroll-hint.hidden{opacity:0;}
+  .tab-scroll-hint.visible{opacity:.85;}
   @keyframes hintNudge{
     0%,100%{transform:translateX(0);}
     50%{transform:translateX(4px);}
@@ -563,6 +568,8 @@
 <button class="tab-btn" data-day="packing">🎒<span class="d">持ち物</span></button>
 <button class="tab-btn" data-day="souvenir">🎁<span class="d">お土産</span></button>
 </nav>
+<div class="tab-fade tab-fade-left" id="tabFadeLeft"></div>
+<div class="tab-fade tab-fade-right" id="tabFadeRight"></div>
 <div class="tab-scroll-hint" id="tabScrollHint">›</div>
 </div>
 <div id="mapSection">
@@ -1814,10 +1821,15 @@
   (function setupTabScrollHint(){
     var bar = document.getElementById("tabbar");
     var hint = document.getElementById("tabScrollHint");
+    var fadeLeft = document.getElementById("tabFadeLeft");
+    var fadeRight = document.getElementById("tabFadeRight");
     if(!bar || !hint) return;
     function update(){
+      var atStart = bar.scrollLeft <= 2;
       var atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 2;
-      hint.classList.toggle("hidden", atEnd);
+      if(fadeLeft) fadeLeft.classList.toggle("visible", !atStart);
+      if(fadeRight) fadeRight.classList.toggle("visible", !atEnd);
+      hint.classList.toggle("visible", !atEnd);
     }
     bar.addEventListener("scroll", update);
     window.addEventListener("resize", update);
