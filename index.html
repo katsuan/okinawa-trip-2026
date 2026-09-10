@@ -1677,7 +1677,7 @@
     markerLayer.clearLayers();
     markersById = {};
     var matched = MAP_POINTS.filter(function(pt){
-      return pointMatchesDay(pt, currentMapDay) && !hiddenRanks[pt.rank];
+      return pointMatchesDay(pt, currentMapDay) && !hiddenRanks[pt.rank] && !(hideDoneOn && isPointDone(pt));
     });
     matched.forEach(function(pt){
       var m = markerFor(pt);
@@ -1731,6 +1731,7 @@
       document.body.classList.toggle("hide-done", hideDoneOn);
       hideDoneBtn.classList.toggle("active", hideDoneOn);
       try{ localStorage.setItem(HIDE_DONE_KEY, hideDoneOn ? "1" : "0"); }catch(e){}
+      if(tripMap) updateMapMarkers(undefined, {skipFit:true});
     });
   }
 
