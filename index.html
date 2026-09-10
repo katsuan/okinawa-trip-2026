@@ -317,6 +317,9 @@
     background:#dceef2;
     margin-bottom:4px;
   }
+  #tripMap .leaflet-tile-pane{
+    filter:saturate(.55) brightness(1.08) contrast(.85);
+  }
   .map-legend{
     display:flex;
     flex-wrap:wrap;
@@ -1121,7 +1124,7 @@
   function ensureMapInit(){
     if(tripMap || typeof L === "undefined") return;
     tripMap = L.map("tripMap", {scrollWheelZoom:false}).setView([26.42, 127.85], 9);
-    L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png", {
+    L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", {
       maxZoom: 18,
       attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>'
     }).addTo(tripMap);
