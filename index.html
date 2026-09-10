@@ -156,21 +156,21 @@
   .tab-fade{
     position:absolute;
     top:0; bottom:12px;
-    width:44px;
+    width:64px;
     pointer-events:none;
-    z-index:1;
+    z-index:21;
     opacity:0;
     transition:opacity .2s ease;
   }
   .tab-fade.visible{opacity:1;}
-  .tab-fade-left{left:0; background:linear-gradient(to left, transparent, var(--sand) 70%);}
-  .tab-fade-right{right:0; background:linear-gradient(to right, transparent, var(--sand) 70%);}
+  .tab-fade-left{left:0; background:linear-gradient(to left, transparent, var(--sand) 45%, var(--sand) 100%);}
+  .tab-fade-right{right:0; background:linear-gradient(to right, transparent, var(--sand) 45%, var(--sand) 100%);}
   .tab-scroll-hint{
     position:absolute;
     top:0; right:2px; bottom:12px;
     display:flex;
     align-items:center;
-    z-index:2;
+    z-index:22;
     pointer-events:none;
     color:var(--sea-deep);
     font-size:1.1rem;
@@ -1834,6 +1834,7 @@
     bar.addEventListener("scroll", update);
     window.addEventListener("resize", update);
     setTimeout(update, 100);
+    window.addEventListener("load", update);
   })();
 
   init();
