@@ -525,8 +525,9 @@
     font-size:.72rem;
     color:var(--text-sub);
     margin-top:30px;
-    padding:0 20px;
+    padding:0 20px 24px;
   }
+  footer .save-note{margin-top:4px;}
 </style>
 </head>
 <body>
@@ -552,7 +553,6 @@
 </button>
 <div class="memo-body" id="memoBody">
 <textarea id="memoText" placeholder="持ち物・買うもの・気づいたことなど自由にメモ"></textarea>
-<div class="memo-hint">端末に自動保存されます(この端末だけで見られます)</div>
 </div>
 </div>
 <div class="tab-wrap">
@@ -1195,7 +1195,7 @@
 <div class="count"><span id="pfChecked">0</span> / <span id="pfTotal">0</span></div>
 </div>
 <div class="pf-bar"><div class="pf-bar-fill" id="pfBarFill"></div></div>
-<div class="hint">チェックを入れると自動集計・端末に保存されます</div>
+<div class="hint">チェックを入れると自動集計されます</div>
 <a class="official-link" href="https://local.pokemon.jp/manhole/" rel="noopener" target="_blank">🔗 ポケふた公式サイト</a>
 </div>
 <div class="pf-intro">沖縄本島に設置されている「ポケふた」は全12基。チェックはどのタブから入れても連動します。</div>
@@ -1437,6 +1437,7 @@
 </main>
 <footer>
   沖縄旅行 2026.9.14–9.18 / 私的な旅程メモ
+  <div class="save-note">チェック・メモ・持ち物やお土産のリストは、この端末にのみ自動保存されます</div>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
