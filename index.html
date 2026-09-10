@@ -5,6 +5,16 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
 <title>沖縄旅行 2026.9.14-18</title>
+<meta name="description" content="広島⇄那覇・カヌチャリゾート滞在の旅程しおり。日程、ポケふた図鑑、地図、持ち物リストをまとめた個人用ページです。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="沖縄旅行 2026.9.14-18">
+<meta property="og:description" content="広島⇄那覇・カヌチャリゾート滞在の旅程しおり。日程、ポケふた図鑑、地図、持ち物リストをまとめた個人用ページです。">
+<meta property="og:url" content="https://katsuan.github.io/okinawa-trip-2026/">
+<meta property="og:image" content="https://katsuan.github.io/okinawa-trip-2026/img/manhole_logo_jp.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沖縄旅行 2026.9.14-18">
+<meta name="twitter:description" content="広島⇄那覇・カヌチャリゾート滞在の旅程しおり。">
+<meta name="twitter:image" content="https://katsuan.github.io/okinawa-trip-2026/img/manhole_logo_jp.png">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet"/>
 <style>
   :root{
@@ -144,10 +154,30 @@
   .tab-wrap::after{
     content:"";
     position:absolute;
-    top:0; right:0; bottom:0;
-    width:32px;
-    background:linear-gradient(to right, transparent, var(--sand) 75%);
+    top:0; right:0; bottom:12px;
+    width:44px;
+    background:linear-gradient(to right, transparent, var(--sand) 70%);
     pointer-events:none;
+    z-index:1;
+  }
+  .tab-scroll-hint{
+    position:absolute;
+    top:0; right:2px; bottom:12px;
+    display:flex;
+    align-items:center;
+    z-index:2;
+    pointer-events:none;
+    color:var(--sea-deep);
+    font-size:1.1rem;
+    font-weight:800;
+    opacity:.85;
+    animation:hintNudge 1.4s ease-in-out infinite;
+    transition:opacity .25s ease;
+  }
+  .tab-scroll-hint.hidden{opacity:0;}
+  @keyframes hintNudge{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(4px);}
   }
   .tabbar{
     position:relative;
@@ -373,6 +403,15 @@
     opacity:.4;
     text-decoration:line-through;
   }
+  .hide-done-toggle{margin-left:auto;}
+  .hide-done-toggle.active{
+    background:var(--sand-card);
+    border-color:var(--sea-light);
+    color:var(--sea-deep);
+    font-weight:700;
+  }
+  .dot-done{width:12px;height:12px;border-radius:50%;display:inline-block;flex:0 0 auto;background:var(--text-sub);}
+  body.hide-done .card.done{display:none;}
   .map-legend .dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:0 0 auto;}
   .dot.must{background:var(--coral);}
   .dot.optional{background:var(--sea);}
@@ -524,6 +563,7 @@
 <button class="tab-btn" data-day="packing">🎒<span class="d">持ち物</span></button>
 <button class="tab-btn" data-day="souvenir">🎁<span class="d">お土産</span></button>
 </nav>
+<div class="tab-scroll-hint" id="tabScrollHint">›</div>
 </div>
 <div id="mapSection">
 <div id="tripMap"></div>
@@ -532,6 +572,7 @@
 <button type="button" class="item" data-rank="optional"><span class="dot optional"></span>拠点</button>
 <button type="button" class="item" data-rank="lodging"><span class="dot lodging"></span>宿泊</button>
 <button type="button" class="item" data-rank="pokefuta"><span class="dot pokefuta"></span>ポケふた</button>
+<button type="button" class="item hide-done-toggle" id="hideDoneToggle"><span class="dot-done"></span>済を隠す</button>
 </div>
 </div>
 <!-- DAY 1 -->
@@ -592,7 +633,7 @@
       <div class="row3">
         <div class="thumb emoji">🛬</div>
         <div class="body">
-          <div class="desc">国内線出口→横断歩道→送迎バスのりば11番。Timesレンタカーの送迎バスで店舗へ</div>
+          <div class="desc">国内線出口→横断歩道→送迎バスのりば11番。Timesレンタカーの送迎バスで店舗へ(約5分)</div>
         </div>
       </div>
     </div>
@@ -627,7 +668,7 @@
         <div class="thumb"><img alt="ポケふた" src="img/07ed34f46b856337cea843d294287933_m.png"/></div>
         <div class="body">
           <div class="pf-mon">キバゴ・ジャラコ</div>
-          <div class="desc">瀬長島ウミカジテラス方面、豊崎エリア。レンタカー受取後、空港近くで先に回収</div>
+          <div class="desc">瀬長島ウミカジテラス方面、豊崎エリア。レンタカー受取後、車で約15分</div>
         </div>
       </div>
     </div>
@@ -661,7 +702,7 @@
       <div class="row3">
         <div class="thumb emoji">🎫</div>
         <div class="body">
-          <div class="desc">沖縄自動車道 許田IC近く、国道58号沿いで寄り道なし。美ら海水族館の割引券(330円引き)を購入(要現地確認)</div>
+          <div class="desc">糸満市から車で約1時間。沖縄自動車道 許田IC近く、国道58号沿いで寄り道なし。美ら海水族館の割引券(330円引き)を購入(要現地確認)</div>
         </div>
       </div>
     </div>
@@ -750,7 +791,7 @@
         <div class="thumb"><img alt="ポケふた" src="img/73c010eaa7438086463ffc02641320d9_m.png"/></div>
         <div class="body">
           <div class="pf-mon">エモンガ・ツツケラ</div>
-          <div class="desc">名護城二丁目・名護城址/ひんぷんガジュマル周辺。水族館からの帰り道に立ち寄り◎</div>
+          <div class="desc">名護城二丁目・名護城址/ひんぷんガジュマル周辺。水族館から車で約30分、帰り道に立ち寄り◎</div>
         </div>
       </div>
     </div>
@@ -766,7 +807,7 @@
       <div class="row3">
         <div class="thumb emoji">🏝️</div>
         <div class="body">
-          <div class="desc">ホテルでゆっくり夕食・プールなど</div>
+          <div class="desc">名護市から車で約20分。ホテルでゆっくり夕食・プールなど</div>
         </div>
       </div>
     </div>
@@ -834,7 +875,7 @@
         <div class="thumb"><img alt="ポケふた" src="img/b084912808574bde91de683704e1503d_m.png"/></div>
         <div class="body">
           <div class="pf-mon">バチンキー・ラランテス</div>
-          <div class="desc">ライカムのすぐ近く。ランチのついでに立ち寄りやすい</div>
+          <div class="desc">ライカムから車で約5分。ランチのついでに立ち寄りやすい</div>
         </div>
       </div>
     </div>
@@ -868,7 +909,7 @@
         <div class="thumb"><img alt="ポケふた" src="img/130f21e980593ce7e537a81a804a1bc3_m.png"/></div>
         <div class="body">
           <div class="pf-mon">サニーゴ・ラブカス</div>
-          <div class="desc">北谷から那覇方面へ南下する道中。余裕があれば立ち寄り</div>
+          <div class="desc">北谷から車で約15分、那覇方面へ南下する道中。余裕があれば立ち寄り</div>
         </div>
       </div>
     </div>
@@ -885,7 +926,7 @@
         <div class="thumb"><img alt="ポケふた" src="img/f845741c04f2845bd5ca99241c714706_m.png"/></div>
         <div class="body">
           <div class="pf-mon">ソルロック・ポポッコ</div>
-          <div class="desc">宜野湾からさらに南下、那覇市街へ向かう道中</div>
+          <div class="desc">宜野湾から車で約10分、さらに南下し那覇市街へ向かう道中</div>
         </div>
       </div>
     </div>
@@ -1596,7 +1637,7 @@
     });
   });
 
-  document.querySelectorAll(".map-legend .item").forEach(function(btn){
+  document.querySelectorAll(".map-legend .item[data-rank]").forEach(function(btn){
     btn.addEventListener("click", function(){
       var rank = btn.getAttribute("data-rank");
       hiddenRanks[rank] = !hiddenRanks[rank];
@@ -1604,6 +1645,21 @@
       updateMapMarkers();
     });
   });
+
+  var HIDE_DONE_KEY = "okinawa-trip-2026-hide-done";
+  var hideDoneBtn = document.getElementById("hideDoneToggle");
+  if(hideDoneBtn){
+    var hideDoneOn = false;
+    try{ hideDoneOn = localStorage.getItem(HIDE_DONE_KEY) === "1"; }catch(e){}
+    document.body.classList.toggle("hide-done", hideDoneOn);
+    hideDoneBtn.classList.toggle("active", hideDoneOn);
+    hideDoneBtn.addEventListener("click", function(){
+      hideDoneOn = !hideDoneOn;
+      document.body.classList.toggle("hide-done", hideDoneOn);
+      hideDoneBtn.classList.toggle("active", hideDoneOn);
+      try{ localStorage.setItem(HIDE_DONE_KEY, hideDoneOn ? "1" : "0"); }catch(e){}
+    });
+  }
 
   function todayDayNumber(){
     var now = new Date();
@@ -1743,7 +1799,7 @@
     setupChecklist("okinawa-trip-2026-packing", "packingList", "packingInput", "packingAddBtn",
       ["保険証・母子手帳", "常備薬・酔い止め", "日焼け止め・帽子", "タオル", "モバイルバッテリー・充電器", "サンダル", "折りたたみ傘", "カメラ", "免許証・ETCカード"]);
     setupChecklist("okinawa-trip-2026-souvenir", "souvenirList", "souvenirInput", "souvenirAddBtn",
-      ["ちんすこう", "紅芋タルト", "シークヮーサー関連", "ポケモンセンター限定グッズ"]);
+      ["ちんすこう", "紅芋タルト", "シークヮーサー関連", "琉球グラス", "ポケモンセンター限定グッズ"]);
 
     var todayDay = todayDayNumber();
     setupTodayBanner(todayDay);
@@ -1754,6 +1810,19 @@
     var initialDay = todayDay || savedTab || "1";
     showDay(initialDay);
   }
+
+  (function setupTabScrollHint(){
+    var bar = document.getElementById("tabbar");
+    var hint = document.getElementById("tabScrollHint");
+    if(!bar || !hint) return;
+    function update(){
+      var atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 2;
+      hint.classList.toggle("hidden", atEnd);
+    }
+    bar.addEventListener("scroll", update);
+    window.addEventListener("resize", update);
+    setTimeout(update, 100);
+  })();
 
   init();
 
