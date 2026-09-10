@@ -843,6 +843,22 @@
 </section>
 <!-- DAY 3 -->
 <section class="day-panel" data-day="3">
+    <div class="card optional" data-id="d3-shurijo" data-map-id="shurijo">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">8:30〜</div>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E9%A6%96%E9%87%8C%E5%9F%8E%E5%85%AC%E5%9C%92" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="place">首里城公園</div>
+      <div class="row3">
+        <div class="thumb emoji">🏯</div>
+        <div class="body">
+          <div class="desc">カヌチャから車で約1時間20分。世界遺産、有料区域(正殿など)は9月は8:30開場。那覇ICのそばなので国際通りへ向かう前に立ち寄りやすい</div>
+        <div class="parking">🅿️ 有料(首里杜館地下 最初60分500円/最大1,000円)</div>
+        </div>
+      </div>
+    </div>
     <div class="card pika" data-id="pf-naha-shuri" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -856,7 +872,7 @@
         <div class="thumb"><img alt="ポケふた" src="img/6ea8d929a518be32eb78754371390526_m.png"/></div>
         <div class="body">
           <div class="pf-mon">ガーディ</div>
-          <div class="desc">首里城公園そば。カヌチャから車で約1時間20分、那覇ICのそばなので国際通りへ向かう前に立ち寄りやすい。時間があれば首里城観光とあわせて</div>
+          <div class="desc">首里城公園そば、首里城観光とあわせて回収しやすい</div>
         <div class="parking">🅿️ 有料(首里杜館地下 最初60分500円/最大1,000円)</div>
         </div>
       </div>
@@ -1537,6 +1553,7 @@
   var MAP_POINTS = [
     {id:"lodging", name:"カヌチャリゾート(宿泊)", rank:"lodging", emoji:"🏝️", days:[1,2,3,4,5], cardIds:{1:"d1-checkin",2:"d2-return",3:"d3-return",4:"d4-free",5:"d5-checkout"}, lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
     {id:"churaumi", name:"沖縄美ら海水族館(必須)", rank:"must", emoji:"🐠", days:[2], cardIds:{2:"d2-churaumi"}, lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
+    {id:"shurijo", name:"首里城公園", rank:"optional", emoji:"🏯", days:[3], cardIds:{3:"d3-shurijo"}, lat:26.2170, lng:127.7195, link:"https://www.google.com/maps/search/?api=1&query=%E9%A6%96%E9%87%8C%E5%9F%8E%E5%85%AC%E5%9C%92"},
     {id:"kokusai", name:"国際通り(必須)", rank:"must", emoji:"🛍️", days:[3], cardIds:{3:"d3-kokusai"}, lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
     {id:"naha-airport", name:"那覇空港", rank:"optional", emoji:"🛫", days:[1,5], cardIds:{1:"d1-arrive"}, lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
     {id:"rentalcar", name:"Timesレンタカー那覇空港店", rank:"optional", emoji:"🚗", days:[1,5], cardIds:{1:"d1-rentalcar",5:"d5-move"}, lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
