@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>沖縄旅行 2026.9.14-18</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
   :root{
     --sea-deep:#0a5c78;
@@ -306,6 +307,46 @@
     margin-bottom:12px;
   }
 
+  /* Map */
+  #tripMap{
+    width:100%;
+    height:60vh;
+    min-height:360px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    background:#dceef2;
+  }
+  .map-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 14px;
+    margin-top:10px;
+    margin-bottom:14px;
+    font-size:.76rem;
+    color:var(--text-sub);
+  }
+  .map-legend .item{display:flex;align-items:center;gap:5px;}
+  .map-legend .dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:0 0 auto;}
+  .dot.must{background:var(--coral);}
+  .dot.optional{background:var(--sea);}
+  .dot.pokefuta{background:var(--pika-border);}
+  .dot.lodging{background:#3a9d6f;}
+  .pin{
+    width:26px;height:26px;
+    border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(0,0,0,.35);
+    border:2px solid #fff;
+  }
+  .pin span{transform:rotate(45deg);font-size:12px;line-height:1;}
+  .pin.must{background:var(--coral);}
+  .pin.optional{background:var(--sea);}
+  .pin.pokefuta{background:var(--pika-border);}
+  .pin.lodging{background:#3a9d6f;}
+  .leaflet-popup-content{font-size:.82rem;line-height:1.5;}
+  .leaflet-popup-content a{color:var(--sea-deep);font-weight:700;}
+
   .day-note{
     font-size:.8rem;
     color:var(--text-sub);
@@ -373,6 +414,7 @@
     <button class="tab-btn" data-day="4">DAY4<span class="d">9/17 木</span></button>
     <button class="tab-btn" data-day="5">DAY5<span class="d">9/18 金</span></button>
     <button class="tab-btn" data-day="pf">🎯図鑑<span class="d">ポケふた12</span></button>
+    <button class="tab-btn" data-day="map">🗺️地図<span class="d">全候補地</span></button>
   </nav>
 
   <!-- DAY 1 -->
@@ -719,12 +761,25 @@
     </div>
   </section>
 
+  <!-- MAP -->
+  <section class="day-panel" data-day="map">
+    <div class="pf-intro">ピンの位置はエリアの目安です。正確な経路は各カードの「Google Map」ボタン(住所検索)をご利用ください。</div>
+    <div id="tripMap"></div>
+    <div class="map-legend">
+      <span class="item"><span class="dot must"></span>必須スポット</span>
+      <span class="item"><span class="dot optional"></span>任意スポット・拠点</span>
+      <span class="item"><span class="dot pokefuta"></span>ポケふた</span>
+      <span class="item"><span class="dot lodging"></span>宿泊地</span>
+    </div>
+  </section>
+
 </main>
 
 <footer>
   沖縄旅行 2026.9.14–9.18 / 私的な旅程メモ
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -812,6 +867,55 @@
       p.classList.toggle("active", p.getAttribute("data-day") === String(day));
     });
     try{ localStorage.setItem(TAB_KEY, String(day)); }catch(e){}
+    if(String(day) === "map"){
+      ensureMapInit();
+      setTimeout(function(){ if(tripMap) tripMap.invalidateSize(); }, 50);
+    }
+  }
+
+  /* Map */
+  var tripMap = null;
+  var MAP_POINTS = [
+    {name:"カヌチャリゾート(宿泊)", rank:"lodging", lat:26.6135, lng:128.0508, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88"},
+    {name:"沖縄美ら海水族館(必須)", rank:"must", lat:26.6940, lng:127.8779, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8"},
+    {name:"国際通り(必須)", rank:"must", lat:26.2124, lng:127.6809, link:"https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A"},
+    {name:"那覇空港", rank:"optional", lat:26.1958, lng:127.6459, link:"https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF"},
+    {name:"Timesレンタカー那覇空港店", rank:"optional", lat:26.2010, lng:127.6540, link:"https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97"},
+    {name:"ポケモンセンターオキナワ", rank:"optional", lat:26.3306, lng:127.8064, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
+    {name:"那覇市首里 ポケふた", rank:"pokefuta", lat:26.2170, lng:127.7194, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E9%A6%96%E9%87%8C%E6%B1%A0%E7%AB%AF%E7%94%BA18"},
+    {name:"那覇市牧志 ポケふた", rank:"pokefuta", lat:26.2141, lng:127.6892, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82%E7%89%A7%E5%BF%973%E4%B8%81%E7%9B%AE2"},
+    {name:"北谷町 ポケふた", rank:"pokefuta", lat:26.3186, lng:127.7554, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA%E7%BE%8E%E6%B5%9C20"},
+    {name:"南城市 ポケふた", rank:"pokefuta", lat:26.1552, lng:127.7960, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82%E7%9F%A5%E5%BF%B5%E4%B9%85%E6%89%8B%E5%A0%85541"},
+    {name:"豊見城市 ポケふた", rank:"pokefuta", lat:26.1655, lng:127.6467, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82%E5%AD%97%E8%B1%8A%E5%B4%8E1-1162"},
+    {name:"本部町 ポケふた(海洋博公園)", rank:"pokefuta", lat:26.6928, lng:127.8776, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA%E5%AD%97%E7%9F%B3%E5%B7%9D%20%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92"},
+    {name:"糸満市 ポケふた", rank:"pokefuta", lat:26.1256, lng:127.6591, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82%E8%A5%BF%E5%B4%8E%E7%94%BA4%E4%B8%81%E7%9B%AE19"},
+    {name:"名護市 ポケふた", rank:"pokefuta", lat:26.5919, lng:127.9789, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%9F%8E%E4%BA%8C%E4%B8%81%E7%9B%AE321"},
+    {name:"浦添市 ポケふた", rank:"pokefuta", lat:26.2472, lng:127.7208, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82%E5%8B%A2%E7%90%86%E5%AE%A24-14-1"},
+    {name:"うるま市 ポケふた", rank:"pokefuta", lat:26.4204, lng:127.8357, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82%E7%9F%B3%E5%B7%9D2316"},
+    {name:"沖縄市 ポケふた", rank:"pokefuta", lat:26.3339, lng:127.8046, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E8%83%A1%E5%B1%8B5-7-1"},
+    {name:"宜野湾市 ポケふた", rank:"pokefuta", lat:26.2827, lng:127.7620, link:"https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82%E7%9C%9F%E5%BF%97%E5%96%994-2-1"}
+  ];
+  var RANK_EMOJI = {must:"★", optional:"●", pokefuta:"⚡", lodging:"🏝"};
+
+  function ensureMapInit(){
+    if(tripMap || typeof L === "undefined") return;
+    tripMap = L.map("tripMap", {scrollWheelZoom:false}).setView([26.42, 127.85], 9);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+    }).addTo(tripMap);
+
+    MAP_POINTS.forEach(function(pt){
+      var icon = L.divIcon({
+        className: "",
+        html: '<div class="pin ' + pt.rank + '"><span>' + RANK_EMOJI[pt.rank] + '</span></div>',
+        iconSize: [26,26],
+        iconAnchor: [13,26],
+        popupAnchor: [0,-24]
+      });
+      L.marker([pt.lat, pt.lng], {icon: icon}).addTo(tripMap)
+        .bindPopup(pt.name + '<br><a href="' + pt.link + '" target="_blank" rel="noopener">📍 Google Mapで開く</a>');
+    });
   }
 
   tabButtons.forEach(function(btn){
