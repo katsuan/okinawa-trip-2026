@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>沖縄旅行 2026.9.14-18</title>
+<style>
+  :root{
+    --sea-deep:#0a5c78;
+    --sea:#1b8ba6;
+    --sea-light:#5fc4dd;
+    --sand:#fdf6e9;
+    --sand-card:#ffffff;
+    --sunset:#f4a13a;
+    --coral:#f0704f;
+    --text:#22343c;
+    --text-sub:#5c7079;
+    --border:#e3ecee;
+    --pika:#fbd648;
+    --pika-border:#e0a614;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    font-family:"Hiragino Sans","Yu Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--sand);
+    color:var(--text);
+    line-height:1.6;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  header{
+    background:linear-gradient(160deg,var(--sea-deep),var(--sea) 55%,var(--sea-light));
+    color:#fff;
+    padding:28px 20px 54px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    bottom:-1px;left:0;right:0;
+    height:34px;
+    background:var(--sand);
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    transform:scale(1.5);
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size:1.5rem;
+    letter-spacing:.02em;
+  }
+  header .dates{
+    font-size:.92rem;
+    opacity:.92;
+    font-weight:600;
+  }
+  main{
+    max-width:640px;
+    margin:0 auto;
+    padding:0 14px 40px;
+    position:relative;
+    z-index:1;
+  }
+  /* Today banner */
+  .today-banner{
+    margin-top:-34px;
+    margin-bottom:14px;
+    background:var(--sunset);
+    color:#fff;
+    border-radius:14px;
+    padding:12px 16px;
+    font-size:.86rem;
+    font-weight:700;
+    box-shadow:0 6px 16px rgba(244,161,58,.35);
+    display:none;
+  }
+  .today-banner.show{display:block;}
+  .today-banner .sub{font-weight:500;font-size:.78rem;opacity:.9;margin-top:2px;}
+
+  .flight-strip{
+    display:flex;
+    gap:10px;
+    margin-top:-34px;
+    margin-bottom:14px;
+  }
+  .flight-strip.pushed{margin-top:10px;}
+  .flight-card{
+    flex:1;
+    background:var(--sand-card);
+    border-radius:16px;
+    padding:12px 10px;
+    box-shadow:0 6px 18px rgba(10,92,120,.12);
+    text-align:center;
+  }
+  .flight-card .label{font-size:.7rem;color:var(--text-sub);font-weight:600;}
+  .flight-card .route{font-size:.95rem;font-weight:700;margin:5px 0 2px;}
+  .flight-card .time{font-size:1.2rem;font-weight:800;color:var(--sea-deep);}
+
+  .notice{
+    background:#fff1e8;
+    border:1px solid #f6cdb2;
+    border-radius:14px;
+    padding:12px 15px;
+    font-size:.84rem;
+    color:#8a4a1f;
+    margin-bottom:14px;
+  }
+  .notice b{color:var(--coral);}
+
+  .lodging{
+    background:var(--sand-card);
+    border-radius:16px;
+    padding:14px 16px;
+    box-shadow:0 4px 14px rgba(10,92,120,.08);
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .lodging .icon{font-size:1.6rem;}
+  .lodging .name{font-weight:700;font-size:1rem;}
+  .lodging .sub{font-size:.78rem;color:var(--text-sub);}
+  .lodging a{
+    margin-left:auto;
+    white-space:nowrap;
+    font-size:.78rem;
+    color:var(--sea-deep);
+    text-decoration:none;
+    font-weight:700;
+    border:1px solid var(--sea-light);
+    border-radius:999px;
+    padding:6px 12px;
+  }
+
+  /* Pokefuta progress */
+  .pokefuta-box{
+    background:linear-gradient(0deg,#fffdf5,#fffef9);
+    border:1px solid var(--pika-border);
+    border-radius:16px;
+    padding:14px 16px;
+    margin-bottom:16px;
+  }
+  .pokefuta-box .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:8px;
+  }
+  .pokefuta-box .row .title{font-weight:800;font-size:.92rem;}
+  .pokefuta-box .row .count{font-weight:800;font-size:.92rem;color:#7a5a00;}
+  .pf-bar{
+    background:#f2e6b8;
+    border-radius:999px;
+    height:10px;
+    overflow:hidden;
+  }
+  .pf-bar-fill{
+    background:linear-gradient(90deg,var(--pika-border),var(--pika));
+    height:100%;
+    width:0%;
+    transition:width .3s ease;
+  }
+  .pokefuta-box .hint{font-size:.72rem;color:#8a7326;margin-top:6px;}
+  .pokefuta-box .official-link{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    margin-top:10px;
+    font-size:.76rem;
+    font-weight:700;
+    color:#7a5a00;
+    background:#fff;
+    border:1px solid var(--pika-border);
+    border-radius:999px;
+    padding:6px 12px;
+    text-decoration:none;
+  }
+
+  /* Tabs */
+  .tabbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    background:var(--sand);
+    padding:10px 0 12px;
+    margin-bottom:10px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .tabbar::-webkit-scrollbar{display:none;}
+  .tab-btn{
+    flex:0 0 auto;
+    border:1px solid var(--border);
+    background:var(--sand-card);
+    color:var(--text-sub);
+    font-weight:700;
+    font-size:.82rem;
+    border-radius:999px;
+    padding:9px 14px;
+    cursor:pointer;
+    position:relative;
+    white-space:nowrap;
+  }
+  .tab-btn .d{display:block;font-size:.68rem;font-weight:600;opacity:.75;}
+  .tab-btn.active{
+    background:var(--sea-deep);
+    color:#fff;
+    border-color:var(--sea-deep);
+    box-shadow:0 4px 10px rgba(10,92,120,.25);
+  }
+  .tab-btn.is-today::before{
+    content:"●";
+    color:var(--coral);
+    font-size:.5rem;
+    position:absolute;
+    top:4px;
+    right:8px;
+  }
+  .tab-btn.active.is-today::before{color:#ffd0c4;}
+
+  .day-panel{display:none;}
+  .day-panel.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  .card{
+    background:var(--sand-card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:13px 15px;
+    margin-bottom:10px;
+    box-shadow:0 2px 8px rgba(10,92,120,.05);
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    transition:opacity .2s ease;
+  }
+  .card .thumb{
+    flex:0 0 auto;
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    background:radial-gradient(circle at 35% 30%,#fff7d6,var(--pika) 70%);
+    border:2px solid var(--pika-border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .card .thumb svg{width:34px;height:34px;}
+  .card.done .thumb{opacity:.5;}
+  .card.done{opacity:.5;}
+  .card input[type=checkbox]{
+    margin-top:3px;
+    width:20px;
+    height:20px;
+    accent-color:var(--sea-deep);
+    flex:0 0 auto;
+  }
+  .card .body{flex:1;min-width:0;}
+  .card .time{font-size:.76rem;font-weight:800;color:var(--sea);letter-spacing:.02em;}
+  .card .place{font-size:1rem;font-weight:700;margin:2px 0 4px;}
+  .card.done .place{text-decoration:line-through;}
+  .card .desc{font-size:.84rem;color:var(--text-sub);}
+  .card .maplink{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    margin-top:8px;
+    font-size:.76rem;
+    color:var(--sea-deep);
+    text-decoration:none;
+    font-weight:700;
+    background:#eaf6fa;
+    border-radius:999px;
+    padding:5px 11px;
+  }
+  .badge{
+    font-size:.62rem;
+    font-weight:800;
+    border-radius:6px;
+    padding:2px 6px;
+    margin-left:6px;
+    vertical-align:middle;
+    display:inline-block;
+  }
+  .must{border-left:4px solid var(--coral);}
+  .must .badge{color:#fff;background:var(--coral);}
+  .pika{border-left:4px solid var(--pika-border);}
+  .pika .place::before{content:"⚡";margin-right:3px;}
+  .pika .badge{color:#6b4d00;background:var(--pika);}
+  .rest .badge{color:var(--text-sub);background:var(--border);}
+
+  .day-note{
+    font-size:.8rem;
+    color:var(--text-sub);
+    background:#eef7f4;
+    border-radius:10px;
+    padding:10px 12px;
+    margin-top:2px;
+  }
+  footer{
+    text-align:center;
+    font-size:.72rem;
+    color:var(--text-sub);
+    margin-top:30px;
+    padding:0 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>沖縄旅行 🌺</h1>
+  <div class="dates">2026年9月14日(月) 〜 9月18日(金)</div>
+</header>
+
+<main>
+
+  <div id="todayBanner" class="today-banner"></div>
+
+  <div id="flightStrip" class="flight-strip">
+    <div class="flight-card">
+      <div class="label">往路 9/14(月)</div>
+      <div class="route">広島 → 那覇</div>
+      <div class="time">11:20発</div>
+    </div>
+    <div class="flight-card">
+      <div class="label">復路 9/18(金)</div>
+      <div class="route">那覇 → 広島</div>
+      <div class="time">16:25発</div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <b>体調最優先</b>：嫁は妊娠13週。移動や炎天下の観光は無理のない範囲で。予定はあくまで目安、当日の体調で自由に調整・キャンセルOK。
+  </div>
+
+  <div class="lodging">
+    <div class="icon">🏝️</div>
+    <div>
+      <div class="name">カヌチャリゾート</div>
+      <div class="sub">名護市字安部 / 全泊利用</div>
+    </div>
+    <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88" target="_blank" rel="noopener">Map</a>
+  </div>
+
+  <div class="pokefuta-box">
+    <div class="row">
+      <div class="title">⚡ ポケふた回収率</div>
+      <div class="count"><span id="pfChecked">0</span> / <span id="pfTotal">0</span></div>
+    </div>
+    <div class="pf-bar"><div class="pf-bar-fill" id="pfBarFill"></div></div>
+    <div class="hint">チェックを入れると自動集計・端末に保存されます(場所・基数は現地情報で要確認)</div>
+    <a class="official-link" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 ポケふた公式サイトで写真・設置場所を見る</a>
+  </div>
+
+  <nav class="tabbar" id="tabbar">
+    <button class="tab-btn" data-day="1">DAY1<span class="d">9/14 月</span></button>
+    <button class="tab-btn" data-day="2">DAY2<span class="d">9/15 火</span></button>
+    <button class="tab-btn" data-day="3">DAY3<span class="d">9/16 水</span></button>
+    <button class="tab-btn" data-day="4">DAY4<span class="d">9/17 木</span></button>
+    <button class="tab-btn" data-day="5">DAY5<span class="d">9/18 金</span></button>
+  </nav>
+
+  <!-- DAY 1 -->
+  <section class="day-panel" data-day="1">
+    <div class="card" data-id="d1-depart">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">11:20</div>
+        <div class="place">広島空港 発</div>
+        <div class="desc">✈️ ANA1861 那覇行き</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%BA%83%E5%B3%B6%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+    </div>
+    <div class="card" data-id="d1-arrive">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">13:25頃</div>
+        <div class="place">那覇空港 着</div>
+        <div class="desc">国内線出口→横断歩道→送迎バスのりば11番。Timesレンタカーの送迎バスで店舗へ(空港から約1.5km)</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+    </div>
+    <div class="card" data-id="d1-rentalcar">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">14:00</div>
+        <div class="place">Timesカーレンタル 那覇空港店 受取</div>
+        <div class="desc">TEL 0570-00-1536 / コンパクトクラス(AT・禁煙)。補償料込み合計 32,890円(現地払い 32,810円)。受取後、北部・カヌチャへ移動(車で約1時間30分)</div>
+        <a class="maplink" href="https://rental.timescar.jp/okinawa/shop/4701/?layout=0&btn=0" target="_blank" rel="noopener">🔗 店舗詳細</a>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+    </div>
+    <div class="card pika" data-id="d1-airport-pokefuta" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="time">道中</div>
+        <div class="place">那覇空港 ポケふた<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">空港内に設置。時間があれば出発前後にチェック</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+    <div class="card" data-id="d1-checkin">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">15:00頃</div>
+        <div class="place">カヌチャリゾート 到着・チェックイン</div>
+        <div class="desc">初日は移動のみ。ホテル内でゆっくり過ごす</div>
+      </div>
+    </div>
+    <div class="day-note">初日は移動がメイン。無理に予定を詰めない。</div>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="day-panel" data-day="2">
+    <div class="card must" data-id="d2-churaumi">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">午前</div>
+        <div class="place">沖縄美ら海水族館<span class="badge">必須</span></div>
+        <div class="desc">カヌチャから車で約40分。黒潮の海の大水槽は必見。混雑を避けて午前中がおすすめ</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+    </div>
+    <div class="card pika" data-id="d2-kaiyohaku-pokefuta" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="time">午前〜昼</div>
+        <div class="place">海洋博公園 ポケふた<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">水族館と同じ園内エリア。あわせて回収</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%B5%B7%E6%B4%8B%E5%8D%9A%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+    <div class="card" data-id="d2-lunch">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">昼</div>
+        <div class="place">海洋博公園 周辺で昼食</div>
+        <div class="desc">園内・近隣の飲食店でランチ</div>
+      </div>
+    </div>
+    <div class="card pika" data-id="d2-nago-pokefuta" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="thumb"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#8a6d00" stroke-width="2"/><circle cx="20" cy="20" r="13" fill="none" stroke="#8a6d00" stroke-width="1.5"/><polygon points="22,4 10,22 18,22 16,36 30,16 21,16" fill="#8a6d00"/></svg></div>
+      <div class="body">
+        <div class="time">午後</div>
+        <div class="place">名護市 ポケふた巡り(ピカチュウひろば)<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">名護市役所周辺に複数のピカチュウ・マンホールが点在。水族館からの帰り道に立ち寄り◎</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E8%AD%B7%E5%B8%82%E5%BD%B9%E6%89%80" target="_blank" rel="noopener">📍 Google Map</a>
+        <a class="maplink" href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener">🔗 公式で見る</a>
+      </div>
+    </div>
+    <div class="card" data-id="d2-return">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">夕方</div>
+        <div class="place">カヌチャリゾートへ戻る</div>
+        <div class="desc">ホテルでゆっくり夕食・プールなど</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="day-panel" data-day="3">
+    <div class="card" data-id="d3-pokecenter">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">午前</div>
+        <div class="place">ポケモンセンターオキナワ</div>
+        <div class="desc">イオンモール沖縄ライカム内。カヌチャから車で約40分、那覇へ向かう中継地点</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+    </div>
+    <div class="card" data-id="d3-lunch">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">昼</div>
+        <div class="place">イオンモール沖縄ライカムでランチ</div>
+        <div class="desc">フードコート・レストラン充実</div>
+      </div>
+    </div>
+    <div class="card must" data-id="d3-kokusai">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">午後</div>
+        <div class="place">国際通り<span class="badge">必須</span></div>
+        <div class="desc">ライカムから車で約20分。お土産・食べ歩き。人混みが多いので歩きすぎ注意</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+    </div>
+    <div class="card" data-id="d3-return">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">夕方〜夜</div>
+        <div class="place">カヌチャリゾートへ戻る</div>
+        <div class="desc">那覇からカヌチャまで車で約1時間30分〜2時間</div>
+      </div>
+    </div>
+    <div class="day-note">この日は運転距離が長め(往復3時間超)。疲れが出そうなら国際通りとポケモンセンターは日を分けて2日目・4日目に振り替えてもOK。</div>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="day-panel" data-day="4">
+    <div class="card rest" data-id="d4-free">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">終日</div>
+        <div class="place">カヌチャリゾート フリーデー<span class="badge">任意</span></div>
+        <div class="desc">プール・ビーチ・園内カートでのんびり。予定を詰めず、体調優先の休息日</div>
+      </div>
+    </div>
+    <div class="card pika" data-id="d4-extra-pokefuta" data-pokefuta="1">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">任意</div>
+        <div class="place">名護市内 未訪問ポケふたの追加巡り<span class="badge">任意・ポケふた</span></div>
+        <div class="desc">2日目に回りきれなかった分があれば、近場のみ軽く</div>
+      </div>
+    </div>
+    <div class="day-note">予備日。天候や体調に応じて2〜3日目の予定をここに移動してもよい。</div>
+  </section>
+
+  <!-- DAY 5 -->
+  <section class="day-panel" data-day="5">
+    <div class="card" data-id="d5-checkout">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">午前</div>
+        <div class="place">カヌチャリゾート チェックアウト</div>
+        <div class="desc">レンタカー返却の時間を逆算し、余裕をもって出発</div>
+      </div>
+    </div>
+    <div class="card" data-id="d5-move">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">〜14:00</div>
+        <div class="place">Timesカーレンタル 那覇空港店 返却</div>
+        <div class="desc">TEL 0570-00-1536。フライト90分前目安で返却→店舗から空港まで送迎あり。カヌチャから店舗まで車で約1時間30分〜2時間、余裕をもって出発</div>
+        <a class="maplink" href="https://rental.timescar.jp/okinawa/shop/4701/?layout=0&btn=0" target="_blank" rel="noopener">🔗 店舗詳細</a>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Times%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%20%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%BA%97" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+    </div>
+    <div class="card" data-id="d5-depart">
+      <input type="checkbox">
+      <div class="body">
+        <div class="time">16:25</div>
+        <div class="place">那覇空港 発</div>
+        <div class="desc">✈️ ANA1862 広島行き(到着目安 18:30頃)</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  沖縄旅行 2026.9.14–9.18 / 私的な旅程メモ
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "okinawa-trip-2026-checks";
+  var TAB_KEY = "okinawa-trip-2026-tab";
+
+  var TRIP_DAYS = {
+    "2026-09-14": 1,
+    "2026-09-15": 2,
+    "2026-09-16": 3,
+    "2026-09-17": 4,
+    "2026-09-18": 5
+  };
+  var DAY_LABELS = {
+    1: "9/14(月)", 2: "9/15(火)", 3: "9/16(水)", 4: "9/17(木)", 5: "9/18(金)"
+  };
+
+  function loadChecks(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveChecks(state){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  var checks = loadChecks();
+
+  function applyChecksToDOM(){
+    document.querySelectorAll(".card[data-id]").forEach(function(card){
+      var id = card.getAttribute("data-id");
+      var cb = card.querySelector("input[type=checkbox]");
+      var on = !!checks[id];
+      cb.checked = on;
+      card.classList.toggle("done", on);
+    });
+  }
+
+  function updatePokefutaProgress(){
+    var boxes = document.querySelectorAll(".card[data-pokefuta='1']");
+    var total = boxes.length;
+    var done = 0;
+    boxes.forEach(function(card){
+      var id = card.getAttribute("data-id");
+      if(checks[id]) done++;
+    });
+    document.getElementById("pfChecked").textContent = done;
+    document.getElementById("pfTotal").textContent = total;
+    var pct = total ? Math.round((done/total)*100) : 0;
+    document.getElementById("pfBarFill").style.width = pct + "%";
+  }
+
+  function onCheckboxChange(e){
+    var cb = e.target;
+    if(cb.type !== "checkbox") return;
+    var card = cb.closest(".card[data-id]");
+    if(!card) return;
+    var id = card.getAttribute("data-id");
+    checks[id] = cb.checked;
+    card.classList.toggle("done", cb.checked);
+    saveChecks(checks);
+    updatePokefutaProgress();
+  }
+
+  document.addEventListener("change", onCheckboxChange);
+
+  /* Tabs */
+  var tabButtons = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
+  var panels = Array.prototype.slice.call(document.querySelectorAll(".day-panel"));
+
+  function showDay(day){
+    tabButtons.forEach(function(btn){
+      btn.classList.toggle("active", btn.getAttribute("data-day") === String(day));
+    });
+    panels.forEach(function(p){
+      p.classList.toggle("active", p.getAttribute("data-day") === String(day));
+    });
+    try{ localStorage.setItem(TAB_KEY, String(day)); }catch(e){}
+  }
+
+  tabButtons.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      showDay(btn.getAttribute("data-day"));
+    });
+  });
+
+  function todayDayNumber(){
+    var now = new Date();
+    var y = now.getFullYear();
+    var m = String(now.getMonth()+1).padStart(2,"0");
+    var d = String(now.getDate()).padStart(2,"0");
+    var key = y + "-" + m + "-" + d;
+    return TRIP_DAYS[key] || null;
+  }
+
+  function setupTodayBanner(todayDay){
+    var banner = document.getElementById("todayBanner");
+    if(todayDay){
+      banner.innerHTML = "📅 今日は旅行 " + todayDay + "日目です<div class=\"sub\">" + DAY_LABELS[todayDay] + " の予定を表示中</div>";
+      banner.classList.add("show");
+      document.getElementById("flightStrip").classList.add("pushed");
+    }else{
+      banner.classList.remove("show");
+    }
+    tabButtons.forEach(function(btn){
+      btn.classList.toggle("is-today", todayDay && btn.getAttribute("data-day") === String(todayDay));
+    });
+  }
+
+  function init(){
+    applyChecksToDOM();
+    updatePokefutaProgress();
+
+    var todayDay = todayDayNumber();
+    setupTodayBanner(todayDay);
+
+    var savedTab = null;
+    try{ savedTab = localStorage.getItem(TAB_KEY); }catch(e){}
+
+    var initialDay = todayDay || savedTab || "1";
+    showDay(initialDay);
+  }
+
+  init();
+})();
+</script>
+
+</body>
+</html>
