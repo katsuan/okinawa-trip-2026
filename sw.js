@@ -1,4 +1,4 @@
-const CACHE_NAME = "okinawa-trip-2026-v1";
+const CACHE_NAME = "okinawa-trip-2026-v2";
 const PRECACHE_URLS = [
   "./",
   "./index.html",
@@ -14,7 +14,12 @@ const PRECACHE_URLS = [
   "./img/b084912808574bde91de683704e1503d_m.png",
   "./img/e3d0f526cfd0d3725b9814853efd7932_m.png",
   "./img/f845741c04f2845bd5ca99241c714706_m.png",
-  "./img/manhole_logo_jp.png"
+  "./img/manhole_logo_jp.png",
+  "./img/apple-touch-icon.png",
+  "./img/favicon-32.png",
+  "./img/icon-192.png",
+  "./img/icon-512.png",
+  "./manifest.json"
 ];
 
 self.addEventListener("install", (event) => {
