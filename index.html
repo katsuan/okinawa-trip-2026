@@ -120,9 +120,12 @@
     gap:10px;
     margin-bottom:8px;
   }
-  .pokefuta-box .row .title{font-weight:800;font-size:.92rem;display:flex;align-items:center;gap:6px;}
-  .pf-logo{height:28px;width:auto;display:block;}
-  .pokefuta-box .row .count{font-weight:800;font-size:.92rem;color:#7a5a00;margin-left:auto;}
+  .pokefuta-box .row-sub{justify-content:flex-end;}
+  .pf-logo{height:34px;width:auto;display:block;flex:0 0 auto;}
+  .pokefuta-box .pf-info{flex:1;min-width:0;}
+  .pokefuta-box .pf-info .title{font-weight:800;font-size:.92rem;}
+  .pokefuta-box .pf-info .hint{font-size:.72rem;color:#8a7326;margin-top:2px;}
+  .pokefuta-box .row .count{font-weight:800;font-size:.92rem;color:#7a5a00;flex:0 0 auto;}
   .pf-bar{
     background:#f2e6b8;
     border-radius:999px;
@@ -135,7 +138,6 @@
     width:0%;
     transition:width .3s ease;
   }
-  .pokefuta-box .hint{font-size:.72rem;color:#8a7326;margin:6px 0;}
   .pokefuta-box .official-link{
     display:inline-flex;
     align-items:center;
@@ -545,7 +547,7 @@
 <span class="memo-chevron" id="memoChevron">▾</span>
 </button>
 <div class="memo-body" id="memoBody">
-<textarea id="memoText" placeholder="持ち物・買うもの・気づいたことなど自由にメモ"></textarea>
+<textarea id="memoText" placeholder="気づいたことなど自由にメモ"></textarea>
 </div>
 </div>
 <div class="tab-wrap">
@@ -1274,11 +1276,16 @@
 <section class="day-panel" data-tab="pf">
 <div class="pokefuta-box">
 <div class="row">
-<div class="title"><img class="pf-logo" src="img/manhole_logo_jp.png" alt="ポケふた">ポケふた回収率</div>
+<img class="pf-logo" src="img/manhole_logo_jp.png" alt="ポケふた">
+<div class="pf-info">
+<div class="title">ポケふた回収率</div>
+<div class="hint">沖縄本島に全12基。チェックは自動集計。</div>
+</div>
+</div>
+<div class="row row-sub">
 <div class="count"><span id="pfChecked">0</span> / <span id="pfTotal">0</span></div>
 <a class="official-link" href="https://local.pokemon.jp/manhole/" rel="noopener" target="_blank">🔗 公式リンク</a>
 </div>
-<div class="hint">沖縄本島に全12基。チェックは自動集計。</div>
 <div class="pf-bar"><div class="pf-bar-fill" id="pfBarFill"></div></div>
 </div>
     <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
