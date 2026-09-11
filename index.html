@@ -243,6 +243,17 @@
     box-shadow:0 2px 8px rgba(10,92,120,.05);
     transition:opacity .2s ease;
   }
+  .transit{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    margin:-2px 0 8px;
+    font-size:.72rem;
+    color:var(--text-sub);
+    opacity:.8;
+  }
+  .transit .mode{font-size:.82rem;}
   .card .row1{
     display:flex;
     align-items:center;
@@ -912,6 +923,7 @@
       </div>
       <div class="parking">🅿️ 有料(首里杜館地下 最初60分500円/最大1,000円)</div>
     </div>
+    <div class="transit"><span class="mode">🚶</span>徒歩約5分</div>
     <div class="card pika" data-id="pf-naha-shuri" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -930,6 +942,7 @@
       </div>
       <div class="parking">🅿️ 有料(首里杜館地下 最初60分500円/最大1,000円)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約15分</div>
     <div class="card must" data-id="d3-kokusai" data-map-id="kokusai">
       <div class="row1">
         <input type="checkbox">
@@ -948,6 +961,7 @@
       <div class="foodpicks">🍽️ 食べ歩き候補<br>・ラフテー(豚の角煮、とろとろに煮込んだ定番料理)<br>・ソーキそば(骨付き軟骨ソーキが乗った沖縄そば)<br>・ゴーヤーチャンプルー(ゴーヤーと豆腐・卵の炒め物)<br>・てびち(豚足をやわらかく煮込んだ一品、コラーゲンたっぷり)<br>・ポーたま(ポーク卵おにぎり、牧志公設市場そばが本店)</div>
       <div class="parking">🅿️ 無料駐車場なし。周辺コインパーキング(60分200〜330円程度)</div>
     </div>
+    <div class="transit"><span class="mode">🚶</span>徒歩約10分</div>
     <div class="card pika" data-id="pf-naha-makishi" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -966,6 +980,7 @@
       </div>
       <div class="parking">🅿️ 有料(周辺コインパーキング 60分200〜330円程度)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約15分</div>
     <div class="card pika" data-id="pf-urasoe" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -984,7 +999,7 @@
       </div>
       <div class="parking">🅿️ カルチャーパーク駐車場(有料の場合あり・要現地確認)</div>
     </div>
-
+    <div class="transit"><span class="mode">🚗</span>車で約10分</div>
     <div class="card optional" data-id="d3-blueseal" data-map-id="blueseal">
       <div class="row1">
         <input type="checkbox">
@@ -1001,6 +1016,7 @@
       </div>
       <div class="parking">🅿️ 無料(店舗駐車場あり)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約5分</div>
     <div class="card pika" data-id="pf-ginowan" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1019,6 +1035,7 @@
       </div>
       <div class="parking">🅿️ 無料(宜野湾海浜公園)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約15分</div>
     <div class="card pika" data-id="pf-chatan" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1037,6 +1054,7 @@
       </div>
       <div class="parking">🅿️ 無料(北谷町営駐車場・6:00-21:00)</div>
     </div>
+    <div class="transit"><span class="mode">🚶</span>徒歩約5分</div>
     <div class="card" data-id="d3-chatan-gourmet" data-map-id="chatan-gourmet">
       <div class="row1">
         <input type="checkbox">
@@ -1054,6 +1072,7 @@
       <div class="foodpicks">🍽️ 食べ歩き候補<br>・タコライス(タコライスcafeきじむなぁ、オムタコが名物)<br>・タコス(タコスカフェ タコロコ)<br>・ステーキ(ダブルデッカー/JUMBO STEAK HAN'S)</div>
       <div class="parking">🅿️ 無料(北谷町営駐車場・6:00-21:00)</div>
     </div>
+    <div class="transit"><span class="mode">🚶</span>徒歩約4分</div>
     <div class="card optional" data-id="d3-deckers" data-map-id="deckers-kitchen">
       <div class="row1">
         <input type="checkbox">
@@ -1070,6 +1089,7 @@
       </div>
       <div class="parking">🅿️ 無料(北谷町営駐車場・6:00-21:00)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約15分</div>
     <div class="card pika" data-id="pf-okinawacity" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1088,6 +1108,7 @@
       </div>
       <div class="parking">🅿️ 無料(沖縄こどもの国)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約5分</div>
     <div class="card optional" data-id="d3-pokecenter" data-map-id="pokecenter">
       <div class="row1">
         <input type="checkbox">
@@ -1104,6 +1125,7 @@
       </div>
       <div class="parking">🅿️ 無料(イオンモール沖縄ライカム 約4,000台)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約10分</div>
     <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1122,6 +1144,7 @@
       </div>
       <div class="parking">🅿️ 無料(石川運動公園)</div>
     </div>
+    <div class="transit"><span class="mode">🚗</span>車で約30分</div>
     <div class="card lodging" data-id="d3-return" data-map-id="lodging">
       <div class="row1">
         <input type="checkbox">
