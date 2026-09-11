@@ -859,7 +859,7 @@
     </div>
     <div class="transit"><span class="mode">🚗</span>車で約5分</div>
 
-    <div class="card" data-id="d2-lunch" data-map-id="churaumi">
+    <div class="card optional" data-id="d2-lunch" data-map-id="churaumi">
       <div class="row1">
         <input type="checkbox">
         <div class="time">昼</div>
@@ -1096,7 +1096,7 @@
       <div class="parking">🅿️ 無料(北谷町営駐車場・6:00-21:00)</div>
     </div>
     <div class="transit"><span class="mode">🚶</span>徒歩約5分</div>
-    <div class="card" data-id="d3-chatan-gourmet" data-map-id="chatan-gourmet">
+    <div class="card optional" data-id="d3-chatan-gourmet" data-map-id="chatan-gourmet">
       <div class="row1">
         <input type="checkbox">
         <div class="time">昼</div>
@@ -1669,6 +1669,21 @@
     document.querySelectorAll(".transit").forEach(function(el){
       if(!el.dataset.orig) el.dataset.orig = el.innerHTML;
     });
+    function flush(pending){
+      if(pending.length === 1){
+        var target1 = pending[0];
+        target1.innerHTML = target1.dataset.orig;
+        target1.style.display = "";
+      }else if(pending.length > 1){
+        var infos = pending.map(function(el){ return parseTransitInfo(el.dataset.orig); });
+        var totalMin = infos.reduce(function(s, i){ return s + i.minutes; }, 0);
+        var icons = [];
+        infos.forEach(function(i){ if(i.icon && icons.indexOf(i.icon) === -1) icons.push(i.icon); });
+        var target = pending[pending.length - 1];
+        target.innerHTML = '<span class="mode">' + icons.join("") + "</span>" + formatTransitMinutes(totalMin);
+        target.style.display = "";
+      }
+    }
     document.querySelectorAll(".day-panel").forEach(function(panel){
       var pending = [];
       Array.prototype.forEach.call(panel.children, function(child){
@@ -1678,23 +1693,12 @@
         }else if(child.classList.contains("card")){
           var visible = getComputedStyle(child).display !== "none";
           if(visible){
-            if(pending.length === 1){
-              var target1 = pending[0];
-              target1.innerHTML = target1.dataset.orig;
-              target1.style.display = "";
-            }else if(pending.length > 1){
-              var infos = pending.map(function(el){ return parseTransitInfo(el.dataset.orig); });
-              var totalMin = infos.reduce(function(s, i){ return s + i.minutes; }, 0);
-              var icons = [];
-              infos.forEach(function(i){ if(i.icon && icons.indexOf(i.icon) === -1) icons.push(i.icon); });
-              var target = pending[pending.length - 1];
-              target.innerHTML = '<span class="mode">' + icons.join("") + "</span>" + formatTransitMinutes(totalMin);
-              target.style.display = "";
-            }
+            flush(pending);
             pending = [];
           }
         }
       });
+      flush(pending);
     });
   }
 
