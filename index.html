@@ -405,14 +405,6 @@
   }
   .map-legend .item.off{
     opacity:.4;
-    text-decoration:line-through;
-  }
-  .hide-done-toggle{margin-left:auto;}
-  .hide-done-toggle.active{
-    background:var(--sand-card);
-    border-color:var(--sea-light);
-    color:var(--sea-deep);
-    font-weight:700;
   }
   .dot-done{width:12px;height:12px;border-radius:50%;display:inline-block;flex:0 0 auto;background:var(--text-sub);}
   body.hide-done .card.done{display:none;}
@@ -1844,11 +1836,11 @@
     var hideDoneOn = false;
     try{ hideDoneOn = localStorage.getItem(HIDE_DONE_KEY) === "1"; }catch(e){}
     document.body.classList.toggle("hide-done", hideDoneOn);
-    hideDoneBtn.classList.toggle("active", hideDoneOn);
+    hideDoneBtn.classList.toggle("off", hideDoneOn);
     hideDoneBtn.addEventListener("click", function(){
       hideDoneOn = !hideDoneOn;
       document.body.classList.toggle("hide-done", hideDoneOn);
-      hideDoneBtn.classList.toggle("active", hideDoneOn);
+      hideDoneBtn.classList.toggle("off", hideDoneOn);
       try{ localStorage.setItem(HIDE_DONE_KEY, hideDoneOn ? "1" : "0"); }catch(e){}
       if(tripMap) updateMapMarkers(undefined, {skipFit:true});
     });
