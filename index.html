@@ -416,6 +416,10 @@
   }
   .dot-done{width:12px;height:12px;border-radius:50%;display:inline-block;flex:0 0 auto;background:var(--text-sub);}
   body.hide-done .card.done{display:none;}
+  body.hide-rank-must .card.must{display:none;}
+  body.hide-rank-optional .card.optional{display:none;}
+  body.hide-rank-lodging .card.lodging{display:none;}
+  body.hide-rank-pokefuta .card.pika{display:none;}
   .map-legend .dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:0 0 auto;}
   .dot.must{background:var(--coral);}
   .dot.optional{background:var(--sea);}
@@ -577,9 +581,9 @@
 <div class="map-legend" id="mapLegend">
 <button type="button" class="item" data-rank="must"><span class="dot must"></span>必須</button>
 <button type="button" class="item" data-rank="optional"><span class="dot optional"></span>拠点</button>
-<button type="button" class="item" data-rank="lodging"><span class="dot lodging"></span>宿泊</button>
 <button type="button" class="item" data-rank="pokefuta"><span class="dot pokefuta"></span>ポケふた</button>
-<button type="button" class="item hide-done-toggle" id="hideDoneToggle"><span class="dot-done"></span>済を隠す</button>
+<button type="button" class="item" data-rank="lodging"><span class="dot lodging"></span>宿泊</button>
+<button type="button" class="item hide-done-toggle" id="hideDoneToggle"><span class="dot-done"></span>訪問済</button>
 </div>
 </div>
 <!-- DAY 1 -->
@@ -1829,6 +1833,7 @@
       var rank = btn.getAttribute("data-rank");
       hiddenRanks[rank] = !hiddenRanks[rank];
       btn.classList.toggle("off", !!hiddenRanks[rank]);
+      document.body.classList.toggle("hide-rank-" + rank, !!hiddenRanks[rank]);
       updateMapMarkers();
     });
   });
