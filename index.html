@@ -1902,7 +1902,7 @@
     if(day === "pf") return pt.rank === "pokefuta";
     var d = Number(day);
     if(isNaN(d)) return false;
-    return pt.rank === "lodging" || (pt.days && pt.days.indexOf(d) !== -1);
+    return pt.days && pt.days.indexOf(d) !== -1;
   }
 
   function isPointDone(pt){
