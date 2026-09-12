@@ -47,6 +47,29 @@
     line-height:1.6;
     padding-bottom:env(safe-area-inset-bottom);
   }
+  .update-banner{
+    position:sticky;
+    top:0;
+    z-index:500;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:10px 16px;
+    padding-top:calc(10px + env(safe-area-inset-top));
+    background:#2d3748;
+    color:#fff;
+    font-size:14px;
+  }
+  .update-banner button{
+    border:none;
+    border-radius:999px;
+    padding:5px 14px;
+    background:#fff;
+    color:#2d3748;
+    font-weight:700;
+    font-size:13px;
+  }
   header{
     background:linear-gradient(160deg,var(--sea-deep),var(--sea) 55%,var(--sea-light));
     color:#fff;
@@ -541,6 +564,10 @@
 </style>
 </head>
 <body>
+<div class="update-banner" id="updateBanner" hidden>
+  <span>新しい内容があります</span>
+  <button type="button" id="updateBannerBtn">更新する</button>
+</div>
 <header>
 <h1>沖縄旅行 🌺</h1>
 </header>
@@ -671,7 +698,7 @@
         </div>
       </div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約12分(6.4km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約15分(6.4km)</div>
 
     <div class="card pika" data-id="pf-tomigusuku" data-pokefuta="1">
       <div class="row1">
@@ -691,7 +718,7 @@
       </div>
       <div class="parking">🅿️ 無料(道の駅豊崎 176台・24h)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約7分(2.7km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約10分(2.7km)</div>
 
     <div class="card pika" data-id="pf-itoman" data-pokefuta="1">
       <div class="row1">
@@ -710,7 +737,7 @@
       </div>
       <div class="parking">🅿️ 無料(道の駅いとまん)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約9分(5.4km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約10分(5.4km)</div>
 
     <div class="card optional" data-id="d1-glass" data-map-id="ryukyu-glass">
       <div class="row1">
@@ -746,7 +773,7 @@
       </div>
       <div class="foodpicks">🍽️ 食べ歩き候補<br>・もずく天ぷら(1個100円、もちもち食感)<br>・タコス(オリジナルサルサソース)<br>・サーターアンダギー(琉球銘菓三矢)<br>・おっぱジェラート(今帰仁産ミルク使用)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約26分(19.7km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約30分(19.7km)</div>
 
     <div class="card lodging" data-id="d1-checkin" data-map-id="lodging">
       <div class="row1">
@@ -782,7 +809,7 @@
         </div>
       </div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約22分(15.3km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約25分(15.3km)</div>
     <div class="card optional" data-id="d2-aw-nago" data-map-id="aw-nago">
       <div class="row1">
         <input type="checkbox">
@@ -798,7 +825,7 @@
         </div>
       </div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約3分(1.1km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約5分(1.1km)</div>
     <div class="card pika" data-id="pf-nago" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -817,7 +844,7 @@
       </div>
       <div class="parking">🅿️ 無料(名護城公園)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約31分(22.5km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約35分(22.5km)</div>
 
     <div class="card must" data-id="d2-churaumi" data-map-id="churaumi">
       <div class="row1">
@@ -874,7 +901,7 @@
       </div>
       <div class="parking">🅿️ 入口に無料駐車場あり(台数少なめ)。満車時は周辺有料(300〜600円)か海洋博公園P9から徒歩</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約3分(1.4km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約5分(1.4km)</div>
 
     <div class="card optional" data-id="d2-lunch" data-map-id="churaumi">
       <div class="row1">
@@ -892,7 +919,7 @@
       </div>
       <div class="foodpicks">🍽️ 食べ歩き候補<br>・沖縄そば<br>・タコライス<br>・あぐーメンチカツバーガー<br>・オリジナルソフトクリーム</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約32分(19.3km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約35分(19.3km)</div>
 
     <div class="card optional" data-id="d2-kouri" data-map-id="kouri">
       <div class="row1">
@@ -911,7 +938,7 @@
       </div>
       <div class="parking">🅿️ 有料(周辺の民間駐車場、100〜300円程度)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約36分(26.4km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約40分(26.4km)</div>
 
     <div class="card lodging" data-id="d2-return" data-map-id="lodging">
       <div class="row1">
@@ -982,7 +1009,7 @@
         </div>
       </div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約44分(40.7km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約45分(40.7km)</div>
     <div class="card pika" data-id="pf-uruma" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1001,7 +1028,7 @@
       </div>
       <div class="parking">🅿️ 無料(石川運動公園)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約29分(17.5km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約30分(17.5km)</div>
     <div class="card optional" data-id="d4-urumatouki" data-map-id="urumatouki">
       <div class="row1">
         <input type="checkbox">
@@ -1018,7 +1045,7 @@
       </div>
       <div class="parking">🅿️ 無料(店舗前4台)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約23分(12.7km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約25分(12.7km)</div>
     <div class="card optional" data-id="d4-pokecenter" data-map-id="pokecenter">
       <div class="row1">
         <input type="checkbox">
@@ -1035,7 +1062,7 @@
       </div>
       <div class="parking">🅿️ 無料(イオンモール沖縄ライカム 約4,000台)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約3分(0.8km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約5分(0.8km)</div>
     <div class="card pika" data-id="pf-okinawacity" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1053,7 +1080,7 @@
       </div>
       <div class="parking">🅿️ 無料(沖縄こどもの国)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約17分(7.1km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約20分(7.1km)</div>
     <div class="card optional" data-id="d4-deckers" data-map-id="deckers-kitchen">
       <div class="row1">
         <input type="checkbox">
@@ -1107,7 +1134,7 @@
       </div>
       <div class="parking">🅿️ 無料(北谷町営駐車場・6:00-21:00)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約17分(6.5km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約20分(6.5km)</div>
     <div class="card optional" data-id="d4-sams" data-map-id="sams-ginowan">
       <div class="row1">
         <input type="checkbox">
@@ -1123,7 +1150,7 @@
         </div>
       </div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約4分(1.1km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約5分(1.1km)</div>
     <div class="card pika" data-id="pf-ginowan" data-pokefuta="1">
       <div class="row1">
         <input type="checkbox">
@@ -1142,7 +1169,7 @@
       </div>
       <div class="parking">🅿️ 無料(宜野湾海浜公園)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約8分(2.7km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約10分(2.7km)</div>
     <div class="card optional" data-id="d4-blueseal" data-map-id="blueseal">
       <div class="row1">
         <input type="checkbox">
@@ -1178,7 +1205,7 @@
       </div>
       <div class="parking">🅿️ カルチャーパーク駐車場(有料の場合あり・要現地確認)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約16分(6.4km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約20分(6.4km)</div>
     <div class="card optional" data-id="d4-shurijo" data-map-id="shurijo">
       <div class="row1">
         <input type="checkbox">
@@ -1214,7 +1241,7 @@
       </div>
       <div class="parking">🅿️ 有料(首里杜館地下 最初60分500円/最大1,000円)</div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約13分(4.1km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約15分(4.1km)</div>
     <div class="card lodging" data-id="d4-checkin-aqua" data-map-id="aquacitta">
       <div class="row1">
         <input type="checkbox">
@@ -1287,7 +1314,7 @@
         </div>
       </div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約44分(22.8km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約45分(22.8km)</div>
 
     <div class="card optional" data-id="d5-seifa" data-map-id="seifa-utaki">
       <div class="row1">
@@ -2244,7 +2271,30 @@
 
   if("serviceWorker" in navigator){
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("sw.js").catch(function(){});
+      navigator.serviceWorker.register("sw.js").then(function(reg){
+        function showUpdateBanner(){
+          var banner = document.getElementById("updateBanner");
+          if(banner) banner.hidden = false;
+        }
+        if(reg.waiting && navigator.serviceWorker.controller){
+          showUpdateBanner();
+        }
+        reg.addEventListener("updatefound", function(){
+          var installing = reg.installing;
+          if(!installing) return;
+          installing.addEventListener("statechange", function(){
+            if(installing.state === "installed" && navigator.serviceWorker.controller){
+              showUpdateBanner();
+            }
+          });
+        });
+      }).catch(function(){});
+      var updateBtn = document.getElementById("updateBannerBtn");
+      if(updateBtn){
+        updateBtn.addEventListener("click", function(){
+          location.reload();
+        });
+      }
     });
   }
 })();
