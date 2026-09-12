@@ -2292,6 +2292,8 @@
       var updateBtn = document.getElementById("updateBannerBtn");
       if(updateBtn){
         updateBtn.addEventListener("click", function(){
+          var banner = document.getElementById("updateBanner");
+          if(banner) banner.hidden = true;
           location.reload();
         });
       }
