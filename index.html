@@ -109,14 +109,13 @@
     background:var(--sunset);
     color:#fff;
     border-radius:14px;
-    padding:12px 16px;
+    padding:8px 16px;
     font-size:.86rem;
     font-weight:700;
     box-shadow:0 6px 16px rgba(244,161,58,.35);
     display:none;
   }
   .today-banner.show{display:block;}
-  .today-banner .sub{font-weight:500;font-size:.78rem;opacity:.9;margin-top:2px;}
 
   .flight-strip{
     display:flex;
@@ -2182,7 +2181,7 @@
   function setupTodayBanner(todayDay){
     var banner = document.getElementById("todayBanner");
     if(todayDay){
-      banner.innerHTML = "📅 今日は旅行 " + todayDay + "日目です<div class=\"sub\">" + DAY_LABELS[todayDay] + " の予定を表示中</div>";
+      banner.innerHTML = "🗓️今日は " + DAY_LABELS[todayDay] + " 旅行" + todayDay + "日目です";
       banner.classList.add("show");
       document.getElementById("flightStrip").classList.add("pushed");
     }else{
