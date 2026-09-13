@@ -2292,13 +2292,46 @@
 
   init();
 
+  function showUpdateBanner(){
+    var banner = document.getElementById("updateBanner");
+    if(banner) banner.hidden = false;
+  }
+
+  // Page-level version check, independent of Service Worker lifecycle.
+  // iOS home-screen (standalone) PWAs are known to be unreliable about
+  // checking for a new sw.js, so this is the primary update-detection
+  // mechanism: compare the current deployment's ETag/Last-Modified via a
+  // plain no-store HEAD request, which runs on load and whenever the app
+  // is brought back to the foreground.
+  var deployedTag = null;
+  function checkForUpdate(){
+    fetch(location.pathname, {method: "HEAD", cache: "no-store"}).then(function(res){
+      var tag = res.headers.get("ETag") || res.headers.get("Last-Modified");
+      if(!tag) return;
+      if(deployedTag === null){
+        deployedTag = tag;
+      }else if(tag !== deployedTag){
+        showUpdateBanner();
+      }
+    }).catch(function(){});
+  }
+  checkForUpdate();
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "visible") checkForUpdate();
+  });
+
+  var updateBtn = document.getElementById("updateBannerBtn");
+  if(updateBtn){
+    updateBtn.addEventListener("click", function(){
+      var banner = document.getElementById("updateBanner");
+      if(banner) banner.hidden = true;
+      location.href = location.pathname + "?v=" + Date.now();
+    });
+  }
+
   if("serviceWorker" in navigator){
     window.addEventListener("load", function(){
       navigator.serviceWorker.register("sw.js").then(function(reg){
-        function showUpdateBanner(){
-          var banner = document.getElementById("updateBanner");
-          if(banner) banner.hidden = false;
-        }
         function watchInstalling(){
           var installing = reg.installing;
           if(!installing) return;
@@ -2318,14 +2351,6 @@
         });
         reg.update().catch(function(){});
       }).catch(function(){});
-      var updateBtn = document.getElementById("updateBannerBtn");
-      if(updateBtn){
-        updateBtn.addEventListener("click", function(){
-          var banner = document.getElementById("updateBanner");
-          if(banner) banner.hidden = true;
-          location.reload();
-        });
-      }
     });
   }
 })();
