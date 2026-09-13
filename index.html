@@ -1934,7 +1934,7 @@
     {id:"pokecenter", name:"ポケモンセンターオキナワ", rank:"optional", emoji:"🎮", days:[1], cardIds:{1:"d1-pokecenter"}, lat:26.3145118, lng:127.7965482, link:"https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF"},
     {id:"kyoda", name:"道の駅 許田", rank:"optional", emoji:"🎫", days:[1], cardIds:{1:"d1-kyoda"}, lat:26.5386, lng:127.9693, link:"https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%E8%A8%B1%E7%94%B0"},
     {id:"maeda-shokudo", name:"前田食堂(名護店)", rank:"optional", emoji:"🍜", days:[3], cardIds:{3:"d3-maeda"}, lat:26.600702, lng:127.976144, link:"https://www.google.com/maps/search/?api=1&query=%E5%89%8D%E7%94%B0%E9%A3%9F%E5%A0%82%20%E5%90%8D%E8%AD%B7%E5%B8%82%E5%AE%AE%E9%87%8C6-9-5"},
-    {id:"glassart-ai", name:"グラスアート藍", rank:"optional", emoji:"🎨", days:[3], cardIds:{3:"d3-glassart"}, lat:26.6249406, lng:127.9662353, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%B0%E3%83%A9%E3%82%B9%E3%82%A2%E3%83%BC%E3%83%88%E8%97%8D%20%E5%90%8D%E8%AD%B7%E5%B8%82%E4%B8%AD%E5%B1%B1211-1"},
+    {id:"glassart-ai", name:"グラスアート藍(必須・体験予約済み)", rank:"must", emoji:"🎨", days:[3], cardIds:{3:"d3-glassart"}, lat:26.6249406, lng:127.9662353, link:"https://www.google.com/maps/search/?api=1&query=%E3%82%B0%E3%83%A9%E3%82%B9%E3%82%A2%E3%83%BC%E3%83%88%E8%97%8D%20%E5%90%8D%E8%AD%B7%E5%B8%82%E4%B8%AD%E5%B1%B1211-1"},
     {id:"aw-nago", name:"A&W 名護店(エンダー)", rank:"optional", emoji:"🍔", days:[2], cardIds:{2:"d2-aw-nago"}, lat:26.5793847, lng:127.9847532, link:"https://www.google.com/maps/search/?api=1&query=A%26W%20%E5%90%8D%E8%AD%B7%E5%BA%97"},
     {id:"bise", name:"備瀬のフクギ並木", rank:"optional", emoji:"🌳", days:[2], cardIds:{2:"d2-bise"}, lat:26.7026, lng:127.8807, link:"https://www.google.com/maps/search/?api=1&query=%E5%82%99%E7%80%AC%E3%81%AE%E3%83%95%E3%82%AF%E3%82%AE%E4%B8%A6%E6%9C%A8"},
     {id:"chatan-gourmet", name:"北谷グルメ(美浜アメリカンビレッジ)", rank:"optional", emoji:"🍔", days:[4], cardIds:{4:"d4-chatan-gourmet"}, lat:26.3186, lng:127.7552, link:"https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E6%B5%9C%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%83%B3%E3%83%93%E3%83%AC%E3%83%83%E3%82%B8%20%E3%82%B0%E3%83%AB%E3%83%A1"},
@@ -2053,7 +2053,6 @@
 
   var currentMapDay = "1";
   var hiddenRanks = {};
-  var animatedDays = {};
 
   function pointOrderForDay(day){
     var order = {};
@@ -2103,11 +2102,10 @@
       var bounds = L.latLngBounds(boundsSource.map(function(pt){ return [pt.lat, pt.lng]; }));
       tripMap.fitBounds(bounds, {padding: [30,30], maxZoom: 12});
     }
-    var shouldAnimate = /^[0-9]+$/.test(String(currentMapDay)) && (!animatedDays[currentMapDay] || previousMapDay === "all");
+    var shouldAnimate = /^[0-9]+$/.test(String(currentMapDay)) && previousMapDay !== currentMapDay;
     var addedById = {};
     matched.forEach(function(pt){ addedById[pt.id] = addMarker(pt); });
     if(shouldAnimate){
-      animatedDays[currentMapDay] = true;
       var order = pointOrderForDay(currentMapDay);
       var sequenced = matched.slice().sort(function(a, b){
         var ai = order[a.id] !== undefined ? order[a.id] : 999;
