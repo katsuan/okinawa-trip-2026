@@ -523,7 +523,8 @@
   }
   .pin-photo img{width:100%;height:100%;object-fit:cover;display:block;}
   .pin-photo.highlight{animation:pinPulse 1.4s ease 2;}
-  .pin-enter{transition:opacity .25s ease, transform .3s cubic-bezier(.34,1.56,.64,1);}
+  .pin.highlight{animation:pinPulse 1.4s ease 2;}
+  .pin-enter{transition:opacity .4s ease, transform .55s cubic-bezier(.34,1.56,.64,1);}
   .pin.pin-enter{transform:rotate(-45deg) scale(.2);opacity:0;}
   .pin.pin-enter-active{transform:rotate(-45deg) scale(1);opacity:1;}
   .pin-photo.pin-enter{transform:scale(.2);opacity:0;}
@@ -2065,6 +2066,10 @@
         requestAnimationFrame(function(){
           requestAnimationFrame(function(){ inner.classList.add("pin-enter-active"); });
         });
+        setTimeout(function(){
+          inner.classList.add("highlight");
+          setTimeout(function(){ inner.classList.remove("highlight"); }, 2800);
+        }, 550);
       }
     }
   }
@@ -2102,7 +2107,7 @@
         setTimeout(function(){
           if(token !== mapRenderToken) return;
           addMarker(pt, true);
-        }, i * 160);
+        }, i * 260);
       });
     }else{
       matched.forEach(function(pt){ addMarker(pt, false); });
