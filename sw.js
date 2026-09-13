@@ -1,4 +1,4 @@
-const CACHE_NAME = "okinawa-trip-2026-v2";
+const CACHE_NAME = "okinawa-trip-2026-v3";
 const PRECACHE_URLS = [
   "./",
   "./index.html",
@@ -46,16 +46,13 @@ self.addEventListener("fetch", (event) => {
     return; // let cross-origin (CDN, map tiles) go straight to network
   }
   event.respondWith(
-    caches.match(req).then((cached) => {
-      const network = fetch(req)
-        .then((res) => {
-          if (res && res.status === 200) {
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, res.clone()));
-          }
-          return res;
-        })
-        .catch(() => cached);
-      return cached || network;
-    })
+    fetch(req, { cache: "no-store" })
+      .then((res) => {
+        if (res && res.status === 200) {
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, res.clone()));
+        }
+        return res;
+      })
+      .catch(() => caches.match(req))
   );
 });

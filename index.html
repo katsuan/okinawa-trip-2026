@@ -2297,10 +2297,7 @@
           var banner = document.getElementById("updateBanner");
           if(banner) banner.hidden = false;
         }
-        if(reg.waiting && navigator.serviceWorker.controller){
-          showUpdateBanner();
-        }
-        reg.addEventListener("updatefound", function(){
+        function watchInstalling(){
           var installing = reg.installing;
           if(!installing) return;
           installing.addEventListener("statechange", function(){
@@ -2308,7 +2305,16 @@
               showUpdateBanner();
             }
           });
+        }
+        if(reg.waiting && navigator.serviceWorker.controller){
+          showUpdateBanner();
+        }
+        watchInstalling();
+        reg.addEventListener("updatefound", watchInstalling);
+        document.addEventListener("visibilitychange", function(){
+          if(document.visibilityState === "visible") reg.update().catch(function(){});
         });
+        reg.update().catch(function(){});
       }).catch(function(){});
       var updateBtn = document.getElementById("updateBannerBtn");
       if(updateBtn){
