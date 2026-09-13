@@ -600,7 +600,7 @@
 <nav class="tabbar" id="tabbar">
 <button class="tab-btn" data-tab="1">🛫<span class="d">往路</span></button>
 <button class="tab-btn" data-tab="2">🐠<span class="d">水族館</span></button>
-<button class="tab-btn" data-tab="3">🏝️<span class="d">フリー</span></button>
+<button class="tab-btn" data-tab="3">🏝️<span class="d">半日フリー</span></button>
 <button class="tab-btn" data-tab="4">🛍️<span class="d">買い物</span></button>
 <button class="tab-btn" data-tab="5">🛬<span class="d">復路</span></button>
 <button class="tab-btn" data-tab="pf">🎯<span class="d">図鑑</span></button>
@@ -965,22 +965,39 @@
 </section>
 <!-- DAY 3 -->
 <section class="day-panel" data-tab="3">
-    <div class="card rest lodging" data-id="d3-free" data-map-id="lodging">
+    <div class="card lodging" data-id="d3-free" data-map-id="lodging">
       <div class="row1">
         <input type="checkbox">
-        <div class="time">終日</div>
+        <div class="time">8:20頃</div>
         <div class="spacer"></div>
         <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%8C%E3%83%81%E3%83%A3%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88" rel="noopener" target="_blank">📍 Map</a>
       </div>
-      <div class="place">カヌチャリゾート フリーデー</div>
+      <div class="place">カヌチャリゾート 出発</div>
       <div class="row3">
         <div class="thumb emoji">🏝️</div>
         <div class="body">
-          <div class="desc">プール・ビーチ・園内カートでのんびり。予定を詰めず、体調優先の休息日</div>
+          <div class="desc">グラスアート藍の体験(9:00〜)へ向けて出発</div>
         </div>
       </div>
     </div>
-    <div class="transit"><span class="mode">🚗</span>車で約25分(17.6km)</div>
+    <div class="transit"><span class="mode">🚗</span>車で約35分(23.2km)</div>
+    <div class="card must" data-id="d3-glassart" data-map-id="glassart-ai">
+      <div class="row1">
+        <input type="checkbox">
+        <div class="time">9:00</div>
+        <span class="chip chip-must">必須</span>
+        <div class="spacer"></div>
+        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E3%82%B0%E3%83%A9%E3%82%B9%E3%82%A2%E3%83%BC%E3%83%88%E8%97%8D%20%E5%90%8D%E8%AD%B7%E5%B8%82%E4%B8%AD%E5%B1%B1211-1" rel="noopener" target="_blank">📍 Map</a>
+      </div>
+      <div class="place">グラスアート藍(体験予約済み)</div>
+      <div class="row3">
+        <div class="thumb emoji">🎨</div>
+        <div class="body">
+          <div class="desc">名護市中山211-1。琉球ガラス手作り体験(2,640円〜)。体験時間は1〜2時間程度を想定。定休日: 火曜(水族館デーが火曜想定のためこちらに予約)</div>
+        </div>
+      </div>
+    </div>
+    <div class="transit"><span class="mode">🚗</span>車で約10分(3.2km)</div>
     <div class="card optional" data-id="d3-maeda" data-map-id="maeda-shokudo">
       <div class="row1">
         <input type="checkbox">
@@ -992,28 +1009,12 @@
       <div class="row3">
         <div class="thumb emoji">🍜</div>
         <div class="body">
-          <div class="desc">名護市宮里6-9-5。沖縄そば・牛肉そばの名店、11:00〜15:00、定休日: 火曜。カヌチャから片道25分ほどなので、外に出る気分の日の昼食候補に</div>
+          <div class="desc">名護市宮里6-9-5。沖縄そば・牛肉そばの名店、11:00〜15:00、定休日: 火曜。グラスアート藍からすぐ近くなので、体験後の昼食候補に</div>
         </div>
       </div>
     </div>
 
-    <div class="card optional" data-id="d3-glassart" data-map-id="glassart-ai">
-      <div class="row1">
-        <input type="checkbox">
-        <div class="time">体験候補</div>
-        <div class="spacer"></div>
-        <a class="chip chip-map" href="https://www.google.com/maps/search/?api=1&query=%E3%82%B0%E3%83%A9%E3%82%B9%E3%82%A2%E3%83%BC%E3%83%88%E8%97%8D%20%E5%90%8D%E8%AD%B7%E5%B8%82%E4%B8%AD%E5%B1%B1211-1" rel="noopener" target="_blank">📍 Map</a>
-      </div>
-      <div class="place">グラスアート藍</div>
-      <div class="row3">
-        <div class="thumb emoji">🎨</div>
-        <div class="body">
-          <div class="desc">名護市中山211-1。琉球ガラス手作り体験(2,640円〜)。9:00〜17:00、体験受付は9:30〜14:00最終、定休日: 火曜。水族館デーが火曜想定のためこちらに移動。カヌチャから片道35分ほど</div>
-        </div>
-      </div>
-    </div>
-
-<div class="day-note">完全フリーデー。予定は入れず、天候や体調に応じて他の日の予定をここに移動してもよい。ポケふたは「🎯図鑑」タブ参照。</div>
+<div class="day-note">午前はグラスアート藍で体験予約済み(9:00〜、1〜2時間程度)。午後はカヌチャに戻って予定を詰めず、体調優先でのんびり過ごす。ポケふたは「🎯図鑑」タブ参照。</div>
 </section>
 <!-- DAY 4 -->
 <section class="day-panel" data-tab="4">
