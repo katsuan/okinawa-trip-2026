@@ -523,6 +523,11 @@
   }
   .pin-photo img{width:100%;height:100%;object-fit:cover;display:block;}
   .pin-photo.highlight{animation:pinPulse 1.4s ease 2;}
+  .pin-enter{transition:opacity .25s ease, transform .3s cubic-bezier(.34,1.56,.64,1);}
+  .pin.pin-enter{transform:rotate(-45deg) scale(.2);opacity:0;}
+  .pin.pin-enter-active{transform:rotate(-45deg) scale(1);opacity:1;}
+  .pin-photo.pin-enter{transform:scale(.2);opacity:0;}
+  .pin-photo.pin-enter-active{transform:scale(1);opacity:1;}
   @keyframes pinPulse{
     0%{box-shadow:0 2px 6px rgba(0,0,0,.4), 0 0 0 0 rgba(240,112,79,.7);}
     70%{box-shadow:0 2px 6px rgba(0,0,0,.4), 0 0 0 14px rgba(240,112,79,0);}
@@ -991,7 +996,7 @@
       <div class="row3">
         <div class="thumb emoji">🍜</div>
         <div class="body">
-          <div class="desc">名護市宮里6-9-5。沖縄そば・牛肉そばの名店、11:00〜15:00、定休日: 火曜。カヌチャから片道35分ほどなので、外に出る気分の日の昼食候補に</div>
+          <div class="desc">名護市宮里6-9-5。沖縄そば・牛肉そばの名店、11:00〜15:00、定休日: 火曜。カヌチャから片道25分ほどなので、外に出る気分の日の昼食候補に</div>
         </div>
       </div>
     </div>
@@ -2034,6 +2039,35 @@
 
   var currentMapDay = "1";
   var hiddenRanks = {};
+  var animatedDays = {};
+
+  function pointOrderForDay(day){
+    var order = {};
+    var idx = 0;
+    var panel = document.querySelector('.day-panel[data-tab="' + day + '"]');
+    if(!panel) return order;
+    panel.querySelectorAll(".card[data-id]").forEach(function(card){
+      var pid = card.getAttribute("data-map-id") || (card.getAttribute("data-pokefuta") === "1" ? card.getAttribute("data-id") : null);
+      if(pid && !(pid in order)) order[pid] = idx++;
+    });
+    return order;
+  }
+
+  function addMarker(pt, animate){
+    var m = markerFor(pt);
+    m.addTo(markerLayer);
+    markersById[pt.id] = m;
+    if(animate){
+      var el = m.getElement();
+      var inner = el && el.firstElementChild;
+      if(inner){
+        inner.classList.add("pin-enter");
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ inner.classList.add("pin-enter-active"); });
+        });
+      }
+    }
+  }
 
   function updateMapMarkers(day, opts){
     ensureMapInit();
@@ -2045,16 +2079,26 @@
     var matched = MAP_POINTS.filter(function(pt){
       return pointMatchesDay(pt, currentMapDay) && !hiddenRanks[pt.rank] && !(hideDoneOn && isPointDone(pt));
     });
-    matched.forEach(function(pt){
-      var m = markerFor(pt);
-      m.addTo(markerLayer);
-      markersById[pt.id] = m;
-    });
     if(matched.length && !opts.skipFit){
       var unchecked = matched.filter(function(pt){ return !isPointDone(pt); });
       var boundsSource = unchecked.length ? unchecked : matched;
       var bounds = L.latLngBounds(boundsSource.map(function(pt){ return [pt.lat, pt.lng]; }));
       tripMap.fitBounds(bounds, {padding: [30,30], maxZoom: 12});
+    }
+    var shouldAnimate = /^[0-9]+$/.test(String(currentMapDay)) && !animatedDays[currentMapDay];
+    if(shouldAnimate){
+      animatedDays[currentMapDay] = true;
+      var order = pointOrderForDay(currentMapDay);
+      var sequenced = matched.slice().sort(function(a, b){
+        var ai = order[a.id] !== undefined ? order[a.id] : 999;
+        var bi = order[b.id] !== undefined ? order[b.id] : 999;
+        return ai - bi;
+      });
+      sequenced.forEach(function(pt, i){
+        setTimeout(function(){ addMarker(pt, true); }, i * 160);
+      });
+    }else{
+      matched.forEach(function(pt){ addMarker(pt, false); });
     }
     setTimeout(function(){ tripMap.invalidateSize(); }, 30);
   }
