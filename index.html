@@ -1994,6 +1994,9 @@
 
   function isPointDone(pt){
     if(pt.cardIds){
+      if(currentMapDay === "all" || currentMapDay === "pf"){
+        return Object.keys(pt.cardIds).some(function(d){ return !!checks[pt.cardIds[d]]; });
+      }
       var cardId = pt.cardIds[currentMapDay];
       return cardId ? !!checks[cardId] : false;
     }
